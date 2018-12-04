@@ -74,7 +74,7 @@ public class InternalControlDB {
                         TablaUsuario.COLUMN_NAME_CORREO + SQL.TEXT_TYPE + SQL.COMMA +
                         TablaUsuario.COLUMN_NAME_FACEBOOK_ID + SQL.INTEGER_TYPE + " )";
         //Drop table Usuario
-        public static final String SQL_DELETE_USUARIOS =
+        public static final String DELETE_USUARIOS =
                 "DROP TABLE IF EXISTS " + TablaUsuario.TABLE_NAME;
     }
 
