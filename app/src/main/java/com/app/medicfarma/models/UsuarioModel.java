@@ -1,5 +1,7 @@
 package com.app.medicfarma.models;
-
+/**
+ * @author soria
+ * */
 public class UsuarioModel {
 
     private int idUsuario;
