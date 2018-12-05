@@ -69,7 +69,7 @@ public class StartActivity extends AppCompatActivity {
                         mDialog.dismiss();
 
                     }
-                });
+                }); 
 
                 //request graph  api
                 Bundle parameters =new Bundle();
