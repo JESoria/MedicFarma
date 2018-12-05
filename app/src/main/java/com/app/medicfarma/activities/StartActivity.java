@@ -13,7 +13,6 @@ import com.app.medicfarma.R;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -69,7 +68,7 @@ public class StartActivity extends AppCompatActivity {
                         mDialog.dismiss();
 
                     }
-                }); 
+                });
 
                 //request graph  api
                 Bundle parameters =new Bundle();
