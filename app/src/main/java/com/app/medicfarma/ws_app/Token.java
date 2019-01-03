@@ -1,0 +1,127 @@
+package com.app.medicfarma.ws_app;
+
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import com.app.medicfarma.helpers.DbHelper;
+import com.app.medicfarma.helpers.InternalControlDB;
+import com.app.medicfarma.models.TokenModel;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.UUID;
+
+/**
+ * Created by Soria on 03/01/2019.
+ */
+
+public class Token extends AsyncTask<Void, Void, String> {
+
+    private Exception exception;
+    DbHelper dbHelper;
+    ProgressBar progressBar;
+
+    public Token(DbHelper mDbHelper, ProgressBar progressBar){
+        this.dbHelper = mDbHelper;
+        this.progressBar = progressBar;
+    }
+
+    protected void onPreExecute() {
+
+    }
+
+    @Override
+    protected String doInBackground(Void... voids) {
+        try {
+
+            TokenModel modelo = new TokenModel();
+
+            modelo.setOuth_name(UUID.randomUUID().toString());
+
+            String requestBody;
+            Uri.Builder builder = new Uri.Builder();
+
+            builder.appendQueryParameter("grant_type","password");
+
+            builder.appendQueryParameter("sender_id", modelo.getSender_id());
+
+            builder.appendQueryParameter("outh_name", modelo.getOuth_name());
+
+            requestBody = builder.build().getEncodedQuery();
+
+            URL url = new URL(WSRoutes.baseURL + ""+ WSRoutes.getToken);
+
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setDoOutput(true);
+
+            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            OutputStream outputStream = new BufferedOutputStream(urlConnection.getOutputStream());
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "utf-8"));
+
+            writer.write(requestBody);
+            writer.flush();
+            writer.close();
+            outputStream.close();
+
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line).append("\n");
+                }
+                bufferedReader.close();
+
+                return stringBuilder.toString();
+            }
+            finally{
+                urlConnection.disconnect();
+            }
+        }
+        catch(Exception e) {
+            Log.e("ERROR", e.getMessage(), e);
+            return null;
+        }
+    }
+
+    protected void onPostExecute(String response) {
+        try {
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Creando objeto JSON from Response").append("\n");
+            JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
+            String token = object.getString("access_token");
+            String expires_in = object.getString("expires_in");
+            String token_type = object.getString("token_type");
+
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            values.put(InternalControlDB.TablaToken.COLUMN_NAME_TOKEN, token);
+            values.put(InternalControlDB.TablaToken.COLUMN_NAME_TOKEN_TYPE, token_type);
+            values.put(InternalControlDB.TablaToken.COLUMN_NAME_TOKEN_ALIVE, 1);
+            values.put(InternalControlDB.TablaToken.COLUMN_NAME_UTC_EXPIRATION, expires_in);
+
+            long newRowId = db.insert(InternalControlDB.TablaToken.TABLE_NAME, null, values);
+            progressBar.setVisibility(View.INVISIBLE);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+}

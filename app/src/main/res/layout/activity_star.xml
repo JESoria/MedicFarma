@@ -31,10 +31,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="55dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="55dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/com_facebook_blue"
+                android:background="@drawable/style_button_secundary"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:textColor="@color/blanco"
@@ -53,6 +51,44 @@
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnIniciarLogin"
+                android:layout_width="131dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/style_button_secundary"
+                android:text="@string/start_sesion"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnCancelarLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/style_button_primary"
+                android:text="@string/new_account"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
 
 
