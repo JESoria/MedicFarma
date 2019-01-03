@@ -11,10 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.app.medicfarma.R;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -30,7 +34,6 @@ import org.json.JSONObject;
 
 public class StartActivity extends AppCompatActivity {
 
-    AlertDialog.Builder builder;
     CallbackManager callbackManager;
     LoginButton loginButton;
     ProgressDialog mDialog;
@@ -48,12 +51,12 @@ public class StartActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_star);
+
         //Administrador de devoluciones de llamada que gestione las respuestas de inicio de sesión.
         callbackManager = CallbackManager.Factory.create();
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList("public_profile","user_status","email"));
-
+        loginButton.setReadPermissions(Arrays.asList("public_profile","email","user_gender"));
 
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -64,14 +67,13 @@ public class StartActivity extends AppCompatActivity {
                 mDialog.setMessage("Obteniendo datos.......");
                 mDialog.show();
 
-
                 String accesstoken = loginResult.getAccessToken().getToken();
 
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         mDialog.dismiss();
-
+                        getData(object);
 
                     }
                 });
@@ -92,14 +94,33 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException exception) {
                 // App code
+                Toast.makeText(StartActivity.this, exception.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        if (AccessToken.getCurrentAccessToken() != null) {
+            //AccessToken.getCurrentAccessToken().getUserId();
+        }
     }
 
+    private void getData(JSONObject object){
+        try {
 
+            System.out.print(
+                    "Datos de Facebook : \n "+
+                            object.getString("id")+"\n"+
+                            object.getString("first_name")+"\n"+
+                            object.getString("last_name")+"\n"+
+                            object.getString("email")+"\n"+
+                            object.getString("gender")+"\n"+
+                            object.getString("birthday")+"\n"+"holis");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+    }
 
-
+/*
     private void printKeyHash() {
 
         try {
@@ -121,4 +142,6 @@ public class StartActivity extends AppCompatActivity {
         }
 
     }
+*/
+
 }
