@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".activities.StartActivity">
 
@@ -16,14 +17,30 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/logodelogin"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="10dp"
+                app:srcCompat="@drawable/logo" />
 
-            <com.facebook.login.widget.LoginButton
+            <com.facebook.login.widget.LoginButton xmlns:facebook="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/login_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="55dp"
+                android:layout_marginRight="55dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/style_button_secundary"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:textColor="@color/blanco"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                facebook:com_facebook_login_text="INICIAR CON FACEBOOK"
+                facebook:com_facebook_logout_text="CERRAR SESION" />
 
         </LinearLayout>
 
