@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".activities.StartActivity">
+    tools:context="com.app.medicfarma.activities.StartActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="55dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/style_button_secundary"
+                android:background="@color/com_facebook_blue"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:textColor="@color/blanco"

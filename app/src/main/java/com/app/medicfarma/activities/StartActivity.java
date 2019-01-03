@@ -1,10 +1,12 @@
 package com.app.medicfarma.activities;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -23,10 +25,12 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class StartActivity extends AppCompatActivity {
 
+    AlertDialog.Builder builder;
     CallbackManager callbackManager;
     LoginButton loginButton;
     ProgressDialog mDialog;
@@ -60,12 +64,14 @@ public class StartActivity extends AppCompatActivity {
                 mDialog.setMessage("Obteniendo datos.......");
                 mDialog.show();
 
+
                 String accesstoken = loginResult.getAccessToken().getToken();
 
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         mDialog.dismiss();
+
 
                     }
                 });
