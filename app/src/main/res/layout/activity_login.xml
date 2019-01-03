@@ -27,7 +27,7 @@
                 app:srcCompat="@drawable/logo" />
 
             <ProgressBar
-                android:id="@+id/progressBar_main"
+                android:id="@+id/progressBar_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -36,14 +36,14 @@
                 android:visibility="gone" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/inpUser"
+                android:id="@+id/inpUserLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:textColorHint="@android:color/holo_blue_light">
 
                 <EditText
-                    android:id="@+id/edtUser"
+                    android:id="@+id/edtUserLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -64,14 +64,14 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/inpPassL"
+                android:id="@+id/inpPassLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:textColorHint="@android:color/holo_blue_light">
 
                 <EditText
-                    android:id="@+id/edtPassL"
+                    android:id="@+id/edtPassLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"

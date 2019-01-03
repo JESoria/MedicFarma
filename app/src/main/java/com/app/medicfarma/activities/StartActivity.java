@@ -1,34 +1,22 @@
 package com.app.medicfarma.activities;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
-
 import com.app.medicfarma.R;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +25,7 @@ public class StartActivity extends AppCompatActivity {
     CallbackManager callbackManager;
     LoginButton loginButton;
     ProgressDialog mDialog;
+    Button iniciarSesion, crearCuenta;
 
     //Interfaz callbackManager.
     @Override
@@ -48,9 +37,10 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_star);
+
+        iniciarSesion = (Button) findViewById(R.id.btnIniciarSesion);
+        crearCuenta = (Button) findViewById(R.id.btnCrearCuenta);
 
         //Administrador de devoluciones de llamada que gestione las respuestas de inicio de sesión.
         callbackManager = CallbackManager.Factory.create();
@@ -64,7 +54,7 @@ public class StartActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
 
                 mDialog=new ProgressDialog(StartActivity.this);
-                mDialog.setMessage("Obteniendo datos.......");
+                mDialog.setMessage("Iniciando sesión.......");
                 mDialog.show();
 
                 String accesstoken = loginResult.getAccessToken().getToken();
@@ -88,12 +78,12 @@ public class StartActivity extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-                // App code
+                // cancel actions
             }
 
             @Override
             public void onError(FacebookException exception) {
-                // App code
+                // Error actions
                 Toast.makeText(StartActivity.this, exception.toString(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -101,6 +91,23 @@ public class StartActivity extends AppCompatActivity {
         if (AccessToken.getCurrentAccessToken() != null) {
             //AccessToken.getCurrentAccessToken().getUserId();
         }
+
+        //End Login with Facebook
+
+        iniciarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        crearCuenta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
     private void getData(JSONObject object){

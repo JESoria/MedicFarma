@@ -63,7 +63,7 @@
 
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btnIniciarLogin"
+                android:id="@+id/btnIniciarSesion"
                 android:layout_width="131dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -76,7 +76,7 @@
                 android:textStyle="bold" />
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btnCancelarLogin"
+                android:id="@+id/btnCrearCuenta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
