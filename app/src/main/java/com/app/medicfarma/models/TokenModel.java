@@ -6,6 +6,13 @@ public class TokenModel {
     private String sender_id;
     private String refresh_token;
 
+    public TokenModel(String refresh_token) {
+        this.refresh_token = refresh_token;
+    }
+
+    public TokenModel() {
+    }
+
     public String getOuth_name() {
         return outh_name;
     }

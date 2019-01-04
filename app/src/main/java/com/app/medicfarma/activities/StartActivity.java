@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.app.medicfarma.R;
 import java.util.Arrays;
 import com.app.medicfarma.helpers.DbHelper;
+import com.app.medicfarma.models.TokenModel;
 import com.app.medicfarma.ws_app.Token;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -49,14 +50,18 @@ public class StartActivity extends AppCompatActivity {
 
         //Get token if it's not
         final DbHelper mDbHelper = new DbHelper(this);
+
         progressBar.setVisibility(View.VISIBLE);
 
         if(mDbHelper.getAuthToken().equals("")){
             new Token(mDbHelper,progressBar).execute();
-            System.out.println("El token ha sido obtenido! jupi!");
+
         }else{
             progressBar.setVisibility(View.INVISIBLE);
+            //TokenModel model = mDbHelper.tokenModel();
+            //System.out.println("El token ha sido obtenido! jupi! " + model.getRefresh_token());
         }
+
         //End get token
 
         //Administrador de devoluciones de llamada que gestione las respuestas de inicio de sesión.

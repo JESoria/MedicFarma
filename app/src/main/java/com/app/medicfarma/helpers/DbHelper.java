@@ -5,11 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.app.medicfarma.models.TokenModel;
+
 
 public class DbHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "farmacias.db";
+    public static final String DATABASE_NAME = "medicfarma.db";
 
     public DbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -67,6 +69,40 @@ public class DbHelper extends SQLiteOpenHelper {
             return  oAuth;
         }else{
             return "";
+        }
+
+    }
+
+    public TokenModel tokenModel(){
+
+        String refresh_token;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        //definiendo el row
+        String[] projection = {
+                InternalControlDB.TablaToken._ID,
+                InternalControlDB.TablaToken.COLUMN_NAME_ACCESS_TOKEN,
+                InternalControlDB.TablaToken.COLUMN_NAME_TOKEN_TYPE,
+                InternalControlDB.TablaToken.COLUMN_NAME_REFRESH_TOKEN,
+                InternalControlDB.TablaToken.COLUMN_NAME_EXPIRES_IN
+        };
+        String selection = null;
+        String[] selectionArgs = null;
+        Cursor c = db.query(
+                InternalControlDB.TablaToken.TABLE_NAME_TOKEN,    // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                      // sort type
+        );
+        if(c.getCount()>0){
+            c.moveToFirst();
+            refresh_token = c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaToken.COLUMN_NAME_REFRESH_TOKEN));
+            return  new TokenModel(refresh_token);
+        }else{
+            return null;
         }
 
     }
