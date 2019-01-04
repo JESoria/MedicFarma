@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context="com.app.medicfarma.activities.StartActivity">
 
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,6 +26,7 @@
                 android:layout_height="150dp"
                 android:layout_margin="10dp"
                 app:srcCompat="@drawable/logo" />
+
 
             <ProgressBar
                 android:id="@+id/progressBar_start"
