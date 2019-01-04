@@ -7,8 +7,8 @@ package com.app.medicfarma.ws_app;
 
 public class WSRoutes {
 
-    public static String baseURL = "https://";
-    public static String getToken = "";
+    public static String baseURL = "https://medicfarma.azurewebsites.net";
+    public static String getToken = "/WService";
     public static String makeLogin = "";
 
 }

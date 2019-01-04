@@ -98,23 +98,24 @@ public class Token extends AsyncTask<Void, Void, String> {
 
     protected void onPostExecute(String response) {
         try {
-
+            //Get WS´Data
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Creando objeto JSON from Response").append("\n");
             JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
-            String token = object.getString("access_token");
-            String expires_in = object.getString("expires_in");
+            String access_token = object.getString("access_token");
             String token_type = object.getString("token_type");
+            String expires_in = object.getString("expires_in");
+            String refresh_token = object.getString("refresh_token");
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-            values.put(InternalControlDB.TablaToken.COLUMN_NAME_TOKEN, token);
+            values.put(InternalControlDB.TablaToken.COLUMN_NAME_ACCESS_TOKEN, access_token);
             values.put(InternalControlDB.TablaToken.COLUMN_NAME_TOKEN_TYPE, token_type);
-            values.put(InternalControlDB.TablaToken.COLUMN_NAME_TOKEN_ALIVE, 1);
-            values.put(InternalControlDB.TablaToken.COLUMN_NAME_UTC_EXPIRATION, expires_in);
+            values.put(InternalControlDB.TablaToken.COLUMN_NAME_REFRESH_TOKEN, refresh_token);
+            values.put(InternalControlDB.TablaToken.COLUMN_NAME_EXPIRES_IN, expires_in);
 
-            long newRowId = db.insert(InternalControlDB.TablaToken.TABLE_NAME, null, values);
+            long newRowId = db.insert(InternalControlDB.TablaToken.TABLE_NAME_TOKEN, null, values);
             progressBar.setVisibility(View.INVISIBLE);
 
         } catch (JSONException e) {

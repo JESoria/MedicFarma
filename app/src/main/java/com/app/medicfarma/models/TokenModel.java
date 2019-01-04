@@ -4,6 +4,7 @@ public class TokenModel {
 
     private String outh_name;
     private String sender_id;
+    private String refresh_token;
 
     public String getOuth_name() {
         return outh_name;
@@ -20,5 +21,9 @@ public class TokenModel {
     public void setSender_id(String sender_id) {
         this.sender_id = sender_id;
     }
+
+    public String getRefresh_token() { return refresh_token; }
+
+    public void setRefresh_token(String refresh_token) { this.refresh_token = refresh_token; }
 
 }

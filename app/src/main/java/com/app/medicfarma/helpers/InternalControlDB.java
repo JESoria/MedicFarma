@@ -11,17 +11,17 @@ public class InternalControlDB {
     //Inner Class para tabla Token
     public static class TablaToken implements BaseColumns {
         //Estructura tabla Token
-        public static final String TABLE_NAME = "token";
-        public static final String COLUMN_NAME_TOKEN = "access_token";
+        public static final String TABLE_NAME_TOKEN = "token";
+        public static final String COLUMN_NAME_ACCESS_TOKEN = "access_token";
         public static final String COLUMN_NAME_TOKEN_TYPE = "token_type";
-        public static final String COLUMN_NAME_TOKEN_ALIVE = "token_alive";
-        public static final String COLUMN_NAME_UTC_EXPIRATION = "expires_in";
+        public static final String COLUMN_NAME_EXPIRES_IN = "expires_in";
+        public static final String COLUMN_NAME_REFRESH_TOKEN = "refresh_token";
     }
 
     //Inner Class para tabla Usuario
     public static class TablaUsuario implements BaseColumns {
         //Estructura tabla Usuario
-        public static final String TABLE_NAME = "usuario";
+        public static final String TABLE_NAME_USUARIO = "usuario";
         public static final String COLUMN_NAME_ID_USUARIO = "id_usuario";
         public static final String COLUMN_NAME_USUARIO = "usuario";
         public static final String COLUMN_NAME_PASSWORD = "password";
@@ -47,22 +47,22 @@ public class InternalControlDB {
     public static class SQL_Token {
         //Create table Token
         public static final String CREATE_TABLE_TOKEN =
-                "CREATE TABLE " + TablaToken.TABLE_NAME + " (" +
+                "CREATE TABLE " + TablaToken.TABLE_NAME_TOKEN + " (" +
                         TablaToken._ID + " INTEGER PRIMARY KEY," +
-                        TablaToken.COLUMN_NAME_TOKEN + SQL.TEXT_TYPE + SQL.COMMA +
-                        TablaToken.COLUMN_NAME_TOKEN_ALIVE +SQL.INTEGER_TYPE + SQL.COMMA +
+                        TablaToken.COLUMN_NAME_ACCESS_TOKEN + SQL.TEXT_TYPE + SQL.COMMA +
                         TablaToken.COLUMN_NAME_TOKEN_TYPE + SQL.TEXT_TYPE + SQL.COMMA +
-                        TablaToken.COLUMN_NAME_UTC_EXPIRATION + SQL.TEXT_TYPE + " )";
+                        TablaToken.COLUMN_NAME_REFRESH_TOKEN  + SQL.TEXT_TYPE + SQL.COMMA +
+                        TablaToken.COLUMN_NAME_EXPIRES_IN + SQL.TEXT_TYPE + " )";
         //Drop table Token
         public static final String DELETE_TABLE_TOKEN =
-                "DROP TABLE IF EXISTS " + TablaToken.TABLE_NAME;
+                "DROP TABLE IF EXISTS " + TablaToken.TABLE_NAME_TOKEN;
     }
 
     //Inner Class para el manejo de consultas a la tabla de usuario
     public static class SQL_Usuario {
         //Create table Usuario
-        public static final String CREATE_TABLE_USUARIO=
-                "CREATE TABLE " + TablaUsuario.TABLE_NAME + " (" +
+        public static final String CREATE_TABLE_USUARIO =
+                "CREATE TABLE " + TablaUsuario.TABLE_NAME_USUARIO + " (" +
                         TablaUsuario._ID + " INTEGER PRIMARY KEY," +
                         TablaUsuario.COLUMN_NAME_ID_USUARIO + SQL.INTEGER_TYPE + SQL.COMMA +
                         TablaUsuario.COLUMN_NAME_USUARIO + SQL.TEXT_TYPE + SQL.COMMA +
@@ -75,7 +75,7 @@ public class InternalControlDB {
                         TablaUsuario.COLUMN_NAME_FACEBOOK_ID + SQL.INTEGER_TYPE + " )";
         //Drop table Usuario
         public static final String DELETE_USUARIOS =
-                "DROP TABLE IF EXISTS " + TablaUsuario.TABLE_NAME;
+                "DROP TABLE IF EXISTS " + TablaUsuario.TABLE_NAME_USUARIO;
     }
 
 

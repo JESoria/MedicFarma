@@ -1,6 +1,7 @@
 package com.app.medicfarma.helpers;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -33,4 +34,43 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
+
+    //Method to get token
+    public String getAuthToken(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        //definiendo el row
+        String[] projection = {
+                InternalControlDB.TablaToken._ID,
+                InternalControlDB.TablaToken.COLUMN_NAME_ACCESS_TOKEN,
+                InternalControlDB.TablaToken.COLUMN_NAME_TOKEN_TYPE,
+                InternalControlDB.TablaToken.COLUMN_NAME_EXPIRES_IN,
+                InternalControlDB.TablaToken.COLUMN_NAME_REFRESH_TOKEN
+        };
+        String selection = null;
+        String[] selectionArgs = null;
+        Cursor c = db.query(
+                InternalControlDB.TablaToken.TABLE_NAME_TOKEN,    // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                      // sort type
+        );
+        if(c.getCount()>0){
+            c.moveToFirst();
+
+            String oAuth =
+                    c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaToken.COLUMN_NAME_TOKEN_TYPE))+" "+
+                    c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaToken.COLUMN_NAME_ACCESS_TOKEN));
+
+            return  oAuth;
+        }else{
+            return "";
+        }
+
+    }
+
+
+
 }

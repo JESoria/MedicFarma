@@ -6,9 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.app.medicfarma.R;
 import java.util.Arrays;
+import com.app.medicfarma.helpers.DbHelper;
+import com.app.medicfarma.ws_app.Token;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -26,6 +29,7 @@ public class StartActivity extends AppCompatActivity {
     LoginButton loginButton;
     ProgressDialog mDialog;
     Button iniciarSesion, crearCuenta;
+    ProgressBar progressBar;
 
     //Interfaz callbackManager.
     @Override
@@ -41,6 +45,19 @@ public class StartActivity extends AppCompatActivity {
 
         iniciarSesion = (Button) findViewById(R.id.btnIniciarSesion);
         crearCuenta = (Button) findViewById(R.id.btnCrearCuenta);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar_start);
+
+        //Get token if it's not
+        final DbHelper mDbHelper = new DbHelper(this);
+        progressBar.setVisibility(View.VISIBLE);
+
+        if(mDbHelper.getAuthToken().equals("")){
+            new Token(mDbHelper,progressBar).execute();
+            System.out.println("El token ha sido obtenido! jupi!");
+        }else{
+            progressBar.setVisibility(View.INVISIBLE);
+        }
+        //End get token
 
         //Administrador de devoluciones de llamada que gestione las respuestas de inicio de sesión.
         callbackManager = CallbackManager.Factory.create();
