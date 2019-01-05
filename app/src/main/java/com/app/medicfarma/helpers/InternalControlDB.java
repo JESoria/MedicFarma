@@ -23,8 +23,6 @@ public class InternalControlDB {
         //Estructura tabla Usuario
         public static final String TABLE_NAME_USUARIO = "usuario";
         public static final String COLUMN_NAME_ID_USUARIO = "id_usuario";
-        public static final String COLUMN_NAME_USUARIO = "usuario";
-        public static final String COLUMN_NAME_PASSWORD = "password";
         public static final String COLUMN_NAME_NOMBRES = "nombres";
         public static final String COLUMN_NAME_APELLIDOS = "apellidos";
         public static final String COLUMN_NAME_GENERO = "genero";
@@ -65,8 +63,6 @@ public class InternalControlDB {
                 "CREATE TABLE " + TablaUsuario.TABLE_NAME_USUARIO + " (" +
                         TablaUsuario._ID + " INTEGER PRIMARY KEY," +
                         TablaUsuario.COLUMN_NAME_ID_USUARIO + SQL.INTEGER_TYPE + SQL.COMMA +
-                        TablaUsuario.COLUMN_NAME_USUARIO + SQL.TEXT_TYPE + SQL.COMMA +
-                        TablaUsuario.COLUMN_NAME_PASSWORD + SQL.TEXT_TYPE + SQL.COMMA +
                         TablaUsuario.COLUMN_NAME_NOMBRES + SQL.TEXT_TYPE + SQL.COMMA +
                         TablaUsuario.COLUMN_NAME_APELLIDOS + SQL.TEXT_TYPE + SQL.COMMA +
                         TablaUsuario.COLUMN_NAME_GENERO + SQL.TEXT_TYPE + SQL.COMMA +

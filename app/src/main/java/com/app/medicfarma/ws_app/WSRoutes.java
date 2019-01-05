@@ -9,6 +9,6 @@ public class WSRoutes {
 
     public static String baseURL = "https://medicfarma.azurewebsites.net";
     public static String getToken = "/WService";
-    public static String makeLogin = "";
+    public static String makeLogin = "/Login";
 
 }

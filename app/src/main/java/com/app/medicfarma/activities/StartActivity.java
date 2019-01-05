@@ -58,8 +58,9 @@ public class StartActivity extends AppCompatActivity {
 
         }else{
             progressBar.setVisibility(View.INVISIBLE);
-            //TokenModel model = mDbHelper.tokenModel();
-            //System.out.println("El token ha sido obtenido! jupi! " + model.getRefresh_token());
+
+            TokenModel model = mDbHelper.tokenModel();
+            System.out.println("El token ha sido obtenido! jupi! " + model.getRefresh_token());
         }
 
         //End get token

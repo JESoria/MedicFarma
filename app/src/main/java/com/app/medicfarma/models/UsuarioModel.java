@@ -5,7 +5,6 @@ package com.app.medicfarma.models;
 public class UsuarioModel {
 
     private int idUsuario;
-    private String usuario;
     private String password;
     private String nombres;
     private String apellidos;
@@ -18,9 +17,8 @@ public class UsuarioModel {
 
     }
 
-    public UsuarioModel(int idUsuario, String usuario, String password, String nombres, String apellidos, String genero, String fechaNacimiento, String correo, int facebookId) {
+    public UsuarioModel(int idUsuario, String password, String nombres, String apellidos, String genero, String fechaNacimiento, String correo, int facebookId) {
         this.idUsuario = idUsuario;
-        this.usuario = usuario;
         this.password = password;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -36,14 +34,6 @@ public class UsuarioModel {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
     }
 
     public String getPassword() {

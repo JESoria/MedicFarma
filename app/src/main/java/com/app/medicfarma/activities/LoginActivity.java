@@ -9,9 +9,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.app.medicfarma.R;
+import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.UsuarioModel;
+import com.app.medicfarma.ws_app.Login;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements Login.AsyncResponse {
 
 
     Button iniciar, cancelar;
@@ -29,6 +31,9 @@ public class LoginActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.edtPassLogin);
         progressBar = (ProgressBar) findViewById(R.id.progressBar_login);
 
+        progressBar.setVisibility(View.VISIBLE);
+        final DbHelper mDbHelper = new DbHelper(this);
+        progressBar.setVisibility(View.INVISIBLE);
 
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,5 +70,10 @@ public class LoginActivity extends AppCompatActivity {
         else{
             //actions if there are not empty fields
         }
+    }
+
+    @Override
+    public void processFinish(String response) {
+
     }
 }
