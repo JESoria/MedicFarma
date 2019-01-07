@@ -36,7 +36,7 @@
         </activity>
         <!-- Seccion de Facebook -->
 
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name=".activities.LoginActivity" android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.StartActivity"></activity>StartActivity
+        <activity android:name=".activities.StartActivity" android:windowSoftInputMode="stateHidden"/>
 
     </application>
 

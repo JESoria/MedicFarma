@@ -13,8 +13,10 @@ import android.widget.ProgressBar;
 
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
+import com.app.medicfarma.models.TokenModel;
 import com.app.medicfarma.models.UsuarioModel;
 import com.app.medicfarma.ws_app.Login;
+import com.app.medicfarma.ws_app.Token;
 
 public class LoginActivity extends AppCompatActivity implements Login.AsyncResponse {
 
@@ -37,6 +39,15 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
         progressBar.setVisibility(View.VISIBLE);
         final DbHelper mDbHelper = new DbHelper(this);
         progressBar.setVisibility(View.INVISIBLE);
+
+        if(mDbHelper.getAuthToken().equals("")){
+            new Token(mDbHelper,progressBar).execute();
+
+        }else{
+            progressBar.setVisibility(View.INVISIBLE);
+        }
+
+        //End get token
 
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
