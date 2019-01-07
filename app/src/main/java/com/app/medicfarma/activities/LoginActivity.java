@@ -1,5 +1,8 @@
 package com.app.medicfarma.activities;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,7 +18,7 @@ import com.app.medicfarma.ws_app.Login;
 
 public class LoginActivity extends AppCompatActivity implements Login.AsyncResponse {
 
-
+    AlertDialog.Builder builder;
     Button iniciar, cancelar;
     ProgressBar progressBar;
     EditText user, pass;
@@ -38,19 +41,72 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginWithEmail();
+                loginWithEmail(mDbHelper);
             }
         });
 
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent welcome = new Intent(LoginActivity.this,StartActivity.class);
+                startActivity(welcome);
+                finish();
             }
         });
     }
 
-    private void loginWithEmail(){
+
+
+    @Override
+    public void processFinish(String response) {
+        try{
+            progressBar.setVisibility(View.INVISIBLE);
+
+            if(!response.equals("")){
+
+                Intent welcome = new Intent(LoginActivity.this,StartActivity.class);
+                startActivity(welcome);
+                finish();
+
+            }
+            else {
+                iniciar.setEnabled(true);
+                builder = new AlertDialog.Builder(LoginActivity.this);
+                builder.setMessage("¡Sus credenciales son incorrectas!")
+                        .setCancelable(false)
+                        .setNeutralButton("Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
+                pass.setText("");
+                pass.requestFocus();
+            }
+
+        }
+        catch (NullPointerException e){
+            iniciar.setEnabled(true);
+            builder = new AlertDialog.Builder(LoginActivity.this);
+            builder.setMessage("Pongase en contacto con soporte tecnico")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }
+    }
+
+    private void loginWithEmail(DbHelper mDbHelper){
 
         UsuarioModel model = new UsuarioModel();
 
@@ -68,12 +124,8 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
             pass.requestFocus();
         }
         else{
-            //actions if there are not empty fields
+            progressBar.setVisibility(View.VISIBLE);
+            new Login(mDbHelper,progressBar,this).execute(model.getCorreo(), model.getPassword());
         }
-    }
-
-    @Override
-    public void processFinish(String response) {
-
     }
 }

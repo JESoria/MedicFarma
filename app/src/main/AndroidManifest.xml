@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme">
 
         <!-- Seccion de Facebook -->
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
@@ -37,7 +36,7 @@
         </activity>
         <!-- Seccion de Facebook -->
 
-        <activity android:name=".activities.StartActivity">
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,7 +44,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.StartActivity"></activity>StartActivity
 
     </application>
 
