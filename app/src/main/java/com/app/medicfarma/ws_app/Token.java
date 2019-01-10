@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -53,15 +54,20 @@ public class Token extends AsyncTask<Void, Void, String> {
             String requestBody;
             Uri.Builder builder = new Uri.Builder();
 
-            builder.appendQueryParameter("grant_type","password");
+            modelo.setSender_id("wakanda");
+            modelo.setOuth_name("token");
 
             builder.appendQueryParameter("sender_id", modelo.getSender_id());
 
             builder.appendQueryParameter("outh_name", modelo.getOuth_name());
 
+            builder.appendQueryParameter("grant_type","password");
+
+
             requestBody = builder.build().getEncodedQuery();
 
             URL url = new URL(WSRoutes.baseURL + ""+ WSRoutes.getToken);
+
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);

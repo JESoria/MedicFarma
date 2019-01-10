@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
 
         if(mDbHelper.getAuthToken().equals("")){
             new Token(mDbHelper,progressBar).execute();
-
         }else{
             progressBar.setVisibility(View.INVISIBLE);
         }

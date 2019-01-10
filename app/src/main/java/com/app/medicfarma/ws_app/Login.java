@@ -52,11 +52,11 @@ public class Login extends AsyncTask<String, Void, String> {
 
             String requestBody;
             Uri.Builder builder = new Uri.Builder();
-            builder.appendQueryParameter("email",email);
-            builder.appendQueryParameter("password",password);
+            builder.appendQueryParameter("correo",email);
+            builder.appendQueryParameter("passworld",password);
             requestBody = builder.build().getEncodedQuery();
 
-            URL url = new URL(WSRoutes.baseURL + ""+ WSRoutes.makeLogin);
+            URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeLogin);
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);
