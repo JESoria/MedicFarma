@@ -33,4 +33,7 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     //Facebook
     implementation 'com.facebook.android:facebook-login:4.39.0'
+    //Animations
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
+    implementation 'com.daimajia.easing:library:2.1@aar'
 }

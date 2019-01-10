@@ -10,13 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
-import com.app.medicfarma.models.TokenModel;
 import com.app.medicfarma.models.UsuarioModel;
 import com.app.medicfarma.ws_app.Login;
 import com.app.medicfarma.ws_app.Token;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 
 public class LoginActivity extends AppCompatActivity implements Login.AsyncResponse {
 
@@ -58,14 +59,10 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent welcome = new Intent(LoginActivity.this,StartActivity.class);
-                startActivity(welcome);
                 finish();
             }
         });
     }
-
-
 
     @Override
     public void processFinish(String response) {
@@ -73,11 +70,9 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
             progressBar.setVisibility(View.INVISIBLE);
 
             if(!response.equals("")){
-
                 Intent welcome = new Intent(LoginActivity.this,StartActivity.class);
                 startActivity(welcome);
                 finish();
-
             }
             else {
                 iniciar.setEnabled(true);
@@ -124,11 +119,19 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
         model.setPassword(pass.getText().toString());
 
         if(TextUtils.isEmpty(model.getCorreo())){
-            iniciar.setEnabled(true);
-            iniciar.setError("¡Debe ingresar su usuario!");
-            iniciar.requestFocus();
+            YoYo.with(Techniques.Tada)
+                    .duration(700)
+                    .repeat(1)
+                    .playOn(user);
+            user.setEnabled(true);
+            user.setError("¡Debe ingresar su usuario!");
+            user.requestFocus();
         }
         else if(TextUtils.isEmpty(model.getPassword())){
+            YoYo.with(Techniques.Tada)
+                    .duration(700)
+                    .repeat(1)
+                    .playOn(pass);
             pass.setEnabled(true);
             pass.setError("¡Debe ingresar su contraseña!");
             pass.requestFocus();
@@ -138,4 +141,7 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
             new Login(mDbHelper,progressBar,this).execute(model.getCorreo(), model.getPassword());
         }
     }
+
+
+
 }
