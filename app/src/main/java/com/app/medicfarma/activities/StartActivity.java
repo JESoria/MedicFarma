@@ -58,9 +58,6 @@ public class StartActivity extends AppCompatActivity {
 
         }else{
             progressBar.setVisibility(View.INVISIBLE);
-
-            TokenModel model = mDbHelper.tokenModel();
-            System.out.println("El token ha sido obtenido! jupi! " + model.getRefresh_token());
         }
 
         //End get token
@@ -120,7 +117,9 @@ public class StartActivity extends AppCompatActivity {
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(StartActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

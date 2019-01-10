@@ -59,17 +59,7 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
                 .playOn(pass);
         //End Section Animations
 
-        progressBar.setVisibility(View.VISIBLE);
         final DbHelper mDbHelper = new DbHelper(this);
-        progressBar.setVisibility(View.INVISIBLE);
-
-        if(mDbHelper.getAuthToken().equals("")){
-            new Token(mDbHelper,progressBar).execute();
-        }else{
-            progressBar.setVisibility(View.INVISIBLE);
-        }
-
-        //End get token
 
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +71,8 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,StartActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
