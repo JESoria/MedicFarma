@@ -1,10 +1,32 @@
 <resources>
     <string name="app_name">MedicFarma</string>
 
+    <!--resource-->
     <string name="facebook_app_id">2035126796547932</string>
     <string name="fb_login_protocol_scheme">fb2035126796547932</string>
+
+
+
+    <!-- label -->
+    <string name="text_start_session">O puede usar su correo</string>
+
+
+
+
+    <!-- botones-->
     <string name="start_sesion">Iniciar Sesión</string>
     <string name="new_account">¿No tienes cuenta?</string>
-    <string name="text_start_session">O puede usar su correo</string>
+    <String name="register">Registrar</String>
+    <string name="cancelar">Cancelar</string>
+
+
+
+    <!--Textbox-->
+
+
+
+
+
+
 
 </resources>
