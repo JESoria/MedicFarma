@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.app.medicfarma.R;
 import java.util.Arrays;
 import com.app.medicfarma.helpers.DbHelper;
-import com.app.medicfarma.models.TokenModel;
+import com.app.medicfarma.models.UsuarioModel;
 import com.app.medicfarma.ws_app.Token;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -83,7 +83,7 @@ public class StartActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         mDialog.dismiss();
-                        getData(object);
+                        getData(object,mDbHelper);
 
                     }
                 });
@@ -109,7 +109,7 @@ public class StartActivity extends AppCompatActivity {
         });
 
         if (AccessToken.getCurrentAccessToken() != null) {
-            //AccessToken.getCurrentAccessToken().getUserId();
+            AccessToken.getCurrentAccessToken().getUserId();
         }
 
         //End Login with Facebook
@@ -132,21 +132,48 @@ public class StartActivity extends AppCompatActivity {
 
     }
 
-    private void getData(JSONObject object){
+    private void getData(JSONObject object, DbHelper mDbHelper){
         try {
 
-            System.out.print(
-                    "Datos de Facebook : \n "+
-                            object.getString("id")+"\n"+
-                            object.getString("first_name")+"\n"+
-                            object.getString("last_name")+"\n"+
-                            object.getString("email")+"\n"+
-                            object.getString("gender")+"\n"+
-                            object.getString("birthday")+"\n"+"holis");
+            UsuarioModel model = new UsuarioModel();
+
+            model.setCorreo(object.getString("email"));
+            model.setPassword("");
+            model.setNombres(object.getString("first_name"));
+            model.setApellidos(object.getString("last_name"));
+            model.setGenero(formatoGenero(object.getString("gender")));
+            model.setFechaNacimiento(object.getString("birthday"));
+            model.setFacebookId(Integer.parseInt(object.getString("id")));
+
+            progressBar.setVisibility(View.VISIBLE);
+
+            /*
+            new Register(mDbHelper,progressBar,this).execute(
+                    model.getCorreo(),
+                    model.getPassword(),
+                    model.getNombres(),
+                    model.getApellidos(),
+                    model.getGenero(),
+                    model.getFechaNacimiento(),
+                    model.getFacebookId()
+            );
+            */
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public static String formatoGenero(String gender){
+
+        if(gender.equals("male")){
+            gender = "m";
+        }
+        else{
+            gender = "f";
+        }
+
+        return gender;
     }
 
 /*
@@ -172,5 +199,6 @@ public class StartActivity extends AppCompatActivity {
 
     }
 */
+
 
 }
