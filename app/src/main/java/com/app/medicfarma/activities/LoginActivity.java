@@ -39,23 +39,23 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
 
         //Section Animations
         YoYo.with(Techniques.FadeIn)
-                .duration(700)
+                .duration(1000)
                 .repeat(1)
                 .playOn(iniciar);
 
         YoYo.with(Techniques.FadeIn)
-                .duration(700)
-                .repeat(1)
+                .duration(900)
+                .repeat(0)
                 .playOn(cancelar);
 
         YoYo.with(Techniques.FadeIn)
-                .duration(700)
-                .repeat(1)
+                .duration(900)
+                .repeat(0)
                 .playOn(user);
 
         YoYo.with(Techniques.FadeIn)
-                .duration(700)
-                .repeat(1)
+                .duration(900)
+                .repeat(0)
                 .playOn(pass);
         //End Section Animations
 
