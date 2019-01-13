@@ -12,6 +12,7 @@ import com.app.medicfarma.R;
 import java.util.Arrays;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.UsuarioModel;
+import com.app.medicfarma.ws_app.RegisterUser;
 import com.app.medicfarma.ws_app.Token;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -127,6 +128,10 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Intent intent = new Intent(StartActivity.this,RegisterActivity.class);
+                startActivity(intent);
+                finish();
+
             }
         });
 
@@ -143,7 +148,7 @@ public class StartActivity extends AppCompatActivity {
             model.setApellidos(object.getString("last_name"));
             model.setGenero(formatoGenero(object.getString("gender")));
             model.setFechaNacimiento(object.getString("birthday"));
-            model.setFacebookId(Integer.parseInt(object.getString("id")));
+            model.setFacebookId(object.getString("id"));
 
             progressBar.setVisibility(View.VISIBLE);
 

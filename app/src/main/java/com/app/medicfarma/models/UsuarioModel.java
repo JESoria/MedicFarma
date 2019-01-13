@@ -11,14 +11,14 @@ public class UsuarioModel {
     private String genero;
     private String fechaNacimiento;
     private String correo;
-    private int facebookId;
+    private String facebookId;
     private int estado;
 
     public UsuarioModel() {
 
     }
 
-    public UsuarioModel(int idUsuario, String password, String nombres, String apellidos, String genero, String fechaNacimiento, String correo, int facebookId, int estado) {
+    public UsuarioModel(int idUsuario, String password, String nombres, String apellidos, String genero, String fechaNacimiento, String correo, String facebookId, int estado) {
         this.idUsuario = idUsuario;
         this.password = password;
         this.nombres = nombres;
@@ -85,11 +85,11 @@ public class UsuarioModel {
         this.correo = correo;
     }
 
-    public int getFacebookId() {
+    public String getFacebookId() {
         return facebookId;
     }
 
-    public void setFacebookId(int facebookId) {
+    public void setFacebookId(String facebookId) {
         this.facebookId = facebookId;
     }
 

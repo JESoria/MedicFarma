@@ -16,7 +16,7 @@
     <!-- botones-->
     <string name="start_sesion">Iniciar Sesión</string>
     <string name="new_account">¿No tienes cuenta?</string>
-    <String name="register">Registrar</String>
+    <string name="register">Registrar</string>
     <string name="cancelar">Cancelar</string>
 
 
