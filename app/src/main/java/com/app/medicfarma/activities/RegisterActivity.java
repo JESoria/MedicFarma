@@ -165,12 +165,20 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
         model.setFechaNacimiento(fecha_nacimiento.getText().toString());
         model.setCorreo(correo.getText().toString());
         model.setFacebookId("Mail");
-        model.setEstado(1);
+        model.setEstado(true);
         model.setPassword("jaja");
 
 
             progressBar.setVisibility(View.VISIBLE);
-            new RegisterUser(mDbHelper,progressBar,this).execute(model.getCorreo(), model.getPassword());
+            new RegisterUser(mDbHelper,progressBar,this).execute(
+                    model.getNombres(),
+                    model.getApellidos(),
+                    model.getGenero(),
+                    model.getFechaNacimiento(),
+                    model.getCorreo(),
+                    model.getFacebookId(),
+                    model.getPassword(),
+                    String.valueOf(model.getEstado()));
 
     }
 
