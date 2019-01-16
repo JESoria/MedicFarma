@@ -115,7 +115,6 @@ public class RegisterUser extends AsyncTask<String, Void, String>
 
             UsuarioModel model = new UsuarioModel();
 
-            //model.setIdUsuario(Integer.parseInt(object.getString("id_usuario")));
             model.setNombres(object.getString("nombres"));
             model.setApellidos(object.getString("apellidos"));
             model.setGenero(object.getString("genero"));
@@ -138,7 +137,7 @@ public class RegisterUser extends AsyncTask<String, Void, String>
 
 
             long newRowId = db.insert(InternalControlDB.TablaUsuario.TABLE_NAME_USUARIO, null, values);
-
+            db.close();
             delegate.processFinish(response);
 
         } catch (JSONException e) {

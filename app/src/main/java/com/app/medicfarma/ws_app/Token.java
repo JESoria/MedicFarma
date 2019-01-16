@@ -122,6 +122,7 @@ public class Token extends AsyncTask<Void, Void, String> {
             values.put(InternalControlDB.TablaToken.COLUMN_NAME_EXPIRES_IN, expires_in);
 
             long newRowId = db.insert(InternalControlDB.TablaToken.TABLE_NAME_TOKEN, null, values);
+            db.close();
             progressBar.setVisibility(View.INVISIBLE);
 
         } catch (JSONException e) {

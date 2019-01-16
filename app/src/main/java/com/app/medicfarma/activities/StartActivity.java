@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.app.medicfarma.R;
 import java.util.Arrays;
+import java.util.Calendar;
+
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.UsuarioModel;
 import com.app.medicfarma.ws_app.RegisterUser;
@@ -22,10 +24,14 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 
 public class StartActivity extends AppCompatActivity implements RegisterUser.AsyncResponse {
 
@@ -153,9 +159,10 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
             model.setNombres(object.getString("first_name"));
             model.setApellidos(object.getString("last_name"));
             model.setGenero(formatoGenero(object.getString("gender")));
-            model.setFechaNacimiento(object.getString("birthday"));
+            model.setFechaNacimiento(formatDate(object.getString("birthday")));
             model.setFacebookId(object.getString("id"));
             model.setEstado(true);
+            model.setPassword("123");
 
             progressBar.setVisibility(View.VISIBLE);
 
@@ -189,6 +196,17 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
         return gender;
     }
 
+    public static String formatDate(String birthday){
+
+        String fecha  = "";
+
+        String[] fechArray = birthday.split("/");
+
+        fecha = fechArray[2]+"-"+fechArray[0]+"-"+fechArray[1];
+
+        return fecha;
+    }
+
     @Override
     public void processFinish(String response) {
         try{
@@ -200,6 +218,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
                 finish();
             }
             else {
+                LoginManager.getInstance().logOut();
                 builder = new AlertDialog.Builder(StartActivity.this);
                 builder.setMessage("¡Ups ha ocurrido un error!")
                         .setCancelable(false)
@@ -215,6 +234,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
 
         }
         catch (NullPointerException e){
+            LoginManager.getInstance().logOut();
             builder = new AlertDialog.Builder(StartActivity.this);
             builder.setMessage("Pongase en contacto con soporte tecnico")
                     .setCancelable(false)

@@ -123,7 +123,7 @@ public class Login extends AsyncTask<String, Void, String> {
 
 
             long newRowId = db.insert(InternalControlDB.TablaUsuario.TABLE_NAME_USUARIO, null, values);
-
+            db.close();
             delegate.processFinish(response);
 
         } catch (JSONException e) {
