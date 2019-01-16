@@ -1,7 +1,9 @@
 package com.app.medicfarma.activities;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,13 +27,14 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends AppCompatActivity implements RegisterUser.AsyncResponse {
 
     CallbackManager callbackManager;
     LoginButton loginButton;
     ProgressDialog mDialog;
     Button iniciarSesion, crearCuenta;
     ProgressBar progressBar;
+    AlertDialog.Builder builder;
 
     //Interfaz callbackManager.
     @Override
@@ -111,6 +114,9 @@ public class StartActivity extends AppCompatActivity {
 
         if (AccessToken.getCurrentAccessToken() != null) {
             AccessToken.getCurrentAccessToken().getUserId();
+            Intent intent = new Intent(StartActivity.this,LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         //End Login with Facebook
@@ -149,20 +155,22 @@ public class StartActivity extends AppCompatActivity {
             model.setGenero(formatoGenero(object.getString("gender")));
             model.setFechaNacimiento(object.getString("birthday"));
             model.setFacebookId(object.getString("id"));
+            model.setEstado(true);
 
             progressBar.setVisibility(View.VISIBLE);
 
-            /*
-            new Register(mDbHelper,progressBar,this).execute(
-                    model.getCorreo(),
-                    model.getPassword(),
+
+            new RegisterUser(mDbHelper,progressBar,this).execute(
                     model.getNombres(),
                     model.getApellidos(),
                     model.getGenero(),
                     model.getFechaNacimiento(),
-                    model.getFacebookId()
+                    model.getCorreo(),
+                    model.getFacebookId(),
+                    model.getPassword(),
+                    String.valueOf(model.getEstado())
             );
-            */
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -181,29 +189,48 @@ public class StartActivity extends AppCompatActivity {
         return gender;
     }
 
-/*
-    private void printKeyHash() {
+    @Override
+    public void processFinish(String response) {
+        try{
+            progressBar.setVisibility(View.INVISIBLE);
 
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo("com.app.medicfarma", PackageManager.GET_SIGNATURES);
-
-            for (Signature signature:info.signatures)
-            {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("AQUI KeyHash:", Base64.encodeToString(md.digest(),Base64.DEFAULT));
-                System.out.print("AQUI KeyHash:" + Base64.encodeToString(md.digest(),Base64.DEFAULT));
-
+            if(!response.equals("")){
+                Intent welcome = new Intent(StartActivity.this,LoginActivity.class);
+                startActivity(welcome);
+                finish();
+            }
+            else {
+                builder = new AlertDialog.Builder(StartActivity.this);
+                builder.setMessage("¡Ups ha ocurrido un error!")
+                        .setCancelable(false)
+                        .setNeutralButton("Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
 
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
         }
+        catch (NullPointerException e){
+            builder = new AlertDialog.Builder(StartActivity.this);
+            builder.setMessage("Pongase en contacto con soporte tecnico")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
 
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }
     }
-*/
+
 
 
 }
