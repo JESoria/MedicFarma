@@ -119,10 +119,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
         });
 
         if (AccessToken.getCurrentAccessToken() != null) {
-            AccessToken.getCurrentAccessToken().getUserId();
-            Intent intent = new Intent(StartActivity.this,LoginActivity.class);
-            startActivity(intent);
-            finish();
+           //Acciones si ya esta logeado
         }
 
         //End Login with Facebook
