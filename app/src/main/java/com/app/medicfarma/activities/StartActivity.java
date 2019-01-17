@@ -143,7 +143,6 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
                 Intent intent = new Intent(StartActivity.this,RegisterActivity.class);
                 startActivity(intent);
                 finish();
-
             }
         });
 
