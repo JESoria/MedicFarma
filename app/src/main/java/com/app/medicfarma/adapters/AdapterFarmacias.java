@@ -52,16 +52,15 @@ public class AdapterFarmacias extends RecyclerView.Adapter<AdapterFarmacias.Farm
 
         farmaciasViewHolder.tvNombreFarmacia.setText(pharmacy.getNombreFarmacia());
 
-        if (pharmacy.getIdFarmacia() == 2){
+        if (pharmacy.getIdFarmacia() == 1){
             farmaciasViewHolder.ivLogo.setImageDrawable(context.getResources().getDrawable(R.drawable.san_nicolas));
         }
-        else if (pharmacy.getIdFarmacia() == 1013){
+        else if (pharmacy.getIdFarmacia() == 2){
             farmaciasViewHolder.ivLogo.setImageDrawable(context.getResources().getDrawable(R.drawable.farmavalue));
         }
-        else if (pharmacy.getIdFarmacia() == 1014){
+        else if (pharmacy.getIdFarmacia() == 3){
             farmaciasViewHolder.ivLogo.setImageDrawable(context.getResources().getDrawable(R.drawable.camila));
         }
-
 
     }
 

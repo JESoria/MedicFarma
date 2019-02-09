@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarListCategorias"
+        android:id="@+id/toolbarListFarmacias"
         style="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
@@ -52,7 +52,7 @@
 
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/rvCategorias"
+            android:id="@+id/rvFarmacias"
             android:layout_width="match_parent"
             android:layout_height="551dp"
             tools:layout_editor_absoluteX="8dp"

@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
             progressBar.setVisibility(View.INVISIBLE);
 
             if(!response.equals("")){
-                Intent welcome = new Intent(LoginActivity.this,StartActivity.class);
+                Intent welcome = new Intent(LoginActivity.this,ListDrugStoreActivity.class);
                 startActivity(welcome);
                 finish();
             }
