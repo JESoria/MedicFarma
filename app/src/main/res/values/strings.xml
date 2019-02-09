@@ -6,11 +6,8 @@
     <string name="fb_login_protocol_scheme">fb2035126796547932</string>
 
 
-
     <!-- label -->
     <string name="text_start_session">O puede usar su correo</string>
-
-
 
 
     <!-- botones-->
@@ -20,13 +17,7 @@
     <string name="cancelar">Cancelar</string>
 
 
-
     <!--Textbox-->
-
-
-
-
-
 
 
 </resources>
