@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.medicfarma.activities.ProductsActivity;
 import com.app.medicfarma.R;
 import com.app.medicfarma.models.Pharmacy;
 
@@ -39,16 +40,16 @@ public class AdapterFarmacias extends RecyclerView.Adapter<AdapterFarmacias.Farm
     public void onBindViewHolder(@NonNull AdapterFarmacias.FarmaciasViewHolder farmaciasViewHolder, int position) {
         final Pharmacy pharmacy = farmacias.get(position);
 
-        /*
+
         farmaciasViewHolder.cvFarmacias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, BuscarProductoActivity.class);
+                Intent intent = new Intent(context, ProductsActivity.class);
                 intent.putExtra("idFarmacia",pharmacy.getIdFarmacia());
                 context.startActivity(intent);
             }
         });
-        */
+
 
         farmaciasViewHolder.tvNombreFarmacia.setText(pharmacy.getNombreFarmacia());
 

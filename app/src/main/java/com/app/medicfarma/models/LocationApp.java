@@ -1,14 +1,14 @@
 package com.app.medicfarma.models;
 
-public class Location {
+public class LocationApp {
 
     private String longitude;
     private String latitude;
 
-    public Location() {
+    public LocationApp() {
     }
 
-    public Location(String longitude, String latitude) {
+    public LocationApp(String longitude, String latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }

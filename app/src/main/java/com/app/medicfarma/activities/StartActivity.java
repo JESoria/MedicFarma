@@ -42,6 +42,8 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
     ProgressBar progressBar;
     AlertDialog.Builder builder;
 
+
+
     //Interfaz callbackManager.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ListDrugStoreActivity"
+    tools:context=".activities.ProductsActivity"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarListFarmacias"
+        android:id="@+id/toolbarMenu"
         style="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
@@ -21,14 +21,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
-            <ImageView
-                android:id="@+id/imgAtras"
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:layout_weight="0.03"
-                app:srcCompat="?android:attr/homeAsUpIndicator" />
-
             <TextView
                 android:id="@+id/toolbar_subTitle"
                 android:layout_width="wrap_content"
@@ -36,9 +28,10 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0.05"
                 android:fontFamily="sans-serif-condensed"
-                android:text="Farmacias"
+                android:gravity="center"
+                android:text="¿Que medicamento buscas?"
                 android:textColor="@color/blanco"
-                android:textSize="20dp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -47,16 +40,22 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/rvFarmacias"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="551dp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/rvProducts"
+                android:layout_width="match_parent"
+                android:layout_height="551dp"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp" />
+
+        </LinearLayout>
 
     </ScrollView>
 
