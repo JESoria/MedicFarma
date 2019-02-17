@@ -34,20 +34,18 @@ public class ProductsActivity extends AppCompatActivity implements Productos.Asy
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-
-
         final DbHelper mDbHelper = new DbHelper(ProductsActivity.this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbarMenu);
         setSupportActionBar(toolbar);
 
-        listaProductos = (RecyclerView) findViewById(R.id.rvFarmacias);
+        listaProductos = (RecyclerView) findViewById(R.id.rvProducts);
         LinearLayoutManager llm = new LinearLayoutManager(ProductsActivity.this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaProductos.setLayoutManager(llm);
 
         Bundle datos = getIntent().getExtras();
-        idFarmacia = datos.getInt("dFarmacia");
+        idFarmacia = datos.getInt("idFarmacia");
 
     }
 

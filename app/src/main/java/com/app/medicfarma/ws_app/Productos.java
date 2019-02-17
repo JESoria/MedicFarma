@@ -46,15 +46,13 @@ public class Productos extends AsyncTask<String, Void, String> {
 
             String requestBody;
             Uri.Builder builder = new Uri.Builder();
-
             builder.appendQueryParameter("idFarmacia",idFarmacia);
             builder.appendQueryParameter("latitud",latitud);
             builder.appendQueryParameter("longitud",longitud);
             builder.appendQueryParameter("producto",producto);
-
             requestBody = builder.build().getEncodedQuery();
 
-            URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeNearbyDrugstore);
+            URL url = new URL(WSRoutes.baseURL + ""+ WSRoutes.makeNearbyDrugstore);
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);

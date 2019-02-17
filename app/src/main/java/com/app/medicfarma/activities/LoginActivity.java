@@ -129,6 +129,9 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
 
         UsuarioModel model = new UsuarioModel();
 
+        user.setText("ing_soria@hotmail.com");
+        pass.setText("123");
+
         model.setCorreo(user.getText().toString());
         model.setPassword(pass.getText().toString());
 

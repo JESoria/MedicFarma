@@ -101,13 +101,13 @@ public class Login extends AsyncTask<String, Void, String> {
 
             UsuarioModel model = new UsuarioModel();
 
-            model.setIdUsuario(Integer.parseInt(object.getString("id_usuario")));
+            model.setIdUsuario(Integer.parseInt(object.getString("iD_USUARIO")));
             model.setNombres(object.getString("nombres"));
             model.setApellidos(object.getString("apellidos"));
             model.setGenero(object.getString("genero"));
-            model.setFechaNacimiento(object.getString("fecha_nacimiento"));
+            model.setFechaNacimiento(object.getString("fechA_NACIMIENTO"));
             model.setCorreo(object.getString("correo"));
-            model.setFacebookId(object.getString("facebook_id"));
+            model.setFacebookId(object.getString("facebooK_ID"));
 
             SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
