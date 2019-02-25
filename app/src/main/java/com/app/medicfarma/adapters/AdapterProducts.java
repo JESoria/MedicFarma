@@ -1,7 +1,6 @@
 package com.app.medicfarma.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.medicfarma.R;
-import com.app.medicfarma.activities.ProductsActivity;
 import com.app.medicfarma.models.Product;
 
 import java.util.List;
@@ -42,7 +40,7 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.Produc
         productsViewHolder.cvProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ProductsActivity.class);
+                Intent intent = new Intent(context, ProductsBranchOfficeActivity.class);
                 intent.putExtra("idSucursal",pharmacy.getIdSucursal());
                 intent.putExtra("producto",pharmacy.getProducto);
                 context.startActivity(intent);

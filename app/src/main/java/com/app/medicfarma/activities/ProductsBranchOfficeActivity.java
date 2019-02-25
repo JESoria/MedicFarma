@@ -22,7 +22,7 @@ import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
 
-public class ProductsActivity extends AppCompatActivity implements Productos.AsyncResponse{
+public class ProductsBranchOfficeActivity extends AppCompatActivity implements Productos.AsyncResponse{
 
     Toolbar toolbar;
     private RecyclerView listaProductos;
@@ -32,18 +32,19 @@ public class ProductsActivity extends AppCompatActivity implements Productos.Asy
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products);
+        setContentView(R.layout.activity_products_branch_office);
 
-        final DbHelper mDbHelper = new DbHelper(ProductsActivity.this);
+        final DbHelper mDbHelper = new DbHelper(ProductsBranchOfficeActivity.this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbarMenu);
         setSupportActionBar(toolbar);
 
         listaProductos = (RecyclerView) findViewById(R.id.rvProducts);
-        LinearLayoutManager llm = new LinearLayoutManager(ProductsActivity.this);
+        LinearLayoutManager llm = new LinearLayoutManager(ProductsBranchOfficeActivity.this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaProductos.setLayoutManager(llm);
 
+        //Recibe el id de la farmacia para hacer busqueda por una farmacia en especifico
         Bundle datos = getIntent().getExtras();
         idFarmacia = datos.getInt("idFarmacia");
 
@@ -63,7 +64,7 @@ public class ProductsActivity extends AppCompatActivity implements Productos.Asy
             @Override
             public boolean onQueryTextSubmit(String query) {
                 product.setProducto(query);
-                new Productos(mDbHelper,ProductsActivity.this).execute(String.valueOf(idFarmacia),"13.700515","-89.201563",product.getProducto());
+                new Productos(mDbHelper,ProductsBranchOfficeActivity.this).execute(String.valueOf(idFarmacia),"13.700515","-89.201563",product.getProducto());
                 return true;
             }
 
@@ -81,10 +82,9 @@ public class ProductsActivity extends AppCompatActivity implements Productos.Asy
 
         int id = item.getItemId();
 
-
         if (id == R.id.itemLogin) {
             LoginManager.getInstance().logOut();
-            Intent intent = new Intent(ProductsActivity.this, StartActivity.class);
+            Intent intent = new Intent(ProductsBranchOfficeActivity.this, StartActivity.class);
             startActivity(intent);
             finish();
         }
@@ -102,7 +102,7 @@ public class ProductsActivity extends AppCompatActivity implements Productos.Asy
 
             }
             else{
-                AlertDialog.Builder builder = new AlertDialog.Builder(ProductsActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProductsBranchOfficeActivity.this);
                 builder.setMessage("Lo sentimos el medicamento "+ product.getProducto() +" no se encuentra en su ubicación")
                         .setCancelable(false)
                         .setNeutralButton("Aceptar",
@@ -117,7 +117,7 @@ public class ProductsActivity extends AppCompatActivity implements Productos.Asy
 
         }
         catch (NullPointerException e){
-            AlertDialog.Builder builder = new AlertDialog.Builder(ProductsActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(ProductsBranchOfficeActivity.this);
             builder.setMessage("Sin servicio")
                     .setCancelable(false)
                     .setNeutralButton("Aceptar",

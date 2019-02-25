@@ -84,9 +84,10 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
             progressBar.setVisibility(View.INVISIBLE);
 
             if(!response.equals("")){
-                Intent welcome = new Intent(LoginActivity.this,ListDrugStoreActivity.class);
-                startActivity(welcome);
-                finish();
+                //Aqui debe estar la llamada al menu de la aplicación
+                //Intent welcome = new Intent(LoginActivity.this,ListDrugStoreActivity.class);
+                //startActivity(welcome);
+                //finish();
             }
             else {
                 iniciar.setEnabled(true);

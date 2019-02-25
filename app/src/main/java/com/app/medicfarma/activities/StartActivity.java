@@ -129,7 +129,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartActivity.this,ListDrugStoreActivity.class);
+                Intent intent = new Intent(StartActivity.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -211,9 +211,10 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
             progressBar.setVisibility(View.INVISIBLE);
 
             if(!response.equals("")){
-                Intent welcome = new Intent(StartActivity.this,ListDrugStoreActivity.class);
-                startActivity(welcome);
-                finish();
+                //Aqui debe ser la llamada al menu de la aplicación
+                //Intent welcome = new Intent(StartActivity.this,ListDrugStoreActivity.class);
+                //startActivity(welcome);
+                //finish();
             }
             else {
                 LoginManager.getInstance().logOut();
