@@ -18,16 +18,6 @@ public class WSRoutes {
     public static String makeProductSearch = "v1/ProductSearch";
     public static String makeProductDetail = "v1/ProductDetail";
 
-    //Rutas Farmacia San Nicolas
-    public static String baseURLSanNicolas = "http://medicfarma.azurewebsites.net/";
-    public static String getTokenSanNicolas = "WService";
 
-    //Rutas Farmacia FarmaValue
-    public static String baseURLFarmaValue = "http://medicfarma.azurewebsites.net/";
-    public static String getTokenFarmaValue= "WService";
-
-    //Rutas Faramacia Camila
-    public static String baseURLCamila = "http://medicfarma.azurewebsites.net/";
-    public static String getTokenCamila= "WService";
 
 }
