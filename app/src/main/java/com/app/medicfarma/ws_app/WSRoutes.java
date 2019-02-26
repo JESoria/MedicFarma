@@ -14,7 +14,8 @@ public class WSRoutes {
     public static String makeLogin = "v1/Login";
     public static String makeRegister = "v1/Register";
     public static String makeDrugstoresList = "v1/DrugstoresList";
-    public static String makeNearbyDrugstore = "v1/NearbyDrugstore";
+    public static String makeProductsBranchOffice = "v1/NearbyDrugstore";
+    public static String makeProductsPharmacies = "";
     public static String makeProductSearch = "v1/ProductSearch";
     public static String makeProductDetail = "v1/ProductDetail";
 

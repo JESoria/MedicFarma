@@ -36,7 +36,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
 
         final DbHelper mDbHelper = new DbHelper(ProductsBranchOfficeActivity.this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarMenu);
+        toolbar = (Toolbar) findViewById(R.id.toolbarMenuBranchOffice);
         setSupportActionBar(toolbar);
 
         listaProductos = (RecyclerView) findViewById(R.id.rvProducts);

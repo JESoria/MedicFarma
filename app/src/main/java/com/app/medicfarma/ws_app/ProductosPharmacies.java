@@ -20,7 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class ProductosSucursal extends AsyncTask<String, Void, String> {
+public class ProductosPharmacies extends AsyncTask<String, Void, String> {
 
     private Exception exception;
     DbHelper mDbHelper;
@@ -31,7 +31,7 @@ public class ProductosSucursal extends AsyncTask<String, Void, String> {
         void processFinish(String response, ArrayList productos);
     }
 
-    public ProductosSucursal(DbHelper mDbHelper, AsyncResponse delegate){
+    public ProductosPharmacies(DbHelper mDbHelper, AsyncResponse delegate){
         this.mDbHelper = mDbHelper;
         this.delegate = delegate;
     }
@@ -39,20 +39,20 @@ public class ProductosSucursal extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... parametros) {
         try{
-            String idFarmacia = parametros[0];
+            String producto = parametros [0];
             String latitud = parametros[1];
             String longitud = parametros [2];
-            String producto = parametros [3];
+
 
             String requestBody;
             Uri.Builder builder = new Uri.Builder();
-            builder.appendQueryParameter("idFarmacia",idFarmacia);
+            builder.appendQueryParameter("producto",producto);
             builder.appendQueryParameter("latitud",latitud);
             builder.appendQueryParameter("longitud",longitud);
-            builder.appendQueryParameter("producto",producto);
+
             requestBody = builder.build().getEncodedQuery();
 
-            URL url = new URL(WSRoutes.baseURL + ""+ WSRoutes.makeProductsBranchOffice);
+            URL url = new URL(WSRoutes.baseURL + ""+ WSRoutes.makeProductsPharmacies);
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);
