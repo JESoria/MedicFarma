@@ -48,7 +48,8 @@
             android:name=".activities.LoginActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.ProductsBranchOfficeActivity"></activity>
+        <activity android:name=".activities.ProductsBranchOfficeActivity" />
+        <activity android:name=".activities.ProductsPharmaciesActivity"></activity>
     </application>
 
 </manifest>
