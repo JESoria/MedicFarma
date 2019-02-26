@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
 
             if(!response.equals("")){
                 //Aqui debe estar la llamada al menu de la aplicación
-                //Intent welcome = new Intent(LoginActivity.this,ListDrugStoreActivity.class);
+                //Intent welcome = new Intent(LoginActivity.this,ProductsBranchOfficeActivity.class);
                 //startActivity(welcome);
                 //finish();
             }
