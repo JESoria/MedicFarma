@@ -37,13 +37,14 @@
         </activity>
         <!-- Seccion de Facebook -->
 
-        <activity android:name=".activities.StartActivity">
+        <activity android:name=".activities.WelcomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.StartActivity" />
         <activity
             android:name=".activities.LoginActivity"
             android:windowSoftInputMode="stateHidden" />
