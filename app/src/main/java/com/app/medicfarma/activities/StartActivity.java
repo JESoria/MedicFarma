@@ -7,8 +7,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.app.medicfarma.R;
 import java.util.Arrays;
@@ -38,11 +42,12 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
     CallbackManager callbackManager;
     LoginButton loginButton;
     ProgressDialog mDialog;
-    Button iniciarSesion, crearCuenta;
+    Button iniciarSesion, crearCuenta, botonfacebook;
     ProgressBar progressBar;
     AlertDialog.Builder builder;
-
-
+    Animation downtoup,uptodown;
+    ImageView LogodeLogin;
+    TextView tvStartactivity;
 
     //Interfaz callbackManager.
     @Override
@@ -56,10 +61,21 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_star);
 
+        uptodown= AnimationUtils.loadAnimation(this,R.anim.uptodown);
+        downtoup=AnimationUtils.loadAnimation(this,R.anim.downtoup);
+
         iniciarSesion = (Button) findViewById(R.id.btnIniciarSesion);
         crearCuenta = (Button) findViewById(R.id.btnCrearCuenta);
         progressBar = (ProgressBar) findViewById(R.id.progressBar_start);
+        LogodeLogin = (ImageView) findViewById(R.id.logodelogin) ;
+        tvStartactivity = (TextView) findViewById(R.id.tvStartactivity);
+        botonfacebook = (Button) findViewById(R.id.login_button);
 
+        LogodeLogin.setAnimation(uptodown);
+        tvStartactivity.setAnimation(downtoup);
+        iniciarSesion.setAnimation(downtoup);
+        crearCuenta.setAnimation(downtoup);
+        botonfacebook.setAnimation(uptodown);
         //Get token if it's not
         final DbHelper mDbHelper = new DbHelper(this);
 
