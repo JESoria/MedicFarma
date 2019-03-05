@@ -145,7 +145,11 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartActivity.this,LoginActivity.class);
+                //Intent intent = new Intent(StartActivity.this,LoginActivity.class);
+                //startActivity(intent);
+                //finish();
+
+                Intent intent = new Intent(StartActivity.this,ProductDetailActivity.class);
                 startActivity(intent);
                 finish();
             }
