@@ -16,12 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.app.medicfarma.R;
 import java.util.Arrays;
-import java.util.Calendar;
 
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.UsuarioModel;
-import com.app.medicfarma.ws_app.RegisterUser;
-import com.app.medicfarma.ws_app.Token;
+import com.app.medicfarma.ws_app.RegisterUserBridge;
+import com.app.medicfarma.ws_app.TokenBridge;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -34,10 +33,7 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.YEAR;
-
-public class StartActivity extends AppCompatActivity implements RegisterUser.AsyncResponse {
+public class StartActivity extends AppCompatActivity implements RegisterUserBridge.AsyncResponse {
 
     CallbackManager callbackManager;
     LoginButton loginButton;
@@ -82,7 +78,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
         progressBar.setVisibility(View.VISIBLE);
 
         if(mDbHelper.getAuthToken().equals("")){
-            new Token(mDbHelper,progressBar).execute();
+            new TokenBridge(mDbHelper,progressBar).execute();
 
         }else{
             progressBar.setVisibility(View.INVISIBLE);
@@ -140,7 +136,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
            //Acciones si ya esta logeado
         }
 
-        //End Login with Facebook
+        //End LoginBridge with Facebook
 
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,7 +181,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUser.Asy
             progressBar.setVisibility(View.VISIBLE);
 
 
-            new RegisterUser(mDbHelper,progressBar,this).execute(
+            new RegisterUserBridge(mDbHelper,progressBar,this).execute(
                     model.getNombres(),
                     model.getApellidos(),
                     model.getGenero(),

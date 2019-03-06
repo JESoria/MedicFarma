@@ -8,9 +8,9 @@ public class InternalControlDB {
 
     }
 
-    //Inner Class para tabla Token
+    //Inner Class para tabla TokenBridge
     public static class TablaToken implements BaseColumns {
-        //Estructura tabla Token
+        //Estructura tabla TokenBridge
         public static final String TABLE_NAME_TOKEN = "token";
         public static final String COLUMN_NAME_ACCESS_TOKEN = "access_token";
         public static final String COLUMN_NAME_TOKEN_TYPE = "token_type";
@@ -43,7 +43,7 @@ public class InternalControlDB {
 
     //Inner Class para el manejo de consultas a la tabla de token
     public static class SQL_Token {
-        //Create table Token
+        //Create table TokenBridge
         public static final String CREATE_TABLE_TOKEN =
                 "CREATE TABLE " + TablaToken.TABLE_NAME_TOKEN + " (" +
                         TablaToken._ID + " INTEGER PRIMARY KEY," +
@@ -51,7 +51,7 @@ public class InternalControlDB {
                         TablaToken.COLUMN_NAME_TOKEN_TYPE + SQL.TEXT_TYPE + SQL.COMMA +
                         TablaToken.COLUMN_NAME_REFRESH_TOKEN  + SQL.TEXT_TYPE + SQL.COMMA +
                         TablaToken.COLUMN_NAME_EXPIRES_IN + SQL.TEXT_TYPE + " )";
-        //Drop table Token
+        //Drop table TokenBridge
         public static final String DELETE_TABLE_TOKEN =
                 "DROP TABLE IF EXISTS " + TablaToken.TABLE_NAME_TOKEN;
     }

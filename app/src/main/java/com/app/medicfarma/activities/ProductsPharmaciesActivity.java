@@ -14,16 +14,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.app.medicfarma.R;
-import com.app.medicfarma.adapters.AdapterProducts;
 import com.app.medicfarma.adapters.AdapterProductsPharmacies;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Product;
-import com.app.medicfarma.ws_app.ProductosPharmacies;
+import com.app.medicfarma.ws_app.ProductosPharmaciesBridge;
 import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
 
-public class ProductsPharmaciesActivity extends AppCompatActivity implements ProductosPharmacies.AsyncResponse {
+public class ProductsPharmaciesActivity extends AppCompatActivity implements ProductosPharmaciesBridge.AsyncResponse {
 
     Toolbar toolbar;
     private RecyclerView listaProductos;
@@ -60,7 +59,7 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
             @Override
             public boolean onQueryTextSubmit(String query) {
                 product.setProducto(query);
-                new ProductosPharmacies(mDbHelper,ProductsPharmaciesActivity.this).execute(product.getProducto(),"13.700515","-89.201563");
+                new ProductosPharmaciesBridge(mDbHelper,ProductsPharmaciesActivity.this).execute(product.getProducto(),"13.700515","-89.201563");
                 return true;
             }
 

@@ -1,14 +1,15 @@
 package com.app.medicfarma.ws_app;
 
-import android.net.Uri;
 import android.os.AsyncTask;
+import android.widget.ProgressBar;
 
 import com.app.medicfarma.helpers.DbHelper;
-import com.app.medicfarma.models.Product;
+import com.app.medicfarma.models.Pharmacy;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -20,39 +21,32 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class ProductosPharmacies extends AsyncTask<String, Void, String> {
+public class FarmaciasBridge extends AsyncTask<Void, Void, String> {
 
     private Exception exception;
     DbHelper mDbHelper;
+    ProgressBar progressBar;
 
     public AsyncResponse delegate = null;
 
     public interface AsyncResponse {
-        void processFinish(String response, ArrayList productos);
+        void processFinish(String response, ArrayList farmacias);
     }
 
-    public ProductosPharmacies(DbHelper mDbHelper, AsyncResponse delegate){
+    public FarmaciasBridge(DbHelper mDbHelper, AsyncResponse delegate){
         this.mDbHelper = mDbHelper;
+        this.progressBar = progressBar;
         this.delegate = delegate;
     }
 
     @Override
-    protected String doInBackground(String... parametros) {
+    protected String doInBackground(Void... voids) {
         try{
-            String producto = parametros [0];
-            String latitud = parametros[1];
-            String longitud = parametros [2];
-
 
             String requestBody;
-            Uri.Builder builder = new Uri.Builder();
-            builder.appendQueryParameter("producto",producto);
-            builder.appendQueryParameter("latitud",latitud);
-            builder.appendQueryParameter("longitud",longitud);
+            requestBody = "";
 
-            requestBody = builder.build().getEncodedQuery();
-
-            URL url = new URL(WSRoutes.baseURL + ""+ WSRoutes.makeProductsPharmacies);
+            URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeDrugstoresList);
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);
@@ -87,13 +81,13 @@ public class ProductosPharmacies extends AsyncTask<String, Void, String> {
             System.err.println(e);
             return "";
         }
-    }
 
+    }
 
     protected void onPostExecute(String response) {
 
-        ArrayList<Product> productosList = new ArrayList<Product>();
-        Product product = null;
+        ArrayList<Pharmacy> farmaciasList = new ArrayList<Pharmacy>();
+        Pharmacy pharmacy = null;
         JSONObject object = null;
 
         try{
@@ -104,25 +98,19 @@ public class ProductosPharmacies extends AsyncTask<String, Void, String> {
 
                 object = jArray.getJSONObject(i);
 
-                product = new Product();
+                pharmacy = new Pharmacy();
 
-                product.setProducto(object.getString("producto"));
-                product.setPrecio(Double.parseDouble(object.getString("precio")));
-                product.setIdSucursalProducto(Integer.parseInt(object.getString("idSucursalProducto")));
-                product.setIdSucursal(Integer.parseInt(object.getString("idSucursal")));
-                product.setSucursal(object.getString("sucursal"));
-                product.setLatitud(object.getString("latitud"));
-                product.setLongitud(object.getString("longitud"));
-                product.setDireccion(object.getString("direccion"));
+                pharmacy.setIdFarmacia(Integer.parseInt(object.getString("idFarmacia")));
+                pharmacy.setNombreFarmacia(object.getString("nombreFarmacia"));
 
-                productosList.add(product);
+                farmaciasList.add(pharmacy);
             }
 
-            delegate.processFinish(response,productosList);
+            delegate.processFinish(response,farmaciasList);
         }
         catch(JSONException e){
             System.err.println(e);
-            delegate.processFinish(response,productosList);
+            delegate.processFinish(response,farmaciasList);
         }
 
     }

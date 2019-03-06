@@ -20,7 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class ProductosSucursal extends AsyncTask<String, Void, String> {
+public class ProductosSucursalBridge extends AsyncTask<String, Void, String> {
 
     private Exception exception;
     DbHelper mDbHelper;
@@ -31,7 +31,7 @@ public class ProductosSucursal extends AsyncTask<String, Void, String> {
         void processFinish(String response, ArrayList productos);
     }
 
-    public ProductosSucursal(DbHelper mDbHelper, AsyncResponse delegate){
+    public ProductosSucursalBridge(DbHelper mDbHelper, AsyncResponse delegate){
         this.mDbHelper = mDbHelper;
         this.delegate = delegate;
     }

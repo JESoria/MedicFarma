@@ -1,11 +1,9 @@
 package com.app.medicfarma.activities;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +14,12 @@ import android.widget.RadioGroup;
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.UsuarioModel;
-import com.app.medicfarma.ws_app.RegisterUser;
+import com.app.medicfarma.ws_app.RegisterUserBridge;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
 
-public class RegisterActivity  extends AppCompatActivity implements RegisterUser.AsyncResponse{
+public class RegisterActivity  extends AppCompatActivity implements RegisterUserBridge.AsyncResponse{
 
     AlertDialog.Builder builder;
     Button registrar, cancelar;
@@ -170,7 +168,7 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
 
 
             progressBar.setVisibility(View.VISIBLE);
-            new RegisterUser(mDbHelper,progressBar,this).execute(
+            new RegisterUserBridge(mDbHelper,progressBar,this).execute(
                     model.getNombres(),
                     model.getApellidos(),
                     model.getGenero(),

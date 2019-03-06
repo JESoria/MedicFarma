@@ -11,7 +11,7 @@ public class WSRoutes {
     //Rutas MedicFarma
     public static String baseURL = "https://7646e87f.ngrok.io/";
     public static String getToken = "WService";
-    public static String makeLogin = "v1/Login";
+    public static String makeLogin = "v1/LoginBridge";
     public static String makeRegister = "v1/Register";
     public static String makeDrugstoresList = "v1/DrugstoresList";
     public static String makeProductsBranchOffice = "v1/NearbyDrugstore";

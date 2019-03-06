@@ -13,6 +13,7 @@ import com.app.medicfarma.models.UsuarioModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,7 +27,7 @@ import java.net.URL;
  * Created by Soria on 04/01/2018.
  */
 
-public class Login extends AsyncTask<String, Void, String> {
+public class ProductDetailBridge extends AsyncTask<String, Void, String> {
 
     private Exception exception;
     DbHelper mDbHelper;
@@ -38,7 +39,7 @@ public class Login extends AsyncTask<String, Void, String> {
         void processFinish(String response);
     }
 
-    public Login(DbHelper mDbHelper, ProgressBar progressBar, AsyncResponse delegate){
+    public ProductDetailBridge(DbHelper mDbHelper, ProgressBar progressBar, AsyncResponse delegate){
         this.mDbHelper = mDbHelper;
         this.progressBar = progressBar;
         this.delegate = delegate;

@@ -24,7 +24,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class RegisterUser extends AsyncTask<String, Void, String>
+public class RegisterUserBridge extends AsyncTask<String, Void, String>
 
 {
     private Exception exception;
@@ -36,7 +36,7 @@ public class RegisterUser extends AsyncTask<String, Void, String>
     public interface AsyncResponse {
         void processFinish(String response);
     }
-    public RegisterUser(DbHelper mDbHelper, ProgressBar progressBar, AsyncResponse delegate){
+    public RegisterUserBridge(DbHelper mDbHelper, ProgressBar progressBar, AsyncResponse delegate){
         this.mDbHelper = mDbHelper;
         this.progressBar = progressBar;
         this.delegate = delegate;

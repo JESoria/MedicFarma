@@ -17,12 +17,12 @@ import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterProducts;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Product;
-import com.app.medicfarma.ws_app.ProductosSucursal;
+import com.app.medicfarma.ws_app.ProductosSucursalBridge;
 import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
 
-public class ProductsBranchOfficeActivity extends AppCompatActivity implements ProductosSucursal.AsyncResponse{
+public class ProductsBranchOfficeActivity extends AppCompatActivity implements ProductosSucursalBridge.AsyncResponse{
 
     Toolbar toolbar;
     private RecyclerView listaProductos;
@@ -65,7 +65,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
             @Override
             public boolean onQueryTextSubmit(String query) {
                 product.setProducto(query);
-                new ProductosSucursal(mDbHelper,ProductsBranchOfficeActivity.this).execute(String.valueOf(idFarmacia),"13.700515","-89.201563",product.getProducto());
+                new ProductosSucursalBridge(mDbHelper,ProductsBranchOfficeActivity.this).execute(String.valueOf(idFarmacia),"13.700515","-89.201563",product.getProducto());
                 return true;
             }
 

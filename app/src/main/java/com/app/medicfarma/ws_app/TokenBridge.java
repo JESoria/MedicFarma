@@ -28,13 +28,13 @@ import java.util.UUID;
  * Created by Soria on 03/01/2019.
  */
 
-public class Token extends AsyncTask<Void, Void, String> {
+public class TokenBridge extends AsyncTask<Void, Void, String> {
 
     private Exception exception;
     DbHelper dbHelper;
     ProgressBar progressBar;
 
-    public Token(DbHelper mDbHelper, ProgressBar progressBar){
+    public TokenBridge(DbHelper mDbHelper, ProgressBar progressBar){
         this.dbHelper = mDbHelper;
         this.progressBar = progressBar;
     }

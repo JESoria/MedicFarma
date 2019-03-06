@@ -13,13 +13,12 @@ import android.widget.ProgressBar;
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.UsuarioModel;
-import com.app.medicfarma.ws_app.Login;
-import com.app.medicfarma.ws_app.Token;
+import com.app.medicfarma.ws_app.LoginBridge;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
 
-public class LoginActivity extends AppCompatActivity implements Login.AsyncResponse {
+public class LoginActivity extends AppCompatActivity implements LoginBridge.AsyncResponse {
 
     AlertDialog.Builder builder;
     Button iniciar, cancelar;
@@ -156,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements Login.AsyncRespo
         }
         else{
             progressBar.setVisibility(View.VISIBLE);
-            new Login(mDbHelper,progressBar,this).execute(model.getCorreo(), model.getPassword());
+            new LoginBridge(mDbHelper,progressBar,this).execute(model.getCorreo(), model.getPassword());
         }
     }
 
