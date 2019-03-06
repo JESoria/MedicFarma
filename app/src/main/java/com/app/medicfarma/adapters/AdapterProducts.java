@@ -1,6 +1,7 @@
 package com.app.medicfarma.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.medicfarma.R;
+import com.app.medicfarma.activities.ProductDetailActivity;
 import com.app.medicfarma.models.Product;
 
 import java.util.List;
@@ -36,17 +38,17 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.Produc
     public void onBindViewHolder(@NonNull AdapterProducts.ProductsViewHolder productsViewHolder, int position) {
         final Product product = products.get(position);
 
-        /*
+
         productsViewHolder.cvProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ProductsBranchOfficeActivity.class);
-                intent.putExtra("idSucursal",pharmacy.getIdSucursal());
-                intent.putExtra("producto",pharmacy.getProducto);
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("idSucursalProducto",product.getIdSucursalProducto());
+                intent.putExtra("idFarmacia",product.getIdFarmacia());
                 context.startActivity(intent);
             }
         });
-        */
+
 
         productsViewHolder.tvProducto.setText(product.getProducto());
         productsViewHolder.tvSucursal.setText(product.getSucursal());

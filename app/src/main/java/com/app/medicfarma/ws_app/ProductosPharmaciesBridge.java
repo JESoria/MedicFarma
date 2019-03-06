@@ -111,6 +111,7 @@ public class ProductosPharmaciesBridge extends AsyncTask<String, Void, String> {
                 product.setLatitud(object.getString("latitud"));
                 product.setLongitud(object.getString("longitud"));
                 product.setDireccion(object.getString("direccion"));
+                product.setIdFarmacia(Integer.parseInt(object.getString("idFarmacia")));
 
                 productosList.add(product);
             }

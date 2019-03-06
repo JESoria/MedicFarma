@@ -145,7 +145,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
                 //startActivity(intent);
                 //finish();
 
-                Intent intent = new Intent(StartActivity.this,ProductDetailActivity.class);
+                Intent intent = new Intent(StartActivity.this,ProductsPharmaciesActivity.class);
                 startActivity(intent);
                 finish();
             }

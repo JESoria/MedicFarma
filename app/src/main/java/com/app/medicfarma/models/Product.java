@@ -6,6 +6,7 @@ public class Product {
     private double precio;
     private int idSucursalProducto;
     private int idSucursal;
+    private int idFarmacia;
     private String sucursal;
     private String latitud;
     private String longitud;
@@ -14,11 +15,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(String producto, double precio, int idSucursalProducto, int idSucursal, String sucursal, String latitud, String longitud, String direccion) {
+    public Product(String producto, double precio, int idSucursalProducto, int idSucursal, int idFarmacia, String sucursal, String latitud, String longitud, String direccion) {
         this.producto = producto;
         this.precio = precio;
         this.idSucursalProducto = idSucursalProducto;
         this.idSucursal = idSucursal;
+        this.idFarmacia = idFarmacia;
         this.sucursal = sucursal;
         this.latitud = latitud;
         this.longitud = longitud;
@@ -88,5 +90,12 @@ public class Product {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
+
+    public int getIdFarmacia() {
+        return idFarmacia;
+    }
+
+    public void setIdFarmacia(int idFarmacia) {
+        this.idFarmacia = idFarmacia;
+    }
 }

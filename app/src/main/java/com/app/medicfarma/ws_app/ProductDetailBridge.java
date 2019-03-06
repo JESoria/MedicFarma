@@ -102,7 +102,7 @@ public class ProductDetailBridge extends AsyncTask<String, Void, String> {
             productDetail.setLaboratorio(object.getString("laboratorio"));
             productDetail.setPrincipalActivos(object.getString("principiosActivos"));
             productDetail.setCategoria(object.getString("categoria"));
-            productDetail.setPrecio(Double.parseDouble(object.getString("producto")));
+            productDetail.setPrecio(Double.parseDouble(object.getString("precio")));
             productDetail.setExistencia(Integer.parseInt(object.getString("existencia")));
 
             delegate.processFinish(response,productDetail);

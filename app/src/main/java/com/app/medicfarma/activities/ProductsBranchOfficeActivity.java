@@ -47,7 +47,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
         //Recibe el id de la farmacia para hacer busqueda por una farmacia en especifico
         //Bundle datos = getIntent().getExtras();
         //idFarmacia = datos.getInt("idFarmacia");
-        idFarmacia = 2;
+        idFarmacia = 1013;
 
     }
 
