@@ -21,7 +21,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Date;
 import java.util.UUID;
 
 /**

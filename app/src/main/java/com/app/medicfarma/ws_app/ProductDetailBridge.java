@@ -1,19 +1,13 @@
 package com.app.medicfarma.ws_app;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.ProgressBar;
-
 import com.app.medicfarma.helpers.DbHelper;
-import com.app.medicfarma.helpers.InternalControlDB;
-import com.app.medicfarma.models.UsuarioModel;
-
+import com.app.medicfarma.models.ProductDetail;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,7 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Soria on 04/01/2018.
+ * Created by Soria on 05/03/2019.
  */
 
 public class ProductDetailBridge extends AsyncTask<String, Void, String> {
@@ -36,7 +30,7 @@ public class ProductDetailBridge extends AsyncTask<String, Void, String> {
     public AsyncResponse delegate = null;
 
     public interface AsyncResponse {
-        void processFinish(String response);
+        void processFinish(String response,ProductDetail productDetail);
     }
 
     public ProductDetailBridge(DbHelper mDbHelper, ProgressBar progressBar, AsyncResponse delegate){
@@ -48,16 +42,16 @@ public class ProductDetailBridge extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... parametros) {
         try{
-            String email = parametros[0];
-            String password = parametros[1];
+            String idSucursalProducto = parametros[0];
+            String idFarmacia = parametros[1];
 
             String requestBody;
             Uri.Builder builder = new Uri.Builder();
-            builder.appendQueryParameter("correo",email);
-            builder.appendQueryParameter("passworld",password);
+            builder.appendQueryParameter("idSucursalProducto",idSucursalProducto);
+            builder.appendQueryParameter("idFarmacia",idFarmacia);
             requestBody = builder.build().getEncodedQuery();
 
-            URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeLogin);
+            URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeProductDetail);
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);
@@ -97,39 +91,25 @@ public class ProductDetailBridge extends AsyncTask<String, Void, String> {
 
     protected void onPostExecute(String response) {
 
+        ProductDetail productDetail = new ProductDetail();
+
         try {
             JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
 
-            UsuarioModel model = new UsuarioModel();
+            productDetail.setProducto(object.getString("producto"));
+            productDetail.setPresentacion(object.getString("presentacion"));
+            productDetail.setFechavencimiento(object.getString("fechaVencimiento"));
+            productDetail.setLaboratorio(object.getString("laboratorio"));
+            productDetail.setPrincipalActivos(object.getString("principiosActivos"));
+            productDetail.setCategoria(object.getString("categoria"));
+            productDetail.setPrecio(Double.parseDouble(object.getString("producto")));
+            productDetail.setExistencia(Integer.parseInt(object.getString("existencia")));
 
-            model.setIdUsuario(Integer.parseInt(object.getString("iD_USUARIO")));
-            model.setNombres(object.getString("nombres"));
-            model.setApellidos(object.getString("apellidos"));
-            model.setGenero(object.getString("genero"));
-            model.setFechaNacimiento(object.getString("fechA_NACIMIENTO"));
-            model.setCorreo(object.getString("correo"));
-            model.setFacebookId(object.getString("facebooK_ID"));
-
-            SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-            ContentValues values = new ContentValues();
-
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_ID_USUARIO, model.getIdUsuario());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_NOMBRES, model.getNombres());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_APELLIDOS, model.getApellidos());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_GENERO, model.getGenero());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_FECHA_NACIMIENTO, model.getFechaNacimiento());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_CORREO, model.getCorreo());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_FACEBOOK_ID, model.getFacebookId());
-
-
-            long newRowId = db.insert(InternalControlDB.TablaUsuario.TABLE_NAME_USUARIO, null, values);
-            db.close();
-            delegate.processFinish(response);
+            delegate.processFinish(response,productDetail);
 
         } catch (JSONException e) {
-            e.printStackTrace();
-            delegate.processFinish(response);
+            System.err.println(e);
+            delegate.processFinish(response,productDetail);
         }
 
     }

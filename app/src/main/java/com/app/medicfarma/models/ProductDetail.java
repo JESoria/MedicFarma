@@ -9,11 +9,12 @@ public class ProductDetail {
     private String principalActivos;
     private String categoria;
     private double precio;
+    private int existencia;
 
     public ProductDetail() {
     }
 
-    public ProductDetail(String producto, String presentacion, String fechavencimiento, String laboratorio, String principalActivos, String categoria, double precio) {
+    public ProductDetail(String producto, String presentacion, String fechavencimiento, String laboratorio, String principalActivos, String categoria, double precio, int existencia) {
         this.producto = producto;
         Presentacion = presentacion;
         this.fechavencimiento = fechavencimiento;
@@ -21,6 +22,7 @@ public class ProductDetail {
         this.principalActivos = principalActivos;
         this.categoria = categoria;
         this.precio = precio;
+        this.existencia = existencia;
     }
 
     public String getProducto() {
@@ -79,4 +81,11 @@ public class ProductDetail {
         this.precio = precio;
     }
 
+    public int getExistencia() {
+        return existencia;
+    }
+
+    public void setExistencia(int existencia) {
+        this.existencia = existencia;
+    }
 }

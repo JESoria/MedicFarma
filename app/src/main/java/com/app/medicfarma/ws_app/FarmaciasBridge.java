@@ -2,15 +2,11 @@ package com.app.medicfarma.ws_app;
 
 import android.os.AsyncTask;
 import android.widget.ProgressBar;
-
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Pharmacy;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -25,7 +21,7 @@ public class FarmaciasBridge extends AsyncTask<Void, Void, String> {
 
     private Exception exception;
     DbHelper mDbHelper;
-    ProgressBar progressBar;
+    //ProgressBar progressBar; falta agregar a la pantalla
 
     public AsyncResponse delegate = null;
 
@@ -35,7 +31,7 @@ public class FarmaciasBridge extends AsyncTask<Void, Void, String> {
 
     public FarmaciasBridge(DbHelper mDbHelper, AsyncResponse delegate){
         this.mDbHelper = mDbHelper;
-        this.progressBar = progressBar;
+        //this.progressBar = progressBar;
         this.delegate = delegate;
     }
 

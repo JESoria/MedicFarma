@@ -5,11 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.ProgressBar;
-
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.helpers.InternalControlDB;
 import com.app.medicfarma.models.UsuarioModel;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
