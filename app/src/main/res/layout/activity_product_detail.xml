@@ -301,6 +301,33 @@
 
             </LinearLayout>
 
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnAgregarProductoDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/style_button_secundary"
+                android:elevation="4dp"
+                android:text="Agregar Producto"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnCancelaProductoDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/style_button_primary"
+                android:elevation="4dp"
+                android:text="Cancelar"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
 
         </LinearLayout>
 

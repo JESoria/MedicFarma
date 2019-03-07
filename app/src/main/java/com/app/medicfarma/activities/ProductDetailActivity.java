@@ -18,7 +18,7 @@ import com.app.medicfarma.ws_app.ProductDetailBridge;
 public class ProductDetailActivity extends AppCompatActivity implements ProductDetailBridge.AsyncResponse {
 
     ProgressBar progressBar;
-    Button btnMas, btnMenos;
+    Button btnMas, btnMenos,btnAgregar,btnCancelar;
     TextView tvMedicamento, tvContenidoPresentacion, tvContenidoLaboratorio, tvContenidoCategoria;
     TextView tvContenidoPrecio, tvContenidoFechaVencimiento, tvContenidoIngredientes;
     EditText edtCantidad;
@@ -26,6 +26,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     private int auxcantidad;
     private int idSucursalProducto;
     private int idFarmacia;
+    private boolean estadoOrden;
     ProductDetail productDetail = new ProductDetail();
 
     @Override
@@ -46,6 +47,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         tvContenidoFechaVencimiento = (TextView) findViewById(R.id.tvContenidoFechaVencimiento);
         tvContenidoIngredientes = (TextView) findViewById(R.id.tvContenidoIngredientes);
         progressBar = (ProgressBar) findViewById(R.id.progressBar_product_detail);
+        btnAgregar = (Button) findViewById(R.id.btnAgregarProductoDetalle);
+        btnCancelar = (Button) findViewById(R.id.btnCancelaProductoDetalle);
 
         auxcantidad = 1;
         edtCantidad.setFocusable(false);
@@ -56,6 +59,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         Bundle datos = getIntent().getExtras();
         idSucursalProducto = datos.getInt("idSucursalProducto");
         idFarmacia = datos.getInt("idFarmacia");
+        estadoOrden = datos.getBoolean("estadoOrden");
 
         progressBar.setVisibility(View.VISIBLE);
         startProcessProductDetail(mDbHelper,idSucursalProducto,idFarmacia);
@@ -81,6 +85,26 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             }
         });
 
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Agrega y Guarda el producto a la carretilla
+                //Aqui se direccionar a la busqueda por una sucursal en especifico
+            }
+        });
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(estadoOrden){
+                    //Regresa a pantalla de busqueda por sucursal especifica
+                }
+                else{
+                    finish();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -98,7 +122,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                 productDetail.setPrecio(model.getPrecio());
                 productDetail.setExistencia(model.getExistencia());
                 productDetail.setPrincipalActivos(model.getPrincipalActivos());
-
+                habilitar();
                 tvMedicamento.setText(""+productDetail.getProducto());
                 tvContenidoPresentacion.setText(""+productDetail.getPresentacion());
                 tvContenidoLaboratorio.setText(""+productDetail.getLaboratorio());
@@ -144,7 +168,38 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     public void startProcessProductDetail(DbHelper mDbHelper, int idSucursalProducto, int idFarmacia){
         progressBar.setVisibility(View.VISIBLE);
+        deshabilitar();
         new ProductDetailBridge(mDbHelper,progressBar,this).execute(String.valueOf(idSucursalProducto), String.valueOf(idFarmacia));
     }
+
+    public void deshabilitar(){
+        btnMenos.setEnabled(false);
+        btnMas.setEnabled(false);
+        edtCantidad.setEnabled(false);
+        tvMedicamento.setEnabled(false);
+        tvContenidoPresentacion.setEnabled(false);
+        tvContenidoLaboratorio.setEnabled(false);
+        tvContenidoCategoria.setEnabled(false);
+        tvContenidoPrecio.setEnabled(false);
+        tvContenidoFechaVencimiento.setEnabled(false);
+        tvContenidoIngredientes.setEnabled(false);
+        btnAgregar.setEnabled(false);
+        btnCancelar.setEnabled(false);
+    };
+
+    public void habilitar(){
+        btnMenos.setEnabled(true);
+        btnMas.setEnabled(true);
+        edtCantidad.setEnabled(true);
+        tvMedicamento.setEnabled(true);
+        tvContenidoPresentacion.setEnabled(true);
+        tvContenidoLaboratorio.setEnabled(true);
+        tvContenidoCategoria.setEnabled(true);
+        tvContenidoPrecio.setEnabled(true);
+        tvContenidoFechaVencimiento.setEnabled(true);
+        tvContenidoIngredientes.setEnabled(true);
+        btnAgregar.setEnabled(true);
+        btnCancelar.setEnabled(true);
+    };
 
 }
