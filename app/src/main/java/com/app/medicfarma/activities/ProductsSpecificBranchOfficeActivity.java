@@ -14,44 +14,45 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.app.medicfarma.R;
-import com.app.medicfarma.adapters.AdapterProducts;
+import com.app.medicfarma.adapters.AdapterProductsSpecificBranchOffice;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Product;
-import com.app.medicfarma.ws_app.ProductosSucursalBridge;
+import com.app.medicfarma.ws_app.ProductosSpecificSucursalBridge;
 import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
 
-public class ProductsBranchOfficeActivity extends AppCompatActivity implements ProductosSucursalBridge.AsyncResponse{
+public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity implements ProductosSpecificSucursalBridge.AsyncResponse{
 
     Toolbar toolbar;
     private RecyclerView listaProductos;
     Product product = new Product();
     int idFarmacia;
+    int idSucursal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products_branch_office);
+        setContentView(R.layout.activity_products_specific_branch_office);
 
-        final DbHelper mDbHelper = new DbHelper(ProductsBranchOfficeActivity.this);
+        final DbHelper mDbHelper = new DbHelper(ProductsSpecificBranchOfficeActivity.this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbarMenuBranchOffice);
         setSupportActionBar(toolbar);
 
         listaProductos = (RecyclerView) findViewById(R.id.rvProducts);
-        LinearLayoutManager llm = new LinearLayoutManager(ProductsBranchOfficeActivity.this);
+        LinearLayoutManager llm = new LinearLayoutManager(ProductsSpecificBranchOfficeActivity.this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaProductos.setLayoutManager(llm);
 
-        //Recibe el id de la farmacia para hacer busqueda por una farmacia en especifico
-        //Bundle datos = getIntent().getExtras();
-        //idFarmacia = datos.getInt("idFarmacia");
-        idFarmacia = 1013;
+
+        Bundle datos = getIntent().getExtras();
+        idFarmacia = datos.getInt("idFarmacia");
+        idSucursal = datos.getInt("idSucursal");
 
     }
 
-    public AdapterProducts adaptador;
+    public AdapterProductsSpecificBranchOffice adaptador;
 
     public boolean onCreateOptionsMenu(Menu menu){
         final DbHelper mDbHelper = new DbHelper(this);
@@ -65,7 +66,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
             @Override
             public boolean onQueryTextSubmit(String query) {
                 product.setProducto(query);
-                new ProductosSucursalBridge(mDbHelper,ProductsBranchOfficeActivity.this).execute(String.valueOf(idFarmacia),"13.700515","-89.201563",product.getProducto());
+                new ProductosSpecificSucursalBridge(mDbHelper,ProductsSpecificBranchOfficeActivity.this).execute(product.getProducto(),String.valueOf(idFarmacia),String.valueOf(idSucursal));
                 return true;
             }
 
@@ -84,9 +85,8 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
         int id = item.getItemId();
 
         if (id == R.id.itemLogin) {
-
             LoginManager.getInstance().logOut();
-            Intent intent = new Intent(ProductsBranchOfficeActivity.this, StartActivity.class);
+            Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this, StartActivity.class);
             startActivity(intent);
             finish();
         }
@@ -99,13 +99,13 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
         try{
 
             if(!response.equals("") && productos != null){
-                adaptador = new AdapterProducts(productos,this);
+                adaptador = new AdapterProductsSpecificBranchOffice(productos,this);
                 listaProductos.setAdapter(adaptador);
 
             }
             else{
-                AlertDialog.Builder builder = new AlertDialog.Builder(ProductsBranchOfficeActivity.this);
-                builder.setMessage("Lo sentimos el medicamento "+ product.getProducto() +" no se encuentra en su ubicación")
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProductsSpecificBranchOfficeActivity.this);
+                builder.setMessage("Lo sentimos el medicamento "+ product.getProducto() +" no se encuentra en la Sucursal")
                         .setCancelable(false)
                         .setNeutralButton("Aceptar",
                                 new DialogInterface.OnClickListener() {
@@ -119,7 +119,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
 
         }
         catch (NullPointerException e){
-            AlertDialog.Builder builder = new AlertDialog.Builder(ProductsBranchOfficeActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(ProductsSpecificBranchOfficeActivity.this);
             builder.setMessage("Sin servicio")
                     .setCancelable(false)
                     .setNeutralButton("Aceptar",
@@ -132,5 +132,4 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
             alert.show();
         }
     }
-
 }

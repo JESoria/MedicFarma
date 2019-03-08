@@ -13,12 +13,10 @@ public class WSRoutes {
     public static String getToken = "WService";
     public static String makeLogin = "v1/LoginBridge";
     public static String makeRegister = "v1/Register";
-    public static String makeDrugstoresList = "v1/DrugstoresList";
+    public static String makeDrugstoresList = "v1/DrugstoresList";//Lista de Farmacias
     public static String makeProductsBranchOffice = "v1/NearbyDrugstore"; //Por sucursal
     public static String makeProductsPharmacies = "v1/Nearby"; // Todas
-    public static String makeProductSearch = "v1/ProductSearch";
+    public static String makeSearchMore = "v1/SearchMore"; //Sucursal Especifica
     public static String makeProductDetail = "v1/Detail";
-
-
 
 }

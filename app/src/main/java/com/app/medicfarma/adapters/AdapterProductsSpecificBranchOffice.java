@@ -16,26 +16,26 @@ import com.app.medicfarma.models.Product;
 
 import java.util.List;
 
-public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ProductsViewHolder>{
+public class AdapterProductsSpecificBranchOffice extends RecyclerView.Adapter<AdapterProductsSpecificBranchOffice.ProductsViewHolder>{
 
     private Context context;
     private String name;
     private List<Product> products;
 
-    public AdapterProducts(List<Product> products, Context context){
+    public AdapterProductsSpecificBranchOffice(List<Product> products, Context context){
         this.products = products;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public AdapterProducts.ProductsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public AdapterProductsSpecificBranchOffice.ProductsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.content_list_products_branch_office,viewGroup,false);
         return new ProductsViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterProducts.ProductsViewHolder productsViewHolder, int position) {
+    public void onBindViewHolder(@NonNull AdapterProductsSpecificBranchOffice.ProductsViewHolder productsViewHolder, int position) {
         final Product product = products.get(position);
 
 
@@ -44,6 +44,7 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.Produc
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProductDetailActivity.class);
                 intent.putExtra("idFarmacia",product.getIdFarmacia());
+                intent.putExtra("idSucursal",product.getIdSucursal());
                 intent.putExtra("estadoOrden",false);
                 context.startActivity(intent);
             }
