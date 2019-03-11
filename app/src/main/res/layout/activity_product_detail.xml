@@ -23,14 +23,6 @@
             android:orientation="horizontal"
             android:paddingRight="15dp">
 
-            <ImageView
-                android:id="@+id/imgAtras"
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:layout_gravity="left"
-                android:layout_weight="0.03"
-                app:srcCompat="?android:attr/homeAsUpIndicator" />
-
             <TextView
                 android:id="@+id/toolbar_subTitle"
                 android:layout_width="266dp"

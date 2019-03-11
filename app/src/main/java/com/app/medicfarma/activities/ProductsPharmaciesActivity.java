@@ -12,6 +12,9 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterProductsPharmacies;
@@ -25,13 +28,27 @@ import java.util.ArrayList;
 public class ProductsPharmaciesActivity extends AppCompatActivity implements ProductosPharmaciesBridge.AsyncResponse {
 
     Toolbar toolbar;
+    ImageView imgAtras;
     private RecyclerView listaProductos;
     Product product = new Product();
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_pharmacies);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBarProductosFarmacias);
+        imgAtras = (ImageView) findViewById(R.id.imgAtras);
+
+        imgAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductsPharmaciesActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         final DbHelper mDbHelper = new DbHelper(ProductsPharmaciesActivity.this);
 
@@ -59,7 +76,8 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
             public boolean onQueryTextSubmit(String query) {
                 product.setProducto(query);
                 //Aqui se le debe enviar las coordenadas del lugar donde este el dispositivo
-                new ProductosPharmaciesBridge(mDbHelper,ProductsPharmaciesActivity.this).execute(product.getProducto(),"13.700515","-89.201563");
+                progressBar.setVisibility(View.VISIBLE);
+                new ProductosPharmaciesBridge(mDbHelper,progressBar,ProductsPharmaciesActivity.this).execute(product.getProducto(),"13.700515","-89.201563");
                 return true;
             }
 
@@ -90,7 +108,7 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
     @Override
     public void processFinish(String response, ArrayList productos) {
         try{
-
+            progressBar.setVisibility(View.INVISIBLE);
             if(!response.equals("") && productos != null){
                 adaptador = new AdapterProductsPharmacies(productos,this);
                 listaProductos.setAdapter(adaptador);

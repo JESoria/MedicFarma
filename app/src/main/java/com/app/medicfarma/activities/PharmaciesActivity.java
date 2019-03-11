@@ -10,12 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-
+import android.widget.ProgressBar;
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterFarmacias;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.ws_app.FarmaciasBridge;
-
 import java.util.ArrayList;
 
 public class PharmaciesActivity extends AppCompatActivity implements FarmaciasBridge.AsyncResponse {
@@ -23,11 +22,14 @@ public class PharmaciesActivity extends AppCompatActivity implements FarmaciasBr
     private RecyclerView listaFarmacias;
     ImageView imgAtras;
     private Toolbar toolbar;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pharmacies);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBarFarmacias);
 
         final DbHelper mDbHelper = new DbHelper(PharmaciesActivity.this);
 
@@ -50,8 +52,8 @@ public class PharmaciesActivity extends AppCompatActivity implements FarmaciasBr
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaFarmacias.setLayoutManager(llm);
 
-
-        new FarmaciasBridge(mDbHelper,PharmaciesActivity.this).execute();
+        progressBar.setVisibility(View.VISIBLE);
+        new FarmaciasBridge(mDbHelper,progressBar,PharmaciesActivity.this).execute();
 
     }
 
@@ -60,7 +62,7 @@ public class PharmaciesActivity extends AppCompatActivity implements FarmaciasBr
     @Override
     public void processFinish(String response, ArrayList farmacias) {
         try{
-
+            progressBar.setVisibility(View.INVISIBLE);
             if(!response.equals("") && farmacias != null){
                 adaptador = new AdapterFarmacias(farmacias,this);
                 listaFarmacias.setAdapter(adaptador);

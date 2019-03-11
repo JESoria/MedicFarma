@@ -2,6 +2,7 @@ package com.app.medicfarma.ws_app;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.widget.ProgressBar;
 
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Product;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class ProductosSpecificSucursalBridge extends AsyncTask<String, Void, String> {
 
     private Exception exception;
+    ProgressBar progressBar;
     DbHelper mDbHelper;
 
     public AsyncResponse delegate = null;
@@ -31,8 +33,9 @@ public class ProductosSpecificSucursalBridge extends AsyncTask<String, Void, Str
         void processFinish(String response, ArrayList productos);
     }
 
-    public ProductosSpecificSucursalBridge(DbHelper mDbHelper, AsyncResponse delegate){
+    public ProductosSpecificSucursalBridge(DbHelper mDbHelper, ProgressBar progressBar, AsyncResponse delegate){
         this.mDbHelper = mDbHelper;
+        this.progressBar = progressBar;
         this.delegate = delegate;
     }
 

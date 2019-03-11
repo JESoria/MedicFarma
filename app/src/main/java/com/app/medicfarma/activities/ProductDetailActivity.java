@@ -15,6 +15,8 @@ import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.ProductDetail;
 import com.app.medicfarma.ws_app.ProductDetailBridge;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 public class ProductDetailActivity extends AppCompatActivity implements ProductDetailBridge.AsyncResponse {
 
@@ -27,7 +29,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     private int auxcantidad;
     private int idSucursalProducto;
     private int idFarmacia;
-    private boolean estadoOrden;
+    public static boolean estadoOrden;
     ProductDetail productDetail = new ProductDetail();
 
     @Override
@@ -62,13 +64,11 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         idFarmacia = datos.getInt("idFarmacia");
         //estadoOrden = datos.getBoolean("estadoOrden");
 
-        progressBar.setVisibility(View.VISIBLE);
         startProcessProductDetail(mDbHelper,idSucursalProducto,idFarmacia);
 
         btnMas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Aqui se debe comparar con las existencias
                 if (productDetail.getExistencia() > auxcantidad){
                     auxcantidad++;
                     edtCantidad.setText(""+auxcantidad);
@@ -90,7 +90,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             @Override
             public void onClick(View view) {
                 //Agrega y Guarda el producto a la carretilla
-                //Aqui se direccionar a la busqueda por una sucursal en especifico
+                //Aqui se direcciona a la busqueda por una sucursal en especifico
                 //Por pruebas se utilizara el estado de la siguiente forma
                 estadoOrden = true;
                 Intent intent = new Intent(ProductDetailActivity.this,ProductsSpecificBranchOfficeActivity.class);
@@ -122,7 +122,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     public void processFinish(String response, ProductDetail model) {
         try{
             progressBar.setVisibility(View.INVISIBLE);
-
             if(!response.equals("") && model != null){
                 //Aqui van las acciones a realizar
                 productDetail.setProducto(model.getProducto());
@@ -179,8 +178,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     public void
     startProcessProductDetail(DbHelper mDbHelper, int idSucursalProducto, int idFarmacia){
-        progressBar.setVisibility(View.VISIBLE);
         deshabilitar();
+        progressBar.setVisibility(View.VISIBLE);
         new ProductDetailBridge(mDbHelper,progressBar,this).execute(String.valueOf(idSucursalProducto), String.valueOf(idFarmacia));
     }
 
@@ -212,6 +211,69 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         tvContenidoIngredientes.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
+
+
+        //Animacion
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(btnMenos);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(btnMas);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(edtCantidad);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(tvMedicamento);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(tvContenidoPresentacion);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(tvContenidoLaboratorio);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(tvContenidoCategoria);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(tvContenidoPrecio);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(tvContenidoFechaVencimiento);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(tvContenidoIngredientes);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(btnAgregar);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(btnCancelar);
+        //End Animacion
     };
 
 }

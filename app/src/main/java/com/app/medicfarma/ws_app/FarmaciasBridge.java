@@ -21,7 +21,7 @@ public class FarmaciasBridge extends AsyncTask<Void, Void, String> {
 
     private Exception exception;
     DbHelper mDbHelper;
-    //ProgressBar progressBar; falta agregar a la pantalla
+    ProgressBar progressBar;
 
     public AsyncResponse delegate = null;
 
@@ -29,9 +29,9 @@ public class FarmaciasBridge extends AsyncTask<Void, Void, String> {
         void processFinish(String response, ArrayList farmacias);
     }
 
-    public FarmaciasBridge(DbHelper mDbHelper, AsyncResponse delegate){
+    public FarmaciasBridge(DbHelper mDbHelper,ProgressBar progressBar, AsyncResponse delegate){
         this.mDbHelper = mDbHelper;
-        //this.progressBar = progressBar;
+        this.progressBar = progressBar;
         this.delegate = delegate;
     }
 

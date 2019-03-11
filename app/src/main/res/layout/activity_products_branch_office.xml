@@ -21,9 +21,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/imgAtras"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_weight="0.03"
+                app:srcCompat="?android:attr/homeAsUpIndicator" />
+
             <TextView
                 android:id="@+id/toolbar_subTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0.05"
@@ -37,6 +44,15 @@
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
+
+    <ProgressBar
+        android:id="@+id/progressBarSucursal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="0.49"
+        android:indeterminate="true"
+        android:visibility="gone" />
 
     <ScrollView
         android:layout_width="match_parent"

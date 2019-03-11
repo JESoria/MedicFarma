@@ -58,6 +58,10 @@ public class LoginActivity extends AppCompatActivity implements LoginBridge.Asyn
                 .playOn(pass);
         //End Section Animations
 
+        //Para efectos de pruebas
+        user.setText("ing_soria@hotmail.com");
+        pass.setText("123");
+
         final DbHelper mDbHelper = new DbHelper(this);
 
         iniciar.setOnClickListener(new View.OnClickListener() {
@@ -128,9 +132,6 @@ public class LoginActivity extends AppCompatActivity implements LoginBridge.Asyn
     private void loginWithEmail(DbHelper mDbHelper){
 
         UsuarioModel model = new UsuarioModel();
-
-        user.setText("ing_soria@hotmail.com");
-        pass.setText("123");
 
         model.setCorreo(user.getText().toString());
         model.setPassword(pass.getText().toString());

@@ -12,6 +12,9 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterProducts;
@@ -25,14 +28,28 @@ import java.util.ArrayList;
 public class ProductsBranchOfficeActivity extends AppCompatActivity implements ProductosSucursalBridge.AsyncResponse{
 
     Toolbar toolbar;
+    ImageView imgAtras;
     private RecyclerView listaProductos;
     Product product = new Product();
     int idFarmacia;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_branch_office);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBarSucursal);
+        imgAtras = (ImageView) findViewById(R.id.imgAtras);
+
+        imgAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductsBranchOfficeActivity.this, PharmaciesActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         final DbHelper mDbHelper = new DbHelper(ProductsBranchOfficeActivity.this);
 
@@ -63,7 +80,8 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
             public boolean onQueryTextSubmit(String query) {
                 //Aqui debe recibir las coordenadas del dispositivo
                 product.setProducto(query);
-                new ProductosSucursalBridge(mDbHelper,ProductsBranchOfficeActivity.this).execute(String.valueOf(idFarmacia),"13.700515","-89.201563",product.getProducto());
+                progressBar.setVisibility(View.VISIBLE);
+                new ProductosSucursalBridge(mDbHelper,progressBar,ProductsBranchOfficeActivity.this).execute(String.valueOf(idFarmacia),"13.700515","-89.201563",product.getProducto());
                 return true;
             }
 
@@ -95,7 +113,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
     @Override
     public void processFinish(String response, ArrayList productos) {
         try{
-
+            progressBar.setVisibility(View.INVISIBLE);
             if(!response.equals("") && productos != null){
                 adaptador = new AdapterProducts(productos,this);
                 listaProductos.setAdapter(adaptador);

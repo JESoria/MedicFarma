@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import com.app.medicfarma.R;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -23,6 +25,26 @@ public class HomeActivity extends AppCompatActivity {
         cvFarmaciaPreferida = (CardView) findViewById(R.id.cvFarmaciaPreferida);
         cvEstados = (CardView) findViewById(R.id.cvEstados);
         cvReclamos = (CardView) findViewById(R.id.cvReclamos);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(cvFarmacias);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(cvFarmaciaPreferida);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(cvEstados);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(cvReclamos);
 
         cvFarmacias.setOnClickListener(new View.OnClickListener() {
             @Override

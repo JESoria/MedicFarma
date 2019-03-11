@@ -9,7 +9,7 @@ public class WSRoutes {
 
 
     //Rutas MedicFarma
-    public static String baseURL = "https://6eb72ef1.ngrok.io/";
+    public static String baseURL = "http://medicfarma.azurewebsites.net/";
     public static String getToken = "WService";
     public static String makeLogin = "v1/LoginBridge";
     public static String makeRegister = "v1/Register";

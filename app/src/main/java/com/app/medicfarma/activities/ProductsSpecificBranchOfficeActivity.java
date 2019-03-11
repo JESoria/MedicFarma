@@ -12,6 +12,9 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterProductsSpecificBranchOffice;
 import com.app.medicfarma.helpers.DbHelper;
@@ -27,11 +30,14 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
     Product product = new Product();
     int idFarmacia;
     int idSucursal;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_specific_branch_office);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBarFarmaciaEspecifica);
 
         final DbHelper mDbHelper = new DbHelper(ProductsSpecificBranchOfficeActivity.this);
 
@@ -64,7 +70,8 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
             @Override
             public boolean onQueryTextSubmit(String query) {
                 product.setProducto(query);
-                new ProductosSpecificSucursalBridge(mDbHelper,ProductsSpecificBranchOfficeActivity.this).execute(product.getProducto(),String.valueOf(idFarmacia),String.valueOf(idSucursal));
+                progressBar.setVisibility(View.VISIBLE);
+                new ProductosSpecificSucursalBridge(mDbHelper, progressBar,ProductsSpecificBranchOfficeActivity.this).execute(product.getProducto(),String.valueOf(idFarmacia),String.valueOf(idSucursal));
                 return true;
             }
 
@@ -95,7 +102,7 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
     @Override
     public void processFinish(String response, ArrayList productos) {
         try{
-
+            progressBar.setVisibility(View.INVISIBLE);
             if(!response.equals("") && productos != null){
                 adaptador = new AdapterProductsSpecificBranchOffice(productos,this);
                 listaProductos.setAdapter(adaptador);
