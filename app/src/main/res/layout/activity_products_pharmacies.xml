@@ -8,6 +8,15 @@
     tools:context=".activities.ProductsPharmaciesActivity">
 
 
+    <ProgressBar
+        android:id="@+id/progressBarProductosFarmacias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="0.49"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarMenuPharmacies"
         style="@style/Theme.AppCompat.Light.NoActionBar"
@@ -31,7 +40,7 @@
 
             <TextView
                 android:id="@+id/toolbar_subTitle"
-                android:layout_width="280dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0.05"
@@ -45,15 +54,6 @@
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
-
-    <ProgressBar
-        android:id="@+id/progressBarProductosFarmacias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="0.49"
-        android:indeterminate="true"
-        android:visibility="gone" />
 
     <ScrollView
         android:layout_width="match_parent"
