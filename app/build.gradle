@@ -37,4 +37,5 @@ dependencies {
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation 'com.daimajia.easing:library:2.1@aar'
     implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
+    implementation 'com.airbnb.android:lottie:2.5.1'
 }

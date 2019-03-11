@@ -12,14 +12,12 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterProductsSpecificBranchOffice;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Product;
 import com.app.medicfarma.ws_app.ProductosSpecificSucursalBridge;
 import com.facebook.login.LoginManager;
-
 import java.util.ArrayList;
 
 public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity implements ProductosSpecificSucursalBridge.AsyncResponse{

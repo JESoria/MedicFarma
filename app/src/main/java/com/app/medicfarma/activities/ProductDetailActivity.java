@@ -1,6 +1,7 @@
 package com.app.medicfarma.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,7 +60,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         Bundle datos = getIntent().getExtras();
         idSucursalProducto = datos.getInt("idSucursalProducto");
         idFarmacia = datos.getInt("idFarmacia");
-        estadoOrden = datos.getBoolean("estadoOrden");
+        //estadoOrden = datos.getBoolean("estadoOrden");
 
         progressBar.setVisibility(View.VISIBLE);
         startProcessProductDetail(mDbHelper,idSucursalProducto,idFarmacia);
@@ -90,6 +91,11 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             public void onClick(View view) {
                 //Agrega y Guarda el producto a la carretilla
                 //Aqui se direccionar a la busqueda por una sucursal en especifico
+                //Por pruebas se utilizara el estado de la siguiente forma
+                estadoOrden = true;
+                Intent intent = new Intent(ProductDetailActivity.this,ProductsSpecificBranchOfficeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -98,8 +104,13 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             public void onClick(View view) {
                 if(estadoOrden){
                     //Regresa a pantalla de busqueda por sucursal especifica
+                    Intent intent = new Intent(ProductDetailActivity.this,ProductsSpecificBranchOfficeActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
                 else{
+                    Intent intent = new Intent(ProductDetailActivity.this,HomeActivity.class);
+                    startActivity(intent);
                     finish();
                 }
             }
@@ -166,7 +177,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         }
     }
 
-    public void startProcessProductDetail(DbHelper mDbHelper, int idSucursalProducto, int idFarmacia){
+    public void
+    startProcessProductDetail(DbHelper mDbHelper, int idSucursalProducto, int idFarmacia){
         progressBar.setVisibility(View.VISIBLE);
         deshabilitar();
         new ProductDetailBridge(mDbHelper,progressBar,this).execute(String.valueOf(idSucursalProducto), String.valueOf(idFarmacia));

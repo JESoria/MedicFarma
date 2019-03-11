@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.app.medicfarma.R;
 import java.util.Arrays;
-
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.UsuarioModel;
 import com.app.medicfarma.ws_app.RegisterUserBridge;
@@ -77,13 +76,13 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
 
         progressBar.setVisibility(View.VISIBLE);
 
+        //El token se debe pedir en la primera pantalla
         if(mDbHelper.getAuthToken().equals("")){
             new TokenBridge(mDbHelper,progressBar).execute();
 
         }else{
             progressBar.setVisibility(View.INVISIBLE);
         }
-
         //End get token
 
         //Administrador de devoluciones de llamada que gestione las respuestas de inicio de sesión.
@@ -133,7 +132,9 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
         });
 
         if (AccessToken.getCurrentAccessToken() != null) {
-           //Acciones si ya esta logeado
+            Intent intent = new Intent(StartActivity.this,HomeActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         //End LoginBridge with Facebook
@@ -141,11 +142,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(StartActivity.this,LoginActivity.class);
-                //startActivity(intent);
-                //finish();
-
-                Intent intent = new Intent(StartActivity.this,ProductsPharmaciesActivity.class);
+                Intent intent = new Intent(StartActivity.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -154,7 +151,6 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
         crearCuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(StartActivity.this,RegisterActivity.class);
                 startActivity(intent);
                 finish();
@@ -179,7 +175,6 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
             model.setPassword("123");
 
             progressBar.setVisibility(View.VISIBLE);
-
 
             new RegisterUserBridge(mDbHelper,progressBar,this).execute(
                     model.getNombres(),
@@ -227,10 +222,10 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
             progressBar.setVisibility(View.INVISIBLE);
 
             if(!response.equals("")){
-                //Aqui debe ser la llamada al menu de la aplicación
-                //Intent welcome = new Intent(StartActivity.this,ListDrugStoreActivity.class);
-                //startActivity(welcome);
-                //finish();
+                //Aqui sea hace la llamada al menu de la aplicación
+                Intent welcome = new Intent(StartActivity.this,HomeActivity.class);
+                startActivity(welcome);
+                finish();
             }
             else {
                 LoginManager.getInstance().logOut();
@@ -262,10 +257,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
                             });
             AlertDialog alert = builder.create();
             alert.show();
-
         }
     }
-
-
 
 }

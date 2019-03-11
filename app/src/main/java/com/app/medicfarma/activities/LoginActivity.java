@@ -83,10 +83,10 @@ public class LoginActivity extends AppCompatActivity implements LoginBridge.Asyn
             progressBar.setVisibility(View.INVISIBLE);
 
             if(!response.equals("")){
-                //Aqui debe estar la llamada al menu de la aplicación
-                //Intent welcome = new Intent(LoginActivity.this,ProductsBranchOfficeActivity.class);
-                //startActivity(welcome);
-                //finish();
+                //Aqui la llamada al menu de la aplicación
+                Intent welcome = new Intent(LoginActivity.this,HomeActivity.class);
+                startActivity(welcome);
+                finish();
             }
             else {
                 iniciar.setEnabled(true);

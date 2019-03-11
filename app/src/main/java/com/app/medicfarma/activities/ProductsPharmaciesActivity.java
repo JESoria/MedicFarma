@@ -42,7 +42,6 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
         LinearLayoutManager llm = new LinearLayoutManager(ProductsPharmaciesActivity.this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaProductos.setLayoutManager(llm);
-
     }
 
     public AdapterProductsPharmacies adaptador;
@@ -59,6 +58,7 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
             @Override
             public boolean onQueryTextSubmit(String query) {
                 product.setProducto(query);
+                //Aqui se le debe enviar las coordenadas del lugar donde este el dispositivo
                 new ProductosPharmaciesBridge(mDbHelper,ProductsPharmaciesActivity.this).execute(product.getProducto(),"13.700515","-89.201563");
                 return true;
             }

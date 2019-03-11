@@ -52,7 +52,9 @@
         <activity android:name=".activities.ProductsBranchOfficeActivity" />
         <activity android:name=".activities.ProductsPharmaciesActivity" />
         <activity android:name=".activities.ProductDetailActivity" />
-        <activity android:name=".activities.ProductsSpecificBranchOfficeActivity"></activity>
+        <activity android:name=".activities.ProductsSpecificBranchOfficeActivity" />
+        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.PharmaciesActivity"></activity>
     </application>
 
 </manifest>

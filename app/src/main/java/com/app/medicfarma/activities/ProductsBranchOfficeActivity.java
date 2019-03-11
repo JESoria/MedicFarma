@@ -44,11 +44,8 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaProductos.setLayoutManager(llm);
 
-        //Recibe el id de la farmacia para hacer busqueda por una farmacia en especifico
-        //Bundle datos = getIntent().getExtras();
-        //idFarmacia = datos.getInt("idFarmacia");
-        idFarmacia = 1013;
-
+        Bundle datos = getIntent().getExtras();
+        idFarmacia = datos.getInt("idFarmacia");
     }
 
     public AdapterProducts adaptador;
@@ -64,6 +61,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                //Aqui debe recibir las coordenadas del dispositivo
                 product.setProducto(query);
                 new ProductosSucursalBridge(mDbHelper,ProductsBranchOfficeActivity.this).execute(String.valueOf(idFarmacia),"13.700515","-89.201563",product.getProducto());
                 return true;

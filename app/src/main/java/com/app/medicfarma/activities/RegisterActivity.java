@@ -1,6 +1,7 @@
 package com.app.medicfarma.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,8 +32,6 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
 
         setContentView(R.layout.activity_register);
         nombres = (EditText) findViewById(R.id.edtNombresRegistro);
@@ -103,9 +102,9 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
                                     });
                     AlertDialog alert = builder.create();
                     alert.show();
-                //Intent welcome = new Intent(LoginActivity.this,StartActivity.class);
-                //startActivity(welcome);
-                //finish();
+                Intent welcome = new Intent(RegisterActivity.this,StartActivity.class);
+                startActivity(welcome);
+                finish();
             }
             else {
 
