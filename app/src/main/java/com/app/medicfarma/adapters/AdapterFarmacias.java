@@ -49,7 +49,8 @@ public class AdapterFarmacias extends RecyclerView.Adapter<AdapterFarmacias.Farm
         });
 
 
-        farmaciasViewHolder.tvNombreFarmacia.setText(pharmacy.getNombreFarmacia());
+        //farmaciasViewHolder.tvNombreFarmacia.setText(pharmacy.getNombreFarmacia());
+        farmaciasViewHolder.tvNombreFarmacia.setText("");
 
         if (pharmacy.getIdFarmacia() == 2){
             farmaciasViewHolder.ivLogo.setImageDrawable(context.getResources().getDrawable(R.drawable.san_nicolas));

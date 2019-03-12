@@ -40,6 +40,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
         setContentView(R.layout.activity_products_branch_office);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarSucursal);
+
         imgAtras = (ImageView) findViewById(R.id.imgAtras);
 
         imgAtras.setOnClickListener(new View.OnClickListener() {
