@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,15 +8,7 @@
     android:orientation="vertical"
     tools:context="com.app.medicfarma.activities.StartActivity">
 
-    <ProgressBar
-        android:id="@+id/progressBar_start"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="0.49"
-        android:indeterminate="true"
-        android:layout_gravity="center"
-        android:visibility="gone" />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,6 +26,16 @@
                 android:layout_height="150dp"
                 android:layout_margin="10dp"
                 app:srcCompat="@drawable/logo" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_start"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_weight="0.49"
+                android:indeterminate="true"
+                android:visibility="gone" />
 
             <com.facebook.login.widget.LoginButton xmlns:facebook="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/login_button"
@@ -106,4 +108,4 @@
 
     </ScrollView>
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

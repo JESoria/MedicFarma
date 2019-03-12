@@ -8,7 +8,7 @@ package com.app.medicfarma.ws_app;
 public class WSRoutes {
 
     //Rutas MedicFarma
-    public static String baseURL = "http://d4810667.ngrok.io/";
+    public static String baseURL = "http://medicfarma.azurewebsites.net/";
     public static String getToken = "WService";
     public static String makeLogin = "v1/Login";
     public static String makeRegister = "v1/Register";
