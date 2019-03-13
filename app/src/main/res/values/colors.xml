@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#01579b</color>
     <color name="colorPrimaryDark">#002f6c</color>
-    <color name="colorAccent">#b51e1e</color>
-    <color name="colorBotonCancelar">#b51e1e</color>
+    <color name="colorAccent">#ff6600</color>
+    <color name="colorBotonCancelar">#ff6600</color>
     <color name="blanco">#ffffff</color>
 </resources>

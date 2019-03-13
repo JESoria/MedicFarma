@@ -32,6 +32,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
+                                      <entry key="cropped" value="true" />
                                       <entry key="imageAsset" value="C:\Users\soria\Desktop\MedicFarma\logo_new.png" />
                                       <entry key="outputName" value="ic_logo" />
                                     </map>
