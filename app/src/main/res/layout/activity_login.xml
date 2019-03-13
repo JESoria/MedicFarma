@@ -24,7 +24,7 @@
                 android:layout_width="262dp"
                 android:layout_height="195dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/logo" />
+                app:srcCompat="@drawable/logo_new" />
 
             <ProgressBar
                 android:id="@+id/progressBar_login"

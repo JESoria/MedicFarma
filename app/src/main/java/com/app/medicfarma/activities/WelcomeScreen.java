@@ -33,7 +33,7 @@ public class WelcomeScreen extends AppCompatActivity {
                 //    .withTargetActivity(Slide.class)
                 .withSplashTimeOut(2500)
                 .withBackgroundColor(R.color.blanco)
-                .withLogo(R.drawable.logo)
+                .withLogo(R.drawable.logo_new)
                 .withHeaderText("")
                 .withFooterText("")
                 .withBeforeLogoText("")
