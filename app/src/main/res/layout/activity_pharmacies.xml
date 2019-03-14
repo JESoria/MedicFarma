@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activities.PharmaciesActivity">
-
-    <ProgressBar
-        android:id="@+id/progressBarFarmacias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="0.49"
-        android:indeterminate="true"
-        android:layout_gravity="center"
-        android:visibility="gone" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarListFarmacias"
@@ -64,6 +54,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ProgressBar
+                android:id="@+id/progressBarFarmacias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="0.49"
+                android:indeterminate="true"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvFarmacias"
                 android:layout_width="match_parent"
@@ -76,4 +76,4 @@
     </ScrollView>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

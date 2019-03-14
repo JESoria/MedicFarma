@@ -55,7 +55,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 app:lottie_autoPlay="true"
-                                app:lottie_fileName="todas.json"
+                                app:lottie_fileName="preferida.json"
                                 app:lottie_loop="true" />
 
                             <TextView

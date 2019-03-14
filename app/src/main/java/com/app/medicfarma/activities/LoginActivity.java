@@ -17,7 +17,6 @@ import com.app.medicfarma.ws_app.LoginBridge;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
-
 public class LoginActivity extends AppCompatActivity implements LoginBridge.AsyncResponse {
 
     AlertDialog.Builder builder;
