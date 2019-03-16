@@ -19,8 +19,21 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\soria\Desktop\MedicFarma\Iconos\add.png" />
-                                      <entry key="outputName" value="ic_add" />
+                                      <entry key="imageAsset" value="C:\Users\Quintana\Documents\GitHub\FondosMedicFarma\ic_close.png" />
+                                      <entry key="outputName" value="ic_close_sesion" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                            <entry key="launcher">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundLayerName" value="ic_launcher_background" />
+                                      <entry key="foregroundLayerName" value="ic_launcher_foreground" />
+                                      <entry key="outputName" value="ic_close_sesion" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -44,7 +57,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>
