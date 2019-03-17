@@ -19,11 +19,26 @@
 
     <!--Textbox-->
 
-
-
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="text_registro">Ingresa tus datos</string>
+
+
+    <!--HINT-->
+    <string name="hint_nombre">Ingrese sus nombres</string>
+    <string name="hint_apellidos">Ingrese sus apellidos</string>
+    <string name="hint_masculino">Masculino</string>
+    <string name="hint_femenino">Femenino</string>
+    <string name="hint_user">Usuario o Correo Electronico</string>
+    <string name="hint_contraseña">Contraseña</string>
+    <string name="hint_correo">Dirección de correo electronico</string>
+    <string name="hint_edad">Fecha de nacimiento</string>
+    <string name="hint_registro">Ingresa tus datos</string>
+    <string name="msj_error">Ocurrio un error al registrarse...</string>
+    <string name="msjError_edtName">Ingrese su nombre</string>
+    <string name="msjError_edtLastname">Ingrese su apellido</string>
+    <string name="msj_email">Debe ingresar su correo electronico</string>
+    <string name="msj_pass">Debe ingresar su contraseña</string>
 
 </resources>

@@ -5,4 +5,5 @@
     <color name="colorAccent">#ff6600</color>
     <color name="colorBotonCancelar">#ff6600</color>
     <color name="blanco">#ffffff</color>
+    <color name="transparent">#00000000</color>
 </resources>
