@@ -19,8 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Quintana\Documents\GitHub\FondosMedicFarma\ic_close.png" />
-                                      <entry key="outputName" value="ic_close_sesion" />
+                                      <entry key="imageAsset" value="C:\Users\Quintana\Documents\GitHub\FondosMedicFarma\iconpass.png" />
+                                      <entry key="outputName" value="ic_pass_register" />
                                     </map>
                                   </option>
                                 </PersistentState>
