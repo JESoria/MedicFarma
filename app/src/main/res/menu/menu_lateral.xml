@@ -12,7 +12,6 @@
             android:id="@+id/sesion"
             android:icon="@drawable/ic_close_sesion"
             android:title="Cerrar Sesión" />
-
     </group>
 
 

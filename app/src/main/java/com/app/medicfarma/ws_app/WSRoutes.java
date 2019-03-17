@@ -17,5 +17,4 @@ public class WSRoutes {
     public static String makeProductsPharmacies = "v1/Nearby"; // Todas
     public static String makeSearchMore = "v1/SearchMore"; //Sucursal Especifica
     public static String makeProductDetail = "v1/Detail";
-
 }

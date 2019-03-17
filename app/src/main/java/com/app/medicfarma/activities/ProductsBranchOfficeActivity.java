@@ -115,7 +115,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
     public void processFinish(String response, ArrayList productos) {
         try{
             progressBar.setVisibility(View.INVISIBLE);
-            if(!response.equals("") && productos != null){
+            if(productos.size() > 0){
                 adaptador = new AdapterProducts(productos,this);
                 listaProductos.setAdapter(adaptador);
 
