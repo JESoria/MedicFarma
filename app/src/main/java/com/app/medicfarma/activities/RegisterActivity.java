@@ -105,7 +105,7 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
         btncancelarregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent welcome = new Intent(RegisterActivity.this, RegisterActivity.class);
+                Intent welcome = new Intent(RegisterActivity.this, StartActivity.class);
                 startActivity(welcome);
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_in);
                 finish();
@@ -131,18 +131,20 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
         });
 
 
+
         mDataSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
 
                 month = month+1;
-                date = month+"/"+day+"/"+year;
+                date = day+"/"+month+"/"+year;
 
                 if(Integer.parseInt(getAge(date)) >= 14){
                     tvFecharegister.setText(date);
 
                     model.setAge(getAge(date));
-                    model.setBirthday(date);
+
+                    model.setBirthday(year+"-"+month+"-"+day);
                 }
                 else{
 
@@ -254,58 +256,75 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
 
     private void ResgiterByMail(DbHelper mDbHelper){
 
-        UsuarioModel model = new UsuarioModel();
-
         model.setNombres(nombresregister.getText().toString());
         model.setApellidos(apellidosregister.getText().toString());
+        model.setCorreo(correoregister.getText().toString());
+        model.setPassword(passwordregister.getText().toString());
+        model.setEstado(true);
 
         if (TextUtils.isEmpty(model.getNombres())) {
-            btnregistrarregister.setEnabled(true);
+            //btnregistrarregister.setEnabled(true);
             nombresregister.setError(getResources().getString(R.string.msjError_edtName));
             nombresregister.requestFocus();
         }
         else if (TextUtils.isEmpty(model.getApellidos()))
         {
-            btnregistrarregister.setEnabled(true);
+            //btnregistrarregister.setEnabled(true);
             apellidosregister.setError(getResources().getString(R.string.msjError_edtLastname));
             apellidosregister.requestFocus();
         }
-
-        else if (rdbfemeninoregister.isChecked()){
-            model.setGenero("F");
-        }
-        else if(rdbmasculinoregister.isChecked()){
-            model.setGenero("M");
+        else if (!rdbfemeninoregister.isChecked() && !rdbmasculinoregister.isChecked()){
+            builder = new AlertDialog.Builder(RegisterActivity.this);
+            builder.setMessage("Seleccione un genero, para poder registrase")
+                    .setTitle("Advertencia")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
         else if (date.equals("sinfecha"))
-        {   btnregistrarregister.setEnabled(true);
+        {   //btnregistrarregister.setEnabled(true);
             Toast.makeText(this, "Seleccione una fecha de nacimiento", Toast.LENGTH_SHORT).show();
         }
-
         else if (TextUtils.isEmpty(model.getCorreo())){
-            btnregistrarregister.setEnabled(true);
+            //btnregistrarregister.setEnabled(true);
             correoregister.setError(getResources().getString(R.string.msj_email));
             correoregister.requestFocus();
         }
         else if (TextUtils.isEmpty(model.getPassword())){
-            btnregistrarregister.setEnabled(true);
+            //btnregistrarregister.setEnabled(true);
             passwordregister.setError(getResources().getString(R.string.msj_pass));
             passwordregister.requestFocus();
         }
+        else {
 
-        //año/mes/dia
+            if (rdbfemeninoregister.isChecked()){
+                model.setGenero("F");
+            }
+            if(rdbmasculinoregister.isChecked()){
+                model.setGenero("M");
+            }
 
+
+            btnregistrarregister.setEnabled(false);
             progressBar.setVisibility(View.VISIBLE);
 
-        new RegisterUserBridge(mDbHelper, progressBar, this).execute(
-                model.getNombres(),
-                model.getApellidos(),
-                model.getGenero(),
-                model.getAge(),
-                model.getBirthday(),
-                model.getCorreo(),
-                model.getPassword(),
-                String.valueOf(model.getEstado()));
+            new RegisterUserBridge(mDbHelper, progressBar, this).execute(
+                    model.getNombres(),
+                    model.getApellidos(),
+                    model.getGenero(),
+                    //model.getAge(),
+                    model.getBirthday(),
+                    model.getCorreo(),
+                    null,
+                    model.getPassword(),
+                    String.valueOf(model.getEstado()));
+        }
 
     }
 
