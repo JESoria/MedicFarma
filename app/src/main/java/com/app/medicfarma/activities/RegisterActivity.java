@@ -135,16 +135,20 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
         mDataSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-
+                String fecha = "";
                 month = month+1;
                 date = day+"/"+month+"/"+year;
 
                 if(Integer.parseInt(getAge(date)) >= 14){
                     tvFecharegister.setText(date);
-
                     model.setAge(getAge(date));
 
-                    model.setBirthday(year+"-"+month+"-"+day);
+                    if(month/10 == 0){
+                        fecha = year+"-0"+month+"-"+day;
+                    }else{
+                        fecha = year+"-"+month+"-"+day;
+                    }
+                    model.setBirthday(fecha);
                 }
                 else{
 
@@ -177,7 +181,7 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
         try{
             progressBar.setVisibility(View.INVISIBLE);
 
-            if(!response.equals("")){
+            if(!response.equals("1")){
 
                     builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setMessage("¡Registrado con exito!")
