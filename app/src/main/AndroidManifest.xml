@@ -54,7 +54,9 @@
         <activity android:name=".activities.ProductDetailActivity" />
         <activity android:name=".activities.ProductsSpecificBranchOfficeActivity" />
         <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.PharmaciesActivity"></activity>
+        <activity android:name=".activities.PharmaciesActivity" />
+        <activity android:name=".activities.OrderDetailActivity" />
+        <activity android:name=".activities.PaymentTypeActivity"></activity>
     </application>
 
 </manifest>
