@@ -56,7 +56,9 @@
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.PharmaciesActivity" />
         <activity android:name=".activities.OrderDetailActivity" />
-        <activity android:name=".activities.PaymentTypeActivity"></activity>
+        <activity android:name=".activities.PaymentTypeActivity" />
+        <activity android:name=".activities.InfoExtraEnvioActivity" />
+        <activity android:name=".activities.PayPalActivity"></activity>
     </application>
 
 </manifest>
