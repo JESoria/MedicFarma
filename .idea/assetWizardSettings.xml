@@ -19,7 +19,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Quintana\Documents\GitHub\FondosMedicFarma\iconpass.png" />
+                                      <entry key="imageAsset" value="C:\Users\soria\Desktop\MedicFarma\Iconos\add.png" />
                                       <entry key="outputName" value="ic_pass_register" />
                                     </map>
                                   </option>
@@ -46,8 +46,9 @@
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="cropped" value="true" />
-                                      <entry key="imageAsset" value="C:\Users\soria\Desktop\MedicFarma\logo_new.png" />
-                                      <entry key="outputName" value="ic_logo" />
+                                      <entry key="iconShape" value="NONE" />
+                                      <entry key="imageAsset" value="C:\Users\soria\Desktop\MedicFarma\Iconos\edit.png" />
+                                      <entry key="outputName" value="ic_edit" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -57,7 +58,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
+                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>

@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".activities.OrderDetailActivity">
 
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarOrder"
         style="@style/Theme.AppCompat.Light.NoActionBar"
@@ -22,6 +23,14 @@
             android:orientation="horizontal"
             android:paddingRight="15dp">
 
+            <ImageView
+                android:id="@+id/imgAtras"
+                android:layout_width="64dp"
+                android:layout_height="30dp"
+                android:layout_weight="0.03"
+                app:srcCompat="?android:attr/homeAsUpIndicator" />
+
+
             <TextView
                 android:id="@+id/toolbar_subTitle"
                 android:layout_width="266dp"
@@ -30,6 +39,7 @@
                 android:layout_weight="0.05"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
+                android:paddingRight="50dp"
                 android:text="Detalle de Orden"
                 android:textColor="@color/blanco"
                 android:textSize="16sp"
@@ -39,13 +49,42 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Agrega algo más"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/ic_add" />
+
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="250dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="vertical">
 
             <ProgressBar
@@ -61,13 +100,30 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvDetalleOrder"
                 android:layout_width="match_parent"
-                android:layout_height="551dp"
+                android:layout_height="250dp"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="8dp" />
 
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp">
+
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total compra"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnProcesarOrden"
@@ -78,12 +134,12 @@
         android:layout_marginRight="50dp"
         android:background="@drawable/style_button_secundary"
         android:elevation="4dp"
-        android:text=""
+        android:text="Procesar Orden"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnCancelarOrden"
+        android:id="@+id/btnCancelarLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -92,9 +148,7 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/style_button_primary"
         android:elevation="4dp"
-        android:text="Cancelar"
+        android:text="Cancelar Orden"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
-
-
 </LinearLayout>
