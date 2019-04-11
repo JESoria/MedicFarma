@@ -31,6 +31,27 @@ public class InternalControlDB {
         public static final String COLUMN_NAME_FACEBOOK_ID = "facebook_id";
     }
 
+    //Inner Class para tabla pedido
+    public static class TablaPedido implements BaseColumns {
+        //Estructura tabla Pedido
+        public static final String TABLE_NAME_PEDIDO = "pedido";
+        public static final String COLUMN_NAME_CODIGO_PEDIDO = "codigo_pedido";
+        public static final String COLUMN_NAME_ID_USUARIO = "id_usuario";
+        public static final String COLUMN_NAME_ID_SUCURSAL = "id_sucursal";
+        public static final String COLUMN_NAME_DIRECCION = "direccion";
+        public static final String COLUMN_NAME_TELEFONO = "telefono";
+        public static final String COLUMN_NAME_MONTO_COMPRA = "monto_compra";
+        public static final String COLUMN_NAME_ESTADO_PAGO = "estado_pago";
+    }
+
+    //Inner Class para tabla Usuario
+    public static class TablaDetallePedido implements BaseColumns {
+        //Estructura tabla DetallePedido
+        public static final String TABLE_NAME_DETALLE_PEDIDO = "detalle_pedido";
+        public static final String COLUMN_NAME_ID_PRODUCTO = "id_producto";
+        public static final String COLUMN_NAME_CANTIDAD = "cantidad";
+    }
+
     //Inner Class para TipoDatos
     public static class SQL {
         //Tipos de datos
@@ -75,6 +96,40 @@ public class InternalControlDB {
     }
 
 
+
+    //Inner Class para el manejo de consultas a la tabla de Pedido
+    public static class SQL_Pedido {
+        //Create table Pedido
+        public static final String CREATE_TABLE_PEDIDO =
+                "CREATE TABLE " + TablaPedido.TABLE_NAME_PEDIDO+ " (" +
+                        TablaPedido._ID + " INTEGER PRIMARY KEY," +
+                        TablaPedido.COLUMN_NAME_CODIGO_PEDIDO + SQL.INTEGER_TYPE + SQL.COMMA +
+                        TablaPedido.COLUMN_NAME_ID_USUARIO + SQL.INTEGER_TYPE + SQL.COMMA +
+                        TablaPedido.COLUMN_NAME_ID_SUCURSAL + SQL.INTEGER_TYPE + SQL.COMMA +
+                        TablaPedido.COLUMN_NAME_DIRECCION + SQL.TEXT_TYPE + SQL.COMMA +
+                        TablaPedido.COLUMN_NAME_TELEFONO + SQL.TEXT_TYPE + SQL.COMMA +
+                        TablaPedido.COLUMN_NAME_MONTO_COMPRA + SQL.REAL_TYPE + SQL.COMMA +
+                        TablaPedido.COLUMN_NAME_ESTADO_PAGO + SQL.TEXT_TYPE + " )";
+        //Drop table Pedido
+        public static final String DELETE_PEDIDO=
+                "DROP TABLE IF EXISTS " + TablaPedido.TABLE_NAME_PEDIDO;
+    }
+
+
+
+    //Inner Class para el manejo de consultas a la tabla de Pedido
+    public static class SQL_DetallePedido {
+        //Create table Detalle Pedido
+        public static final String CREATE_TABLE_DETALLE_PEDIDO =
+                "CREATE TABLE " + TablaDetallePedido.TABLE_NAME_DETALLE_PEDIDO + " (" +
+                        TablaDetallePedido._ID + " INTEGER PRIMARY KEY," +
+                        TablaDetallePedido.COLUMN_NAME_ID_PRODUCTO + SQL.INTEGER_TYPE + SQL.COMMA +
+                        TablaDetallePedido.COLUMN_NAME_CANTIDAD + SQL.INTEGER_TYPE + " )";
+
+        //Drop table Detalle Pedido
+        public static final String DELETE_DETALLE_PEDIDO=
+                "DROP TABLE IF EXISTS " + TablaDetallePedido.TABLE_NAME_DETALLE_PEDIDO;
+    }
 
 
 

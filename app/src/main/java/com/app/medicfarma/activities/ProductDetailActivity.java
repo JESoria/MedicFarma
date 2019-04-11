@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
+import com.app.medicfarma.models.DetallePedido;
+import com.app.medicfarma.models.Pedido;
 import com.app.medicfarma.models.ProductDetail;
 import com.app.medicfarma.ws_app.ProductDetailBridge;
 import com.daimajia.androidanimations.library.Techniques;
@@ -31,13 +33,12 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     private int idFarmacia;
     public static boolean estadoOrden;
     ProductDetail productDetail = new ProductDetail();
+    final DbHelper mDbHelper = new DbHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
-
-        final DbHelper mDbHelper = new DbHelper(this);
 
         btnMenos = (Button) findViewById(R.id.btnMenos);
         btnMas = (Button) findViewById(R.id.btnMas);
@@ -62,6 +63,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         Bundle datos = getIntent().getExtras();
         idSucursalProducto = datos.getInt("idSucursalProducto");
         idFarmacia = datos.getInt("idFarmacia");
+        //idProducto = datos.getInt("idProducto");
         //estadoOrden = datos.getBoolean("estadoOrden");
 
         startProcessProductDetail(mDbHelper,idSucursalProducto,idFarmacia);
@@ -89,10 +91,15 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Agrega y Guarda el producto a la carretilla
-                //Aqui se direcciona a la busqueda por una sucursal en especifico
-                //Por pruebas se utilizara el estado de la siguiente forma
+
                 estadoOrden = true;
+
+                DetallePedido detallePedido = new DetallePedido();
+                detallePedido.setIdproducto(1);//Aqui debe venir idproducto
+                detallePedido.setCantidad(Integer.parseInt(edtCantidad.getText().toString()));
+
+                mDbHelper.insertDetallePedido(detallePedido);
+
                 Intent intent = new Intent(ProductDetailActivity.this,ProductsSpecificBranchOfficeActivity.class);
                 startActivity(intent);
                 finish();
