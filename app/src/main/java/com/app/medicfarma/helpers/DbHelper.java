@@ -112,6 +112,40 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //--------------------------------------------------------------------------------
 
+
+    public boolean estadoOrden(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        //definiendo el row
+        String[] projection = {
+                InternalControlDB.TablaDetallePedido._ID,
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_PRODUCTO,
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_CANTIDAD
+        };
+        String selection = null;
+        String[] selectionArgs = null;
+        Cursor c = db.query(
+                InternalControlDB.TablaDetallePedido.TABLE_NAME_DETALLE_PEDIDO,    // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                      // sort type
+        );
+        if(c.getCount()>0){
+            c.moveToFirst();
+
+
+
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+
+
     //Method to get token
     public String getAuthToken(){
         SQLiteDatabase db = this.getReadableDatabase();

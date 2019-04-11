@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.DetallePedido;
-import com.app.medicfarma.models.Pedido;
 import com.app.medicfarma.models.ProductDetail;
 import com.app.medicfarma.ws_app.ProductDetailBridge;
 import com.daimajia.androidanimations.library.Techniques;
@@ -64,7 +62,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         idSucursalProducto = datos.getInt("idSucursalProducto");
         idFarmacia = datos.getInt("idFarmacia");
         //idProducto = datos.getInt("idProducto");
-        //estadoOrden = datos.getBoolean("estadoOrden");
+
+        estadoOrden = mDbHelper.estadoOrden();
 
         startProcessProductDetail(mDbHelper,idSucursalProducto,idFarmacia);
 
@@ -91,8 +90,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                estadoOrden = true;
 
                 DetallePedido detallePedido = new DetallePedido();
                 detallePedido.setIdproducto(1);//Aqui debe venir idproducto

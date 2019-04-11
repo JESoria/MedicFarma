@@ -45,7 +45,6 @@ public class AdapterProductsSpecificBranchOffice extends RecyclerView.Adapter<Ad
                 Intent intent = new Intent(context, ProductDetailActivity.class);
                 intent.putExtra("idFarmacia",product.getIdFarmacia());
                 intent.putExtra("idSucursal",product.getIdSucursal());
-                intent.putExtra("estadoOrden",false);
                 context.startActivity(intent);
             }
         });
