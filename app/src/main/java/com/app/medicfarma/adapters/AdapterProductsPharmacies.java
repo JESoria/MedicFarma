@@ -45,6 +45,7 @@ public class AdapterProductsPharmacies extends RecyclerView.Adapter<AdapterProdu
                 Intent intent = new Intent(context, ProductDetailActivity.class);
                 intent.putExtra("idSucursalProducto",product.getIdSucursalProducto());
                 intent.putExtra("idFarmacia",product.getIdFarmacia());
+                intent.putExtra("idSucursal",product.getIdSucursal());
                 context.startActivity(intent);
             }
         });

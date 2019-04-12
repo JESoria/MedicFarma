@@ -49,7 +49,10 @@ public class InternalControlDB {
         //Estructura tabla DetallePedido
         public static final String TABLE_NAME_DETALLE_PEDIDO = "detalle_pedido";
         public static final String COLUMN_NAME_ID_PRODUCTO = "id_producto";
+        public static final String COLUMN_NAME_ID_FARMACIA = "id_farmacia";
         public static final String COLUMN_NAME_CANTIDAD = "cantidad";
+        public static final String COLUMN_NAME_PRODUCTO = "producto";
+        public static final String COLUMN_NAME_PRECIO = "precio";
     }
 
     //Inner Class para TipoDatos
@@ -95,8 +98,6 @@ public class InternalControlDB {
                 "DROP TABLE IF EXISTS " + TablaUsuario.TABLE_NAME_USUARIO;
     }
 
-
-
     //Inner Class para el manejo de consultas a la tabla de Pedido
     public static class SQL_Pedido {
         //Create table Pedido
@@ -115,8 +116,6 @@ public class InternalControlDB {
                 "DROP TABLE IF EXISTS " + TablaPedido.TABLE_NAME_PEDIDO;
     }
 
-
-
     //Inner Class para el manejo de consultas a la tabla de Pedido
     public static class SQL_DetallePedido {
         //Create table Detalle Pedido
@@ -124,13 +123,14 @@ public class InternalControlDB {
                 "CREATE TABLE " + TablaDetallePedido.TABLE_NAME_DETALLE_PEDIDO + " (" +
                         TablaDetallePedido._ID + " INTEGER PRIMARY KEY," +
                         TablaDetallePedido.COLUMN_NAME_ID_PRODUCTO + SQL.INTEGER_TYPE + SQL.COMMA +
-                        TablaDetallePedido.COLUMN_NAME_CANTIDAD + SQL.INTEGER_TYPE + " )";
+                        TablaDetallePedido.COLUMN_NAME_ID_FARMACIA + SQL.INTEGER_TYPE + SQL.COMMA +
+                        TablaDetallePedido.COLUMN_NAME_CANTIDAD+ SQL.INTEGER_TYPE + SQL.COMMA +
+                        TablaDetallePedido.COLUMN_NAME_PRODUCTO+ SQL.TEXT_TYPE + SQL.COMMA +
+                        TablaDetallePedido.COLUMN_NAME_PRECIO + SQL.REAL_TYPE + " )";
 
         //Drop table Detalle Pedido
         public static final String DELETE_DETALLE_PEDIDO=
                 "DROP TABLE IF EXISTS " + TablaDetallePedido.TABLE_NAME_DETALLE_PEDIDO;
     }
-
-
 
 }

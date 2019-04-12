@@ -30,11 +30,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        System.out.println(InternalControlDB.SQL_Token.DELETE_TABLE_TOKEN);
-        System.out.println(InternalControlDB.SQL_Usuario.DELETE_USUARIOS);
-        System.out.println(InternalControlDB.SQL_Pedido.DELETE_PEDIDO);
-        System.out.println(InternalControlDB.SQL_DetallePedido.DELETE_DETALLE_PEDIDO);
-
         db.execSQL(InternalControlDB.SQL_Token.DELETE_TABLE_TOKEN);
         db.execSQL(InternalControlDB.SQL_Usuario.DELETE_USUARIOS);
         db.execSQL(InternalControlDB.SQL_Pedido.DELETE_PEDIDO);
@@ -46,7 +41,7 @@ public class DbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    //--------------------------------------------------------------------------------
+    //---------------------------------CRUD PEDIDO---------------------------------------
 
     public long insertPedido(Pedido Pedido) {
 
@@ -71,35 +66,40 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public long insertDetallePedido(DetallePedido detallePedido) {
-
         SQLiteDatabase db = this.getReadableDatabase();
-
         ContentValues values = new ContentValues();
-
-        values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_PRODUCTO, detallePedido.getIdproducto());
+        values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_PRODUCTO, detallePedido.getIdSucursalProducto());
+        values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_FARMACIA,detallePedido.getIdFarmacia());
         values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_CANTIDAD, detallePedido.getCantidad());
-
+        values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_PRODUCTO,detallePedido.getProducto());
+        values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_PRECIO,detallePedido.getPrecio());
         long rowID = db.insert(InternalControlDB.TablaDetallePedido.TABLE_NAME_DETALLE_PEDIDO, null,values);
-
         db.close();
-
         return rowID;
     }
 
     public void actualizarDetallePedido(DetallePedido detallePedido) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
-        values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_PRODUCTO, detallePedido.getIdproducto());
+        values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_PRODUCTO, detallePedido.getIdSucursalProducto());
+        values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_FARMACIA,detallePedido.getIdFarmacia());
         values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_CANTIDAD, detallePedido.getCantidad());
+        values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_PRODUCTO,detallePedido.getProducto());
+        values.put(InternalControlDB.TablaDetallePedido.COLUMN_NAME_PRECIO,detallePedido.getPrecio());
         String where = InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_PRODUCTO + "= ?";
-        db.update(InternalControlDB.TablaDetallePedido.TABLE_NAME_DETALLE_PEDIDO, values, where, new String[]{String.valueOf(detallePedido.getIdproducto())});
+        db.update(InternalControlDB.TablaDetallePedido.TABLE_NAME_DETALLE_PEDIDO, values, where, new String[]{String.valueOf(detallePedido.getIdSucursalProducto())});
         db.close();
     }
 
     public void deletePedido(){
         SQLiteDatabase db = this.getReadableDatabase();
-        String where = InternalControlDB.TablaPedido._ID+ "= ?";
-        db.delete(InternalControlDB.TablaPedido.TABLE_NAME_PEDIDO,"" ,new String[]{String.valueOf(1)});
+
+        db.execSQL(InternalControlDB.SQL_Pedido.DELETE_PEDIDO);
+        db.execSQL(InternalControlDB.SQL_DetallePedido.DELETE_DETALLE_PEDIDO);
+
+        db.execSQL(InternalControlDB.SQL_Pedido.CREATE_TABLE_PEDIDO);
+        db.execSQL(InternalControlDB.SQL_DetallePedido.CREATE_TABLE_DETALLE_PEDIDO);
+
         db.close();
     }
 
@@ -110,7 +110,40 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    //--------------------------------------------------------------------------------
+    //---------------------------------FIN CRUD PEDIDO-----------------------------------------------
+
+
+    public  Cursor listadoProductos(){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_PRODUCTO,
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_FARMACIA,
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_CANTIDAD,
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_PRODUCTO,
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_PRECIO
+        };
+        String selection = null;
+        String[] selectionArgs = null;
+        Cursor c = db.query(
+                InternalControlDB.TablaDetallePedido.TABLE_NAME_DETALLE_PEDIDO,// The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                      // sort type
+        );
+        if(c.getCount()>0){
+            c.moveToFirst();
+            //c.moveToNext();
+            return  c;
+        }else{
+            return null;
+        }
+
+    }
 
 
     public boolean estadoOrden(){
@@ -119,7 +152,10 @@ public class DbHelper extends SQLiteOpenHelper {
         String[] projection = {
                 InternalControlDB.TablaDetallePedido._ID,
                 InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_PRODUCTO,
-                InternalControlDB.TablaDetallePedido.COLUMN_NAME_CANTIDAD
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_ID_FARMACIA,
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_CANTIDAD,
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_PRODUCTO,
+                InternalControlDB.TablaDetallePedido.COLUMN_NAME_PRECIO
         };
         String selection = null;
         String[] selectionArgs = null;
@@ -134,8 +170,6 @@ public class DbHelper extends SQLiteOpenHelper {
         );
         if(c.getCount()>0){
             c.moveToFirst();
-
-
 
             return true;
         }else{

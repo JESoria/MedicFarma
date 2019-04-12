@@ -11,6 +11,7 @@ import com.app.medicfarma.R;
 public class PaymentTypeActivity extends AppCompatActivity {
 
     Button btnEfectivo, btnPayPal, btnCancelar;
+    double montoCompra = 0.00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +22,17 @@ public class PaymentTypeActivity extends AppCompatActivity {
         btnPayPal = (Button) findViewById(R.id.btnPaypal);
         btnCancelar = (Button) findViewById(R.id.btnCancelarTipo);
 
+        Bundle datos = getIntent().getExtras();
+
+        if (datos != null){
+            montoCompra= datos.getDouble("montoCompra");
+        }
+
         btnEfectivo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PaymentTypeActivity.this, InfoExtraEnvioActivity.class);
+                intent.putExtra("montoCompra",montoCompra);
                 intent.putExtra("tipoPago","efectivo");
                 startActivity(intent);
                 finish();

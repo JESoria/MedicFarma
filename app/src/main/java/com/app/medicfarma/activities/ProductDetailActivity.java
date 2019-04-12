@@ -28,10 +28,12 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     AlertDialog.Builder builder;
     private int auxcantidad;
     private int idSucursalProducto;
+    private int idSucursal;
     private int idFarmacia;
     public static boolean estadoOrden;
     ProductDetail productDetail = new ProductDetail();
     final DbHelper mDbHelper = new DbHelper(this);
+    private boolean editar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         btnAgregar = (Button) findViewById(R.id.btnAgregarProductoDetalle);
         btnCancelar = (Button) findViewById(R.id.btnCancelaProductoDetalle);
 
+        editar = false;
         auxcantidad = 1;
         edtCantidad.setFocusable(false);
         edtCantidad.setCursorVisible(false);
@@ -61,8 +64,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         Bundle datos = getIntent().getExtras();
         idSucursalProducto = datos.getInt("idSucursalProducto");
         idFarmacia = datos.getInt("idFarmacia");
-        //idProducto = datos.getInt("idProducto");
-
+        idSucursal = datos.getInt("idSucursal");
+        editar = datos.getBoolean("editar");
         estadoOrden = mDbHelper.estadoOrden();
 
         startProcessProductDetail(mDbHelper,idSucursalProducto,idFarmacia);
@@ -92,12 +95,22 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             public void onClick(View view) {
 
                 DetallePedido detallePedido = new DetallePedido();
-                detallePedido.setIdproducto(1);//Aqui debe venir idproducto
+                detallePedido.setIdSucursalProducto(idSucursalProducto);
+                detallePedido.setIdFarmacia(idFarmacia);
                 detallePedido.setCantidad(Integer.parseInt(edtCantidad.getText().toString()));
+                detallePedido.setProducto(productDetail.getProducto());
+                detallePedido.setPrecio(productDetail.getPrecio());
 
-                mDbHelper.insertDetallePedido(detallePedido);
+                if (editar){
+                    mDbHelper.actualizarDetallePedido(detallePedido);
+                }
+                else {
+                    mDbHelper.insertDetallePedido(detallePedido);
+                }
 
                 Intent intent = new Intent(ProductDetailActivity.this,ProductsSpecificBranchOfficeActivity.class);
+                intent.putExtra("idFarmacia",idFarmacia);
+                intent.putExtra("idSucursal",idSucursal);
                 startActivity(intent);
                 finish();
             }

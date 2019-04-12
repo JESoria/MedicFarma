@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.app.medicfarma.R;
@@ -31,6 +32,7 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
     int idFarmacia;
     int idSucursal;
     ProgressBar progressBar;
+    Button verOrden,cancelarOrden;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +51,30 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaProductos.setLayoutManager(llm);
 
+        verOrden = (Button) findViewById(R.id.btnVerOrdenLst);
+        cancelarOrden = (Button) findViewById(R.id.btnCancelarOrdenLst);
 
         Bundle datos = getIntent().getExtras();
         idFarmacia = datos.getInt("idFarmacia");
         idSucursal = datos.getInt("idSucursal");
+
+        verOrden.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this, OrderDetailActivity.class);
+                intent.putExtra("idFarmacia",idFarmacia);
+                intent.putExtra("idSucursal",idSucursal);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        cancelarOrden.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDbHelper.deletePedido();
+            }
+        });
 
     }
 

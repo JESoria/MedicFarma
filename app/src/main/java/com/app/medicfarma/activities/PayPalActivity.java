@@ -7,8 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
-
 import com.app.medicfarma.R;
 import com.app.medicfarma.config.Config;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
@@ -23,6 +21,7 @@ import java.math.BigDecimal;
 
 public class PayPalActivity extends AppCompatActivity {
 
+    double montoCompra = 0.00;
     private static final int REQUEST_CODE_PAYMENT = 7171;
     AlertDialog.Builder builder;
     private static PayPalConfiguration config = new PayPalConfiguration()
@@ -44,24 +43,22 @@ public class PayPalActivity extends AppCompatActivity {
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         startService(intent);
 
-        procesarPago();//Analizar como accionar el pago (esta es posible solucion)
+        Bundle datos = getIntent().getExtras();
+        if (datos != null){
+            montoCompra= datos.getDouble("montoCompra");
+        }
+
+        procesarPago();
 
     }
 
     private void procesarPago() {
 
-        String monto = "";//este dato debe venir del pedido
-
-        //aqui se mandan todos los argumentos del pago
-        //el detalle del pago basicamente
-
-        //En titular se debe cambiar por el usuario en sesión
-        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(monto)),"USD","Titular: Soria",PayPalPayment
+        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(montoCompra)),"USD","Titular: Soria",PayPalPayment
                 .PAYMENT_INTENT_SALE);
 
         Intent intent = new Intent(PayPalActivity.this, PaymentActivity.class);
 
-        // send the same configuration for restart resiliency
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
 
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
@@ -73,8 +70,6 @@ public class PayPalActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        String monto = "";//Esta variable se debe quitar
-
         if (requestCode == REQUEST_CODE_PAYMENT){
             if (resultCode == Activity.RESULT_OK){
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
@@ -83,7 +78,7 @@ public class PayPalActivity extends AppCompatActivity {
                         String paymentDetail = confirmation.toJSONObject().toString(4);
                         startActivity(new Intent(PayPalActivity.this, PagoOKActivity.class)
                                 .putExtra("PaymentDetails",paymentDetail)
-                                .putExtra("PaymentAmount",monto));
+                                .putExtra("PaymentAmount",montoCompra));
 
 
                     } catch (JSONException e) {

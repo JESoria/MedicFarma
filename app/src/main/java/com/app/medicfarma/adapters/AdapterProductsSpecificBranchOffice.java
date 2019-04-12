@@ -43,6 +43,7 @@ public class AdapterProductsSpecificBranchOffice extends RecyclerView.Adapter<Ad
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("idSucursalProducto",product.getIdSucursalProducto());
                 intent.putExtra("idFarmacia",product.getIdFarmacia());
                 intent.putExtra("idSucursal",product.getIdSucursal());
                 context.startActivity(intent);
