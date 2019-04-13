@@ -30,23 +30,19 @@ public class OrdenCompraBridge extends AsyncTask<OrdenCompra, Void, String> {
 
     private Exception exception;
     DbHelper mDbHelper;
-    ProgressBar progressBar;
 
-    public LoginBridge.AsyncResponse delegate = null;
+    public OrdenCompraBridge.AsyncResponse delegate = null;
 
     public interface AsyncResponse {
         void processFinish(String response);
     }
 
-    public OrdenCompraBridge(DbHelper mDbHelper, ProgressBar progressBar, LoginBridge.AsyncResponse delegate){
+    public OrdenCompraBridge(DbHelper mDbHelper, OrdenCompraBridge.AsyncResponse delegate){
         this.mDbHelper = mDbHelper;
-        this.progressBar = progressBar;
         this.delegate = delegate;
     }
 
-    private void setPostRequestContent(HttpURLConnection conn,
-                                       String jsonString) throws IOException {
-
+    private void setPostRequestContent(HttpURLConnection conn,String jsonString) throws IOException {
         OutputStream os = conn.getOutputStream();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
         writer.write(jsonString);

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.app.medicfarma.models.DetallePedido;
 import com.app.medicfarma.models.Pedido;
 import com.app.medicfarma.models.TokenModel;
+import com.app.medicfarma.models.UsuarioModel;
 
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -112,6 +113,64 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //---------------------------------FIN CRUD PEDIDO-----------------------------------------------
 
+
+    public UsuarioModel cargarUsuario() {
+
+        int idUsuario;
+        String nombres;
+        String apellidos;
+        String genero;
+        String fechaNacimiento;
+        String correo;
+        String facebookId;
+        String Birthday;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        //definiendo el row
+        String[] projection = {
+                InternalControlDB.TablaUsuario.COLUMN_NAME_ID_USUARIO,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_NOMBRES,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_APELLIDOS,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_GENERO,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_FECHA_NACIMIENTO,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_CORREO,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_FACEBOOK_ID,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_FECHA_NACIMIENTO
+        };
+        String selection = null;
+        String[] selectionArgs = null;
+        Cursor c = db.query(
+                InternalControlDB.TablaUsuario.TABLE_NAME_USUARIO,// The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                      // sort type
+        );
+        if(c.getCount()>0){
+            c.moveToFirst();
+
+            idUsuario = c.getInt(c.getColumnIndexOrThrow(InternalControlDB.TablaUsuario.COLUMN_NAME_ID_USUARIO));
+            nombres = c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaUsuario.COLUMN_NAME_NOMBRES));
+            apellidos = c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaUsuario.COLUMN_NAME_APELLIDOS));
+            genero = c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaUsuario.COLUMN_NAME_GENERO));
+            fechaNacimiento = c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaUsuario.COLUMN_NAME_FECHA_NACIMIENTO));
+            correo = c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaUsuario.COLUMN_NAME_CORREO));
+            facebookId = c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaUsuario.COLUMN_NAME_FACEBOOK_ID));
+            Birthday = c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaUsuario.COLUMN_NAME_FECHA_NACIMIENTO));
+
+
+            return new UsuarioModel(idUsuario, "n/a", nombres, apellidos, genero, fechaNacimiento, correo, facebookId, true, "n/a", Birthday);
+        }else{
+            return null;
+        }
+    }
+
+    public void deleteUsuario(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(InternalControlDB.TablaUsuario.TABLE_NAME_USUARIO,null,null);
+    }
 
     public  Cursor listadoProductos(){
 

@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 
 public class PayPalActivity extends AppCompatActivity {
 
+    String direccion, telefono;
     double montoCompra = 0.00;
     private static final int REQUEST_CODE_PAYMENT = 7171;
     AlertDialog.Builder builder;
@@ -46,6 +47,8 @@ public class PayPalActivity extends AppCompatActivity {
         Bundle datos = getIntent().getExtras();
         if (datos != null){
             montoCompra= datos.getDouble("montoCompra");
+            direccion = datos.getString("direccion");
+            telefono = datos.getString("telefono");
         }
 
         procesarPago();
@@ -78,6 +81,8 @@ public class PayPalActivity extends AppCompatActivity {
                         String paymentDetail = confirmation.toJSONObject().toString(4);
                         startActivity(new Intent(PayPalActivity.this, PagoOKActivity.class)
                                 .putExtra("PaymentDetails",paymentDetail)
+                                .putExtra("direccion",direccion)
+                                .putExtra("telefono",telefono)
                                 .putExtra("PaymentAmount",montoCompra));
 
 
