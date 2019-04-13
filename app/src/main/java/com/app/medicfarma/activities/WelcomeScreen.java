@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.app.medicfarma.R;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import gr.net.maroulis.library.EasySplashScreen;
 
@@ -48,8 +51,16 @@ public class WelcomeScreen extends AppCompatActivity {
         //set to view
         View view = config.create();
 
+        view.setBackgroundResource(R.color.blanco);
+
         //set view to content view
         setContentView(view);
+
+
+        YoYo.with(Techniques.StandUp)
+                .duration(1100)
+                .repeat(0)
+                .playOn(view);
 
     }
 }

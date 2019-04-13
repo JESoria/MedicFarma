@@ -25,21 +25,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="5dp">
+                android:padding="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:clipToPadding="false"
                     android:gravity="center"
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
                         android:id="@+id/cvFarmacias"
-                        android:layout_width="160dp"
+                        android:layout_width="330dp"
                         android:layout_height="190dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground">
@@ -63,6 +68,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="Farmacias"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <View
@@ -86,12 +93,25 @@
 
                     </android.support.v7.widget.CardView>
 
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <android.support.v7.widget.CardView
                         android:id="@+id/cvFarmaciaPreferida"
-                        android:layout_width="160dp"
+                        android:layout_width="330dp"
                         android:layout_height="190dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground">
@@ -115,6 +135,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="Farmacia Preferida"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <View
@@ -144,69 +166,20 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:clipToPadding="false"
                     android:gravity="center"
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
-                        android:id="@+id/cvEstados"
-                        android:layout_width="160dp"
-                        android:layout_height="190dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:id="@+id/estado"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                app:lottie_autoPlay="true"
-                                app:lottie_fileName="estados.json"
-                                app:lottie_loop="true" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Estados"
-                                android:textStyle="bold" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@color/com_facebook_button_background_color_focused_disabled" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                android:padding="5dp"
-                                android:text="Consulta el estado de tus compras"
-                                android:textColor="@android:color/black"
-                                android:textSize="10sp" />
-
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
                         android:id="@+id/cvReclamos"
-                        android:layout_width="160dp"
+                        android:layout_width="330dp"
                         android:layout_height="190dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground">
 
@@ -229,6 +202,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="Reclamos"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <View
@@ -244,7 +219,7 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
                                 android:padding="5dp"
-                                android:text="Ingresa tus reclamos"
+                                android:text="¿Tienes un inconveniente?"
                                 android:textColor="@android:color/black"
                                 android:textSize="10sp" />
 

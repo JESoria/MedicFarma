@@ -127,6 +127,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         if (detallePedido != null){
             adaptador = new AdapterOrdenCompra(detallePedido,OrderDetailActivity.this);
             listaProductos.setAdapter(adaptador);
+            tvTotal.setText("Total compra: $"+montoCompra);
         }
         else{
             AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetailActivity.this);

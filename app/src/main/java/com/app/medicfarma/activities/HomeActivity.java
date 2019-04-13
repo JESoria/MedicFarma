@@ -21,7 +21,7 @@ import com.facebook.login.LoginManager;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    CardView cvFarmacias, cvFarmaciaPreferida, cvEstados, cvReclamos;
+    CardView cvFarmacias, cvFarmaciaPreferida,cvReclamos;
     AlertDialog.Builder builder;
     Toolbar toolbar;
 
@@ -32,7 +32,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         cvFarmacias = (CardView) findViewById(R.id.cvFarmacias);
         cvFarmaciaPreferida = (CardView) findViewById(R.id.cvFarmaciaPreferida);
-        cvEstados = (CardView) findViewById(R.id.cvEstados);
         cvReclamos = (CardView) findViewById(R.id.cvReclamos);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_home);
@@ -40,22 +39,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(cvFarmacias);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(cvFarmaciaPreferida);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
-                .playOn(cvEstados);
-
-        YoYo.with(Techniques.FadeIn)
-                .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(cvReclamos);
 
         cvFarmacias.setOnClickListener(new View.OnClickListener() {
@@ -79,23 +73,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         });
 
         cvReclamos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                builder = new AlertDialog.Builder(HomeActivity.this);
-                builder.setMessage("¡Todavia no se ha desarrollado esta sección!")
-                        .setCancelable(false)
-                        .setNeutralButton("Aceptar",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        });
-
-        cvEstados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 builder = new AlertDialog.Builder(HomeActivity.this);

@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
@@ -23,7 +25,7 @@ public class LoginActivity extends AppCompatActivity implements LoginBridge.Asyn
     Button iniciar, cancelar;
     ProgressBar progressBar;
     EditText user, pass;
-
+    LinearLayout linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +36,11 @@ public class LoginActivity extends AppCompatActivity implements LoginBridge.Asyn
         user = (EditText) findViewById(R.id.edtUserLogin);
         pass = (EditText) findViewById(R.id.edtPassLogin);
         progressBar = (ProgressBar) findViewById(R.id.progressBar_login);
-
+        linearLayout = (LinearLayout) findViewById(R.id.pantallaLogin);
         //Section Animations
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(iniciar);
 
         YoYo.with(Techniques.FadeIn)
@@ -87,6 +89,10 @@ public class LoginActivity extends AppCompatActivity implements LoginBridge.Asyn
 
             if(!response.equals("")){
                 //Aqui la llamada al menu de la aplicación
+                YoYo.with(Techniques.ZoomOutUp)
+                        .duration(500)
+                        .repeat(0)
+                        .playOn(linearLayout);
                 Intent welcome = new Intent(LoginActivity.this,HomeActivity.class);
                 startActivity(welcome);
                 finish();

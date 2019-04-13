@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.app.medicfarma.R;
@@ -25,6 +26,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     TextView tvMedicamento, tvContenidoPresentacion, tvContenidoLaboratorio, tvContenidoCategoria;
     TextView tvContenidoPrecio, tvContenidoFechaVencimiento, tvContenidoIngredientes;
     EditText edtCantidad;
+    ImageView imgMedicina;
     AlertDialog.Builder builder;
     private int auxcantidad;
     private int idSucursalProducto;
@@ -40,6 +42,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
+//Componentes------------------------------------------------------------------------
         btnMenos = (Button) findViewById(R.id.btnMenos);
         btnMas = (Button) findViewById(R.id.btnMas);
         edtCantidad = (EditText) findViewById(R.id.edtCantidad);
@@ -53,7 +56,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         progressBar = (ProgressBar) findViewById(R.id.progressBar_product_detail);
         btnAgregar = (Button) findViewById(R.id.btnAgregarProductoDetalle);
         btnCancelar = (Button) findViewById(R.id.btnCancelaProductoDetalle);
-
+        imgMedicina = (ImageView) findViewById(R.id.imgMedicina);
+//Componentes------------------------------------------------------------------------
         editar = false;
         auxcantidad = 1;
         edtCantidad.setFocusable(false);
@@ -213,6 +217,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         tvContenidoIngredientes.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnCancelar.setEnabled(false);
+        imgMedicina.setEnabled(false);
     };
 
     public void habilitar(){
@@ -228,67 +233,72 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         tvContenidoIngredientes.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
-
+        imgMedicina.setEnabled(true);
 
         //Animacion
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
+                .playOn(imgMedicina);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(0)
                 .playOn(btnMenos);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(btnMas);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(edtCantidad);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(tvMedicamento);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(tvContenidoPresentacion);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(tvContenidoLaboratorio);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(tvContenidoCategoria);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(tvContenidoPrecio);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(tvContenidoFechaVencimiento);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(tvContenidoIngredientes);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(btnAgregar);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1000)
-                .repeat(1)
+                .repeat(0)
                 .playOn(btnCancelar);
         //End Animacion
     };
