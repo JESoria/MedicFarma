@@ -20,11 +20,13 @@ import com.app.medicfarma.adapters.AdapterOrdenCompra;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.DetallePedido;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class OrderDetailActivity extends AppCompatActivity {
 
     TextView tvTotal;
+    String monto;
     double montoCompra = 0.00;
     Button procesarOrden,cancelarOrden;
     ImageView agregarProducto;
@@ -34,15 +36,12 @@ public class OrderDetailActivity extends AppCompatActivity {
     private RecyclerView listaProductos;
     ImageView imgAtras;
     private Toolbar toolbar;
-    ProgressBar progressBar;
     public AdapterOrdenCompra adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
-
-        progressBar = (ProgressBar) findViewById(R.id.progressOrder);
 
         final DbHelper mDbHelper = new DbHelper(OrderDetailActivity.this);
 
@@ -67,18 +66,25 @@ public class OrderDetailActivity extends AppCompatActivity {
         Bundle datos = getIntent().getExtras();
         idFarmacia = datos.getInt("idFarmacia");
         idSucursal = datos.getInt("idSucursal");
+        boolean eliminar = datos.getBoolean("eliminar");
+
+        if (eliminar){
+            Intent intent = new Intent(OrderDetailActivity.this,OrderDetailActivity.class);
+            intent.putExtra("idFarmacia",idFarmacia);
+            intent.putExtra("idSucursal",idSucursal);
+            startActivity(intent);
+            finish();
+        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbarOrder);
         setSupportActionBar(toolbar);
 
-        listaProductos = (RecyclerView) findViewById(R.id.rvFarmacias);
+        listaProductos = (RecyclerView) findViewById(R.id.rvDetalleOrder);
         LinearLayoutManager llm = new LinearLayoutManager(OrderDetailActivity.this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaProductos.setLayoutManager(llm);
 
-        progressBar.setVisibility(View.VISIBLE);
         cargarListaProductos(mDbHelper);
-        progressBar.setVisibility(View.INVISIBLE);
 
         agregarProducto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +111,9 @@ public class OrderDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mDbHelper.deletePedido();
+                Intent intent = new Intent(OrderDetailActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -127,7 +136,9 @@ public class OrderDetailActivity extends AppCompatActivity {
         if (detallePedido != null){
             adaptador = new AdapterOrdenCompra(detallePedido,OrderDetailActivity.this);
             listaProductos.setAdapter(adaptador);
-            tvTotal.setText("Total compra: $"+montoCompra);
+            DecimalFormat decimalFormat = new DecimalFormat("#.00");
+            String monto = decimalFormat.format(montoCompra);
+            tvTotal.setText("Total compra: $"+monto);
         }
         else{
             AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetailActivity.this);

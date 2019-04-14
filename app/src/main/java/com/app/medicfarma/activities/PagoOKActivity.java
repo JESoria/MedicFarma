@@ -33,6 +33,8 @@ public class PagoOKActivity extends AppCompatActivity implements OrdenCompraBrid
         final DbHelper mDbHelper = new DbHelper(PagoOKActivity.this);
         Intent intent = getIntent();
 
+        try {
+/*
         Bundle datos = getIntent().getExtras();
         if (datos != null){
             direccion = datos.getString("direccion");
@@ -51,9 +53,10 @@ public class PagoOKActivity extends AppCompatActivity implements OrdenCompraBrid
             cod1= (int) (Math.random() * 1000) + 1;
             cod2= (int) (Math.random() * 1000) + 1;
             //Fin de codigo de pedido
-
+*/
             JSONObject jsonObject = new JSONObject(intent.getStringExtra("PaymentDetails"));
 
+            /*
             ArrayList<DetallePedido> detallePedido;
 
             Cursor listado = mDbHelper.listadoProductos();
@@ -82,20 +85,35 @@ public class PagoOKActivity extends AppCompatActivity implements OrdenCompraBrid
             OrdenCompra ordenCompra = new OrdenCompra();
             ordenCompra.setPedidos(pedido);
             ordenCompra.setDetallePedido(detallePedido);
-
-            procesarPedido(jsonObject.getJSONObject("response"),mDbHelper,ordenCompra);
-
+*/
+            //procesarPedido(jsonObject.getJSONObject("response"),mDbHelper,ordenCompra);
+            procesarPedido(jsonObject.getJSONObject("response"),mDbHelper);
         }catch (JSONException e){
             e.printStackTrace();
         }
 
     }
 
-    private void procesarPedido(JSONObject response, final DbHelper mDbHelper, OrdenCompra ordenCompra) {
+    private void procesarPedido(JSONObject response, final DbHelper  mDbHelper) {
         try {
 
-            if (response.getString("state").equals("Aproved")){
-                new OrdenCompraBridge(mDbHelper,PagoOKActivity.this).execute(ordenCompra);
+            if (response.getString("state").equals("approved")){
+                //new OrdenCompraBridge(mDbHelper,PagoOKActivity.this).execute(ordenCompra);
+                builder = new AlertDialog.Builder(PagoOKActivity.this);
+                builder.setMessage("Pago efectuado con exito")
+                        .setCancelable(false)
+                        .setNeutralButton("Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        mDbHelper.deletePedido();
+                                        Intent intent = new Intent(PagoOKActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }else{
                 builder = new AlertDialog.Builder(PagoOKActivity.this);
                 builder.setMessage("Ups! ocurrio un problema con tu pago, se cancelara la orden, ponte en contacto con PayPal")
@@ -104,6 +122,9 @@ public class PagoOKActivity extends AppCompatActivity implements OrdenCompraBrid
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         mDbHelper.deletePedido();
+                                        Intent intent = new Intent(PagoOKActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                         dialog.cancel();
                                     }
                                 });

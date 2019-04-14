@@ -43,6 +43,7 @@ public class PaymentTypeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PaymentTypeActivity.this, InfoExtraEnvioActivity.class);
+                intent.putExtra("montoCompra",montoCompra);
                 intent.putExtra("tipoPago","paypal");
                 startActivity(intent);
                 finish();

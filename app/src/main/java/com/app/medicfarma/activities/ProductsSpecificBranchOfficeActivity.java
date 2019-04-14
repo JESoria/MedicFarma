@@ -73,6 +73,9 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
             @Override
             public void onClick(View view) {
                 mDbHelper.deletePedido();
+                Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -129,6 +132,19 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
                 adaptador = new AdapterProductsSpecificBranchOffice(productos,this);
                 listaProductos.setAdapter(adaptador);
 
+            }
+            else if (response.equals("1")){
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProductsSpecificBranchOfficeActivity.this);
+                builder.setMessage("Lo sentimos el medicamento "+ product.getProducto() +" no se encuentra disponible")
+                        .setCancelable(false)
+                        .setNeutralButton("Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
             else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(ProductsSpecificBranchOfficeActivity.this);

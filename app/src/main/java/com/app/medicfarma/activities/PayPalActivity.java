@@ -33,12 +33,6 @@ public class PayPalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_pal);
-    }
-
-    @Override
-    protected void onDestroy() {
-        stopService(new Intent(PayPalActivity.this, PayPalService.class));
-        super.onDestroy();
 
         Intent intent = new Intent(PayPalActivity.this, PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
@@ -52,7 +46,12 @@ public class PayPalActivity extends AppCompatActivity {
         }
 
         procesarPago();
+    }
 
+    @Override
+    protected void onDestroy() {
+        stopService(new Intent(PayPalActivity.this, PayPalService.class));
+        super.onDestroy();
     }
 
     private void procesarPago() {
@@ -67,6 +66,8 @@ public class PayPalActivity extends AppCompatActivity {
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
 
         startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+
+
     }
 
     @Override

@@ -325,7 +325,7 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
                     //model.getAge(),
                     model.getBirthday(),
                     model.getCorreo(),
-                    null,
+                    "S/F",
                     model.getPassword(),
                     String.valueOf(model.getEstado()));
         }

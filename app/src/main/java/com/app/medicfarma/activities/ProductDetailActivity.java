@@ -72,6 +72,10 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         editar = datos.getBoolean("editar");
         estadoOrden = mDbHelper.estadoOrden();
 
+        if (editar){
+            btnAgregar.setText("Actualizar");
+        }
+
         startProcessProductDetail(mDbHelper,idSucursalProducto,idFarmacia);
 
         btnMas.setOnClickListener(new View.OnClickListener() {
@@ -97,26 +101,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                DetallePedido detallePedido = new DetallePedido();
-                detallePedido.setIdSucursalProducto(idSucursalProducto);
-                detallePedido.setIdFarmacia(idFarmacia);
-                detallePedido.setCantidad(Integer.parseInt(edtCantidad.getText().toString()));
-                detallePedido.setProducto(productDetail.getProducto());
-                detallePedido.setPrecio(productDetail.getPrecio());
-
-                if (editar){
-                    mDbHelper.actualizarDetallePedido(detallePedido);
-                }
-                else {
-                    mDbHelper.insertDetallePedido(detallePedido);
-                }
-
-                Intent intent = new Intent(ProductDetailActivity.this,ProductsSpecificBranchOfficeActivity.class);
-                intent.putExtra("idFarmacia",idFarmacia);
-                intent.putExtra("idSucursal",idSucursal);
-                startActivity(intent);
-                finish();
+                agregarProducto();
             }
         });
 
@@ -197,8 +182,30 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         }
     }
 
-    public void
-    startProcessProductDetail(DbHelper mDbHelper, int idSucursalProducto, int idFarmacia){
+    public void agregarProducto(){
+
+        DetallePedido detallePedido = new DetallePedido();
+        detallePedido.setIdSucursalProducto(idSucursalProducto);
+        detallePedido.setIdFarmacia(idFarmacia);
+        detallePedido.setCantidad(Integer.parseInt(edtCantidad.getText().toString()));
+        detallePedido.setProducto(productDetail.getProducto());
+        detallePedido.setPrecio(productDetail.getPrecio());
+
+        if (editar){
+            mDbHelper.actualizarDetallePedido(detallePedido);
+        }
+        else {
+            mDbHelper.insertDetallePedido(detallePedido);
+        }
+
+        Intent intent = new Intent(ProductDetailActivity.this,ProductsSpecificBranchOfficeActivity.class);
+        intent.putExtra("idFarmacia",idFarmacia);
+        intent.putExtra("idSucursal",idSucursal);
+        startActivity(intent);
+        finish();
+    }
+
+    public void startProcessProductDetail(DbHelper mDbHelper, int idSucursalProducto, int idFarmacia){
         deshabilitar();
         progressBar.setVisibility(View.VISIBLE);
         new ProductDetailBridge(mDbHelper,progressBar,this).execute(String.valueOf(idSucursalProducto), String.valueOf(idFarmacia));

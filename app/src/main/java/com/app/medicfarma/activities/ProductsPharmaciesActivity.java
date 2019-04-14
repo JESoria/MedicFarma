@@ -109,7 +109,6 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
     public void processFinish(String response, ArrayList productos) {
         try{
             progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setEnabled(false);
             if(!response.equals("") && productos != null){
                 adaptador = new AdapterProductsPharmacies(productos,this);
                 listaProductos.setAdapter(adaptador);

@@ -76,7 +76,7 @@ public class ProductosSpecificSucursalBridge extends AsyncTask<String, Void, Str
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line).append("\n");
+                    stringBuilder.append(line);
                 }
                 bufferedReader.close();
 

@@ -68,8 +68,8 @@
 
         <ImageView
             android:id="@+id/imvAgregarPOrden"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="33dp"
             android:layout_weight="1"
             app:srcCompat="@mipmap/ic_add" />
 
@@ -87,16 +87,6 @@
             android:layout_marginRight="10dp"
             android:orientation="vertical">
 
-            <ProgressBar
-                android:id="@+id/progressOrder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_weight="0.49"
-                android:indeterminate="true"
-                android:visibility="gone" />
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvDetalleOrder"
                 android:layout_width="match_parent"
@@ -108,47 +98,60 @@
 
     </ScrollView>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="20dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvTotalDetalleOrden"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Total compra"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:orientation="vertical" >
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnProcesarOrden"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
-        android:background="@drawable/style_button_secundary"
-        android:elevation="4dp"
-        android:text="Procesar Orden"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnCancelarOrdenDetalle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/style_button_primary"
-        android:elevation="4dp"
-        android:text="Cancelar Orden"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvTotalDetalleOrden"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total compra"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnProcesarOrden"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/style_button_secundary"
+                android:elevation="4dp"
+                android:text="Procesar Orden"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnCancelarOrdenDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/style_button_primary"
+                android:elevation="4dp"
+                android:text="Cancelar Orden"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

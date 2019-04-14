@@ -33,16 +33,18 @@
                     android:layout_height="wrap_content"
                     android:paddingRight="5dp"
                     android:text="2"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="8sp" />
 
                 <TextView
                     android:id="@+id/tvProductols"
-                    android:layout_width="218dp"
+                    android:layout_width="146dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingRight="5dp"
                     android:text="Acetaminofen"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="8sp" />
 
                 <TextView
                     android:id="@+id/tvPreciols"
@@ -51,7 +53,8 @@
                     android:layout_weight="1"
                     android:paddingRight="5dp"
                     android:text="$ 10.00"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="8sp" />
 
             </LinearLayout>
 
