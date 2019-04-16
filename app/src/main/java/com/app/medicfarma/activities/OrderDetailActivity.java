@@ -66,15 +66,6 @@ public class OrderDetailActivity extends AppCompatActivity {
         Bundle datos = getIntent().getExtras();
         idFarmacia = datos.getInt("idFarmacia");
         idSucursal = datos.getInt("idSucursal");
-        boolean eliminar = datos.getBoolean("eliminar");
-
-        if (eliminar){
-            Intent intent = new Intent(OrderDetailActivity.this,OrderDetailActivity.class);
-            intent.putExtra("idFarmacia",idFarmacia);
-            intent.putExtra("idSucursal",idSucursal);
-            startActivity(intent);
-            finish();
-        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbarOrder);
         setSupportActionBar(toolbar);
@@ -110,10 +101,29 @@ public class OrderDetailActivity extends AppCompatActivity {
         cancelarOrden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDbHelper.deletePedido();
-                Intent intent = new Intent(OrderDetailActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetailActivity.this);
+                builder.setMessage("¿Estas seguro de cancelar tu orden?")
+                        .setCancelable(false)
+                        .setNegativeButton("Ups, No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        //Acciones false
+                                        dialog.cancel();
+                                    }
+                                })
+                        .setPositiveButton("Si",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        mDbHelper.deletePedido();
+                                        Intent intent = new Intent(OrderDetailActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
             }
         });
 

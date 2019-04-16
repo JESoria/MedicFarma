@@ -30,7 +30,7 @@
         style="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/transparent"
+        android:background="@color/blanco_transparente"
         app:titleTextColor="@color/blanco"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp">
@@ -56,7 +56,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
                 android:text="¿Que medicamento buscas?"
-                android:textColor="@color/blanco"
+                android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

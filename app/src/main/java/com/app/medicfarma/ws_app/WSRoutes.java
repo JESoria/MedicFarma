@@ -6,7 +6,7 @@ package com.app.medicfarma.ws_app;
  */
 
 public class WSRoutes {
-    public static String baseURL = "https://58b177e6.ngrok.io/";
+    public static String baseURL = "https://927006d5.ngrok.io/";
     public static String getToken = "WService";
     public static String makeLogin = "v1/Login";
     public static String makeRegister = "v1/Register";
@@ -15,4 +15,5 @@ public class WSRoutes {
     public static String makeProductsPharmacies = "v1/Nearby"; // Todas
     public static String makeSearchMore = "v1/SearchMore"; //Sucursal Especifica
     public static String makeProductDetail = "v1/Detail";
+    public static String makeOrder = "v1/Order";
 }

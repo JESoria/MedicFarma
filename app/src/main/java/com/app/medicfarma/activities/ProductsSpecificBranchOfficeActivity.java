@@ -72,10 +72,28 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
         cancelarOrden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDbHelper.deletePedido();
-                Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProductsSpecificBranchOfficeActivity.this);
+                builder.setMessage("¿Estas seguro de cancelar tu orden?")
+                        .setCancelable(false)
+                        .setNegativeButton("Ups, No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        //Acciones false
+                                        dialog.cancel();
+                                    }
+                                })
+                        .setPositiveButton("Si",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        mDbHelper.deletePedido();
+                                        Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 
@@ -128,7 +146,7 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
     public void processFinish(String response, ArrayList productos) {
         try{
             progressBar.setVisibility(View.INVISIBLE);
-            if(!response.equals("") && productos != null){
+            if(productos.size() > 0){
                 adaptador = new AdapterProductsSpecificBranchOffice(productos,this);
                 listaProductos.setAdapter(adaptador);
 

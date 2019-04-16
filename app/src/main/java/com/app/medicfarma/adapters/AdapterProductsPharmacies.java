@@ -22,6 +22,8 @@ public class AdapterProductsPharmacies extends RecyclerView.Adapter<AdapterProdu
     private String name;
     private List<Product> products;
 
+    public static int ids,idf;
+
     public AdapterProductsPharmacies(List<Product> products, Context context){
         this.products = products;
         this.context = context;
@@ -38,6 +40,8 @@ public class AdapterProductsPharmacies extends RecyclerView.Adapter<AdapterProdu
     public void onBindViewHolder(@NonNull AdapterProductsPharmacies.ProductsViewHolder productsViewHolder, int position) {
         final Product product = products.get(position);
 
+        idf = product.getIdFarmacia();
+        ids = product.getIdSucursal();
 
         productsViewHolder.cvProducts.setOnClickListener(new View.OnClickListener() {
             @Override

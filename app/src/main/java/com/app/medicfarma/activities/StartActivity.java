@@ -43,6 +43,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
     Animation downtoup,uptodown;
     ImageView LogodeLogin;
     TextView tvStartactivity;
+    boolean userLogeado;
 
     //Interfaz callbackManager.
     @Override
@@ -84,6 +85,14 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
             progressBar.setVisibility(View.INVISIBLE);
         }
         //End get token
+
+        userLogeado = mDbHelper.usuarioLogeado();
+
+        if (userLogeado){
+            Intent intent = new Intent(StartActivity.this,HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         //Administrador de devoluciones de llamada que gestione las respuestas de inicio de sesión.
         callbackManager = CallbackManager.Factory.create();

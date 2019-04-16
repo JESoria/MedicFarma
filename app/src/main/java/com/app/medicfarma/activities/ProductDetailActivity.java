@@ -78,6 +78,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         if (editar){
             btnAgregar.setText("Actualizar");
             edtCantidad.setText(String.valueOf(cantidad));
+            auxcantidad = cantidad;
         }
 
         startProcessProductDetail(mDbHelper,idSucursalProducto,idFarmacia);
@@ -85,6 +86,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         btnMas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 if (productDetail.getExistencia() > auxcantidad){
                     auxcantidad++;
                     edtCantidad.setText(""+auxcantidad);
@@ -96,10 +99,10 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             @Override
             public void onClick(View view) {
                 if (auxcantidad > 1){
-                    auxcantidad --;
-                    edtCantidad.setText(""+auxcantidad);
+                        auxcantidad --;
+                        edtCantidad.setText(""+auxcantidad);
+                    }
                 }
-            }
         });
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -119,9 +122,28 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                     finish();
                 }
                 else{
-                    Intent intent = new Intent(ProductDetailActivity.this,HomeActivity.class);
-                    startActivity(intent);
-                    finish();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ProductDetailActivity.this);
+                    builder.setMessage("Si cancelas regresaras al menú, ¿Estas seguro?")
+                            .setCancelable(false)
+                            .setNegativeButton("Ups, No",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            //Acciones false
+                                            dialog.cancel();
+                                        }
+                                    })
+                            .setPositiveButton("Si",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Intent intent = new Intent(ProductDetailActivity.this,HomeActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
                 }
             }
         });

@@ -15,15 +15,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import com.app.medicfarma.R;
+import com.app.medicfarma.helpers.DbHelper;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.facebook.login.LoginManager;
+
+import static com.app.medicfarma.adapters.AdapterProductsPharmacies.idf;
+import static com.app.medicfarma.adapters.AdapterProductsPharmacies.ids;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     CardView cvFarmacias, cvFarmaciaPreferida,cvReclamos;
     AlertDialog.Builder builder;
     Toolbar toolbar;
+    final DbHelper mDbHelper = new DbHelper(this);
+    public static boolean estadoOrden;
+    int idF,idS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +105,36 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        estadoOrden = mDbHelper.estadoOrden();
+
+        if (estadoOrden){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+            builder.setMessage("Tiene una orden pendiente ¿Deseas seguir con la orden?")
+                    .setCancelable(false)
+                    .setNegativeButton("No, gracias",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    mDbHelper.deletePedido();
+                                    dialog.cancel();
+                                }
+                            })
+                    .setPositiveButton("Si, por favor",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    idF = idf;
+                                    idS = ids;
+                                    Intent intent = new Intent(HomeActivity.this,OrderDetailActivity.class);
+                                    intent.putExtra("idFarmacia",idF);
+                                    intent.putExtra("idSucursal",idS);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+
     }
     @Override
     public void onBackPressed() {
@@ -123,6 +160,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.itemLoginHome) {
+            mDbHelper.deleteUsuario();
             LoginManager.getInstance().logOut();
             Intent intent = new Intent(HomeActivity.this, StartActivity.class);
             startActivity(intent);

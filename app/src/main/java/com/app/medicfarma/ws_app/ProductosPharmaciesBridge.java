@@ -75,7 +75,7 @@ public class ProductosPharmaciesBridge extends AsyncTask<String, Void, String> {
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line).append("\n");
+                    stringBuilder.append(line);
                 }
                 bufferedReader.close();
 

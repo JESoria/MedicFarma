@@ -41,7 +41,7 @@ public class AdapterOrdenCompra extends RecyclerView.Adapter<AdapterOrdenCompra.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final AdapterOrdenCompra.OrdenCompraViewHolder ordenCompraViewHolder, int position) {
+    public void onBindViewHolder(@NonNull final AdapterOrdenCompra.OrdenCompraViewHolder ordenCompraViewHolder, final int position) {
         final DetallePedido detalle = detallePedido.get(position);
         final DbHelper mDbHelper = new DbHelper(context);
         ordenCompraViewHolder.tvCantidad.setText(String.valueOf(detalle.getCantidad()));
@@ -80,6 +80,7 @@ public class AdapterOrdenCompra extends RecyclerView.Adapter<AdapterOrdenCompra.
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         mDbHelper.deleteDetallePedido(detalle.getIdSucursalProducto());
+                                        detallePedido.remove(position);
                                     }
                                 });
                 AlertDialog alert = builder.create();

@@ -63,7 +63,7 @@ public class OrdenCompraBridge extends AsyncTask<OrdenCompra, Void, String> {
             //builder.appendQueryParameter("correo",email);
             requestBody = builder.build().getEncodedQuery();
 
-            URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeLogin);//Cambiar
+            URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeOrder);
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);
@@ -88,11 +88,11 @@ public class OrdenCompraBridge extends AsyncTask<OrdenCompra, Void, String> {
             urlConnection.connect();
 
             try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(),jsonString));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line).append("\n");
+                    stringBuilder.append(line);
                 }
                 bufferedReader.close();
 
@@ -112,36 +112,9 @@ public class OrdenCompraBridge extends AsyncTask<OrdenCompra, Void, String> {
     protected void onPostExecute(String response) {
 
         try {
-            JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
-
-            UsuarioModel model = new UsuarioModel();
-
-            model.setIdUsuario(Integer.parseInt(object.getString("iD_USUARIO")));
-            model.setNombres(object.getString("nombres"));
-            model.setApellidos(object.getString("apellidos"));
-            model.setGenero(object.getString("genero"));
-            model.setFechaNacimiento(object.getString("fechA_NACIMIENTO"));
-            model.setCorreo(object.getString("correo"));
-            model.setFacebookId(object.getString("facebooK_ID"));
-
-            SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-            ContentValues values = new ContentValues();
-
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_ID_USUARIO, model.getIdUsuario());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_NOMBRES, model.getNombres());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_APELLIDOS, model.getApellidos());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_GENERO, model.getGenero());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_FECHA_NACIMIENTO, model.getFechaNacimiento());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_CORREO, model.getCorreo());
-            values.put(InternalControlDB.TablaUsuario.COLUMN_NAME_FACEBOOK_ID, model.getFacebookId());
-
-
-            long newRowId = db.insert(InternalControlDB.TablaUsuario.TABLE_NAME_USUARIO, null, values);
-            db.close();
             delegate.processFinish(response);
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             delegate.processFinish(response);
         }

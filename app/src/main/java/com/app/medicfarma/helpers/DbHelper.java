@@ -167,6 +167,41 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+
+    public boolean usuarioLogeado() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        //definiendo el row
+        String[] projection = {
+                InternalControlDB.TablaUsuario.COLUMN_NAME_ID_USUARIO,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_NOMBRES,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_APELLIDOS,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_GENERO,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_FECHA_NACIMIENTO,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_CORREO,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_FACEBOOK_ID,
+                InternalControlDB.TablaUsuario.COLUMN_NAME_FECHA_NACIMIENTO
+        };
+        String selection = null;
+        String[] selectionArgs = null;
+        Cursor c = db.query(
+                InternalControlDB.TablaUsuario.TABLE_NAME_USUARIO,// The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                      // sort type
+        );
+        if (c.getCount() > 0) {
+            c.moveToFirst();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void deleteUsuario(){
         SQLiteDatabase db = this.getReadableDatabase();
         db.delete(InternalControlDB.TablaUsuario.TABLE_NAME_USUARIO,null,null);
@@ -236,7 +271,6 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
     }
-
 
 
     //Method to get token

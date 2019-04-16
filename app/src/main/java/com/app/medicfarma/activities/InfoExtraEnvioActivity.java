@@ -43,13 +43,20 @@ public class InfoExtraEnvioActivity extends AppCompatActivity {
                 telefono = edtTelefono.getText().toString();
 
                 if(tipoPago.equals("efectivo")){
-                    //Procesar envio
+                    Intent intent = new Intent(InfoExtraEnvioActivity.this, CashCheckActivity.class);
+                    intent.putExtra("direccion",direccion);
+                    intent.putExtra("telefono",telefono);
+                    intent.putExtra("montoCompra",montoCompra);
+                    intent.putExtra("tipopago",tipoPago);
+                    startActivity(intent);
+                    finish();
                 }
                 else{
                    Intent intent = new Intent(InfoExtraEnvioActivity.this, PayPalActivity.class);
                    intent.putExtra("direccion",direccion);
                    intent.putExtra("telefono",telefono);
                    intent.putExtra("montoCompra",montoCompra);
+                    intent.putExtra("tipopago",tipoPago);
                    startActivity(intent);
                    finish();
                 }

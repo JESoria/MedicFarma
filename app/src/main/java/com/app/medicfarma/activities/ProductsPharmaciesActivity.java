@@ -69,6 +69,7 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
         final MenuItem searchItem = menu.findItem(R.id.itemBuscar);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setQueryHint("¿Que buscas?");
+        //searchView.setBackgroundColor(getResources().getColor(R.color.blanco));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -109,10 +110,9 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
     public void processFinish(String response, ArrayList productos) {
         try{
             progressBar.setVisibility(View.INVISIBLE);
-            if(!response.equals("") && productos != null){
+            if(productos.size() > 0){
                 adaptador = new AdapterProductsPharmacies(productos,this);
                 listaProductos.setAdapter(adaptador);
-
             }
             else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(ProductsPharmaciesActivity.this);

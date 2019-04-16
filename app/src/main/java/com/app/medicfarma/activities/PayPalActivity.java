@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 
 public class PayPalActivity extends AppCompatActivity {
 
-    String direccion, telefono;
+    String direccion, telefono,tipopago;
     double montoCompra = 0.00;
     private static final int REQUEST_CODE_PAYMENT = 7171;
     AlertDialog.Builder builder;
@@ -43,6 +43,7 @@ public class PayPalActivity extends AppCompatActivity {
             montoCompra= datos.getDouble("montoCompra");
             direccion = datos.getString("direccion");
             telefono = datos.getString("telefono");
+            tipopago = datos.getString("tipopago");
         }
 
         procesarPago();
@@ -80,11 +81,12 @@ public class PayPalActivity extends AppCompatActivity {
                 if (confirmation != null){
                     try {
                         String paymentDetail = confirmation.toJSONObject().toString(4);
-                        startActivity(new Intent(PayPalActivity.this, PagoOKActivity.class)
+                        startActivity(new Intent(PayPalActivity.this, PayPalCheckActivity.class)
                                 .putExtra("PaymentDetails",paymentDetail)
                                 .putExtra("direccion",direccion)
                                 .putExtra("telefono",telefono)
-                                .putExtra("PaymentAmount",montoCompra));
+                                .putExtra("tipopago",tipopago)
+                                .putExtra("montoCompraPayPal",montoCompra));
 
 
                     } catch (JSONException e) {

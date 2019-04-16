@@ -57,7 +57,7 @@ public class WelcomeScreen extends AppCompatActivity {
         setContentView(view);
 
 
-        YoYo.with(Techniques.StandUp)
+        YoYo.with(Techniques.FadeIn)
                 .duration(1100)
                 .repeat(0)
                 .playOn(view);
