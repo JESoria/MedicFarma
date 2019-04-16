@@ -56,6 +56,7 @@ public class AdapterOrdenCompra extends RecyclerView.Adapter<AdapterOrdenCompra.
                 Intent intent = new Intent(context, ProductDetailActivity.class);
                 intent.putExtra("idSucursalProducto",detalle.getIdSucursalProducto());
                 intent.putExtra("idFarmacia",detalle.getIdFarmacia());
+                intent.putExtra("cantidad",detalle.getCantidad());
                 intent.putExtra("editar",true);
                 context.startActivity(intent);
             }

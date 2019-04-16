@@ -32,6 +32,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     private int idSucursalProducto;
     private int idSucursal;
     private int idFarmacia;
+    private int cantidad;
     public static boolean estadoOrden;
     ProductDetail productDetail = new ProductDetail();
     final DbHelper mDbHelper = new DbHelper(this);
@@ -70,10 +71,13 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         idFarmacia = datos.getInt("idFarmacia");
         idSucursal = datos.getInt("idSucursal");
         editar = datos.getBoolean("editar");
+        cantidad = datos.getInt("cantidad");
         estadoOrden = mDbHelper.estadoOrden();
+
 
         if (editar){
             btnAgregar.setText("Actualizar");
+            edtCantidad.setText(String.valueOf(cantidad));
         }
 
         startProcessProductDetail(mDbHelper,idSucursalProducto,idFarmacia);

@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.DetallePedido;
@@ -24,96 +26,82 @@ public class PagoOKActivity extends AppCompatActivity implements OrdenCompraBrid
 
     AlertDialog.Builder builder;
     String direccion, telefono;
+    LottieAnimationView pagoOK;
+    final DbHelper mDbHelper = new DbHelper(PagoOKActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pago_ok);
 
-        final DbHelper mDbHelper = new DbHelper(PagoOKActivity.this);
+        pagoOK = (LottieAnimationView) findViewById(R.id.pagoOK);
+        pagoOK.setVisibility(View.INVISIBLE);
+
         Intent intent = getIntent();
 
-        try {
-/*
-        Bundle datos = getIntent().getExtras();
-        if (datos != null){
-            direccion = datos.getString("direccion");
-            telefono = datos.getString("telefono");
-        }
+            Bundle datos = getIntent().getExtras();
+            if (datos != null) {
+                direccion = datos.getString("direccion");
+                telefono = datos.getString("telefono");
+            }
 
-        UsuarioModel usuarioModel;
-        usuarioModel = mDbHelper.cargarUsuario();
+            UsuarioModel usuarioModel;
+            usuarioModel = mDbHelper.cargarUsuario();
 
-        try {
-            //Generando codigo de pedido
-            int cod1 = 0;
-            int cod2 = 0;
-            int idFarmacia = 0;
-            int idSucursalProducto = 0;
-            cod1= (int) (Math.random() * 1000) + 1;
-            cod2= (int) (Math.random() * 1000) + 1;
-            //Fin de codigo de pedido
-*/
-            JSONObject jsonObject = new JSONObject(intent.getStringExtra("PaymentDetails"));
+            try {
+                //Generando codigo de pedido
+                int cod1 = 0;
+                int cod2 = 0;
+                int idFarmacia = 0;
+                int idSucursalProducto = 0;
+                cod1 = (int) (Math.random() * 1000) + 1;
+                cod2 = (int) (Math.random() * 1000) + 1;
+                //Fin de codigo de pedido
 
-            /*
-            ArrayList<DetallePedido> detallePedido;
+                JSONObject jsonObject = new JSONObject(intent.getStringExtra("PaymentDetails"));
 
-            Cursor listado = mDbHelper.listadoProductos();
 
-            detallePedido = new ArrayList<>();
+                ArrayList<DetallePedido> detallePedido;
 
-            do{
-                detallePedido.add(new DetallePedido(listado.getInt(0), listado.getInt(1), listado.getInt(2), listado.getString(3), listado.getDouble(4)));
+                Cursor listado = mDbHelper.listadoProductos();
 
-            } while (listado.moveToNext());
+                detallePedido = new ArrayList<>();
 
-            DetallePedido detail;
-            detail = detallePedido.get(1);
-            idFarmacia = detail.getIdFarmacia();
-            idSucursalProducto = detail.getIdSucursalProducto();
+                do {
+                    detallePedido.add(new DetallePedido(listado.getInt(0), listado.getInt(1), listado.getInt(2), listado.getString(3), listado.getDouble(4)));
 
-            Pedido pedido = new Pedido();
-            pedido.setCodigoPedido("OC"+idFarmacia+idSucursalProducto+cod1+cod2);
-            pedido.setIdusuario(usuarioModel.getIdUsuario());
-            pedido.setIdsucursal(idSucursalProducto);
-            pedido.setDireccion(direccion);
-            pedido.setTelefono(telefono);
-            pedido.setMontoCompra(Double.parseDouble(intent.getStringExtra("PaymentAmount")));
-            pedido.setEstadoPago(jsonObject.getJSONObject("response").getString("state"));
+                } while (listado.moveToNext());
 
-            OrdenCompra ordenCompra = new OrdenCompra();
-            ordenCompra.setPedidos(pedido);
-            ordenCompra.setDetallePedido(detallePedido);
-*/
-            //procesarPedido(jsonObject.getJSONObject("response"),mDbHelper,ordenCompra);
-            procesarPedido(jsonObject.getJSONObject("response"),mDbHelper);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
+                DetallePedido detail;
+                detail = detallePedido.get(1);
+                idFarmacia = detail.getIdFarmacia();
+                idSucursalProducto = detail.getIdSucursalProducto();
 
+                Pedido pedido = new Pedido();
+                pedido.setCodigoPedido("OC" + idFarmacia + idSucursalProducto + cod1 + cod2);
+                pedido.setIdusuario(usuarioModel.getIdUsuario());
+                pedido.setIdsucursal(idSucursalProducto);
+                pedido.setDireccion(direccion);
+                pedido.setTelefono(telefono);
+                pedido.setMontoCompra(Double.parseDouble(intent.getStringExtra("PaymentAmount")));
+                pedido.setEstadoPago(jsonObject.getJSONObject("response").getString("state"));
+
+                OrdenCompra ordenCompra = new OrdenCompra();
+                ordenCompra.setPedidos(pedido);
+                ordenCompra.setDetallePedido(detallePedido);
+
+                procesarPedido(jsonObject.getJSONObject("response"), mDbHelper, ordenCompra);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
     }
 
-    private void procesarPedido(JSONObject response, final DbHelper  mDbHelper) {
+    private void procesarPedido(JSONObject response, final DbHelper  mDbHelper, OrdenCompra ordenCompra) {
         try {
 
             if (response.getString("state").equals("approved")){
-                //new OrdenCompraBridge(mDbHelper,PagoOKActivity.this).execute(ordenCompra);
-                builder = new AlertDialog.Builder(PagoOKActivity.this);
-                builder.setMessage("Pago efectuado con exito")
-                        .setCancelable(false)
-                        .setNeutralButton("Aceptar",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        mDbHelper.deletePedido();
-                                        Intent intent = new Intent(PagoOKActivity.this, HomeActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                        dialog.cancel();
-                                    }
-                                });
-                AlertDialog alert = builder.create();
-                alert.show();
+                new OrdenCompraBridge(mDbHelper,PagoOKActivity.this).execute(ordenCompra);
             }else{
                 builder = new AlertDialog.Builder(PagoOKActivity.this);
                 builder.setMessage("Ups! ocurrio un problema con tu pago, se cancelara la orden, ponte en contacto con PayPal")
@@ -141,17 +129,11 @@ public class PagoOKActivity extends AppCompatActivity implements OrdenCompraBrid
         try{
 
             if(!response.equals("") ){
-                AlertDialog.Builder builder = new AlertDialog.Builder(PagoOKActivity.this);
-                builder.setMessage("¡Pedido efectuado con exito!")
-                        .setCancelable(false)
-                        .setNeutralButton("Aceptar",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-                AlertDialog alert = builder.create();
-                alert.show();
+                pagoOK.setVisibility(View.VISIBLE);
+                mDbHelper.deletePedido();
+                Intent intent = new Intent(PagoOKActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
             else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(PagoOKActivity.this);
