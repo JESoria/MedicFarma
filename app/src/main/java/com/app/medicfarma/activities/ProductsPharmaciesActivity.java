@@ -21,7 +21,6 @@ import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Product;
 import com.app.medicfarma.ws_app.ProductosPharmaciesBridge;
 import com.facebook.login.LoginManager;
-
 import java.util.ArrayList;
 
 public class ProductsPharmaciesActivity extends AppCompatActivity implements ProductosPharmaciesBridge.AsyncResponse {
@@ -68,7 +67,6 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
         final MenuItem searchItem = menu.findItem(R.id.itemBuscar);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setQueryHint("¿Que buscas?");
-        //searchView.setBackgroundColor(getResources().getColor(R.color.blanco));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
