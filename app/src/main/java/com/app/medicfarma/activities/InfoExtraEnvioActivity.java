@@ -15,7 +15,7 @@ public class InfoExtraEnvioActivity extends AppCompatActivity {
     EditText edtDireccionEnvio, edtTelefono;
     Button btnSeguir, btnCancelar;
     double montoCompra = 0.00;
-
+    int idSucursal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +29,7 @@ public class InfoExtraEnvioActivity extends AppCompatActivity {
         Bundle datos = getIntent().getExtras();
         if (datos != null){
             montoCompra= datos.getDouble("montoCompra");
+            idSucursal = datos.getInt("idSucursal");
         }
 
         btnSeguir.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +47,7 @@ public class InfoExtraEnvioActivity extends AppCompatActivity {
                     Intent intent = new Intent(InfoExtraEnvioActivity.this, CashCheckActivity.class);
                     intent.putExtra("direccion",direccion);
                     intent.putExtra("telefono",telefono);
+                    intent.putExtra("idSucursal",idSucursal);
                     intent.putExtra("montoCompra",montoCompra);
                     intent.putExtra("tipopago",tipoPago);
                     startActivity(intent);
@@ -55,6 +57,7 @@ public class InfoExtraEnvioActivity extends AppCompatActivity {
                    Intent intent = new Intent(InfoExtraEnvioActivity.this, PayPalActivity.class);
                    intent.putExtra("direccion",direccion);
                    intent.putExtra("telefono",telefono);
+                   intent.putExtra("idSucursal",idSucursal);
                    intent.putExtra("montoCompra",montoCompra);
                     intent.putExtra("tipopago",tipoPago);
                    startActivity(intent);

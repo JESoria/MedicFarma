@@ -42,25 +42,15 @@ public class OrdenCompraBridge extends AsyncTask<OrdenCompra, Void, String> {
         this.delegate = delegate;
     }
 
-    private void setPostRequestContent(HttpURLConnection conn,String jsonString) throws IOException {
-        OutputStream os = conn.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-        writer.write(jsonString);
-        writer.flush();
-        writer.close();
-        os.close();
-    }
-
     @Override
     protected String doInBackground(OrdenCompra ...ordenCompra) {
         try{
-
             Gson gson = new Gson();
             String jsonString = gson.toJson(ordenCompra[0]);
 
             String requestBody;
             Uri.Builder builder = new Uri.Builder();
-            //builder.appendQueryParameter("correo",email);
+            builder.appendQueryParameter("data",jsonString );
             requestBody = builder.build().getEncodedQuery();
 
             URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeOrder);
@@ -72,7 +62,6 @@ public class OrdenCompraBridge extends AsyncTask<OrdenCompra, Void, String> {
 
             urlConnection.setRequestProperty("Authorization",mDbHelper.getAuthToken());
 
-/*
             OutputStream outputStream = new BufferedOutputStream(urlConnection.getOutputStream());
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "utf-8"));
 
@@ -81,14 +70,8 @@ public class OrdenCompraBridge extends AsyncTask<OrdenCompra, Void, String> {
             writer.close();
             outputStream.close();
 
-*/
-            //Se debe crear dos clases, pedido y detalle pedido en el ws
-
-            setPostRequestContent(urlConnection, jsonString);
-            urlConnection.connect();
-
             try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(),jsonString));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
@@ -105,12 +88,10 @@ public class OrdenCompraBridge extends AsyncTask<OrdenCompra, Void, String> {
             System.err.println(e);
             return "";
         }
-
     }
 
 
     protected void onPostExecute(String response) {
-
         try {
             delegate.processFinish(response);
 

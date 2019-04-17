@@ -93,6 +93,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(OrderDetailActivity.this, PaymentTypeActivity.class);
                 intent.putExtra("montoCompra",montoCompra);
+                intent.putExtra("idSucursal",idSucursal);
                 startActivity(intent);
                 finish();
             }

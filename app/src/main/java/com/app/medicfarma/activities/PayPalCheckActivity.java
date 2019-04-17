@@ -27,6 +27,7 @@ public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompr
     AlertDialog.Builder builder;
     String direccion, telefono, tipopago;
     double montoCompra,montoCompraPayPal;
+    int idSucursal;
     final DbHelper mDbHelper = new DbHelper(PayPalCheckActivity.this);
 
     @Override
@@ -41,6 +42,7 @@ public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompr
                 direccion = datos.getString("direccion");
                 telefono = datos.getString("telefono");
                 montoCompra = datos.getDouble("montoCompra");
+                idSucursal = datos.getInt("idSucursal");
                 montoCompraPayPal = datos.getDouble("montoCompraPayPal");
                 tipopago = datos.getString("tipopago");
             }
@@ -75,7 +77,7 @@ public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompr
                 DetallePedido detail;
                 detail = detallePedido.get(0);
                 idFarmacia = detail.getIdFarmacia();
-                idSucursalProducto = ids;
+                idSucursalProducto = idSucursal;
 
                 Pedido pedido = new Pedido();
                 pedido.setIdusuario(usuarioModel.getIdUsuario());
@@ -88,7 +90,8 @@ public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompr
                     pedido.setCodigoPedido("OC" + idFarmacia + idSucursalProducto + cod1 + cod2);
                 }
                 else{
-                    pedido.setCodigoPedido(jsonObject.getJSONObject("response").getString("id"));
+                    //Limpiar el ultimo
+                    pedido.setCodigoPedido(jsonObject.getJSONObject("response").getString("id").substring(1,jsonObject.getJSONObject("response").getString("id").length()-1));
                     pedido.setMontoCompra(montoCompraPayPal);
                 }
                 pedido.setEstadoPago(jsonObject.getJSONObject("response").getString("state"));
@@ -135,10 +138,22 @@ public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompr
         try{
 
             if(!response.equals("") ){
-                mDbHelper.deletePedido();
-                Intent intent = new Intent(PayPalCheckActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(PayPalCheckActivity.this);
+                builder.setMessage("¡Pago efectuado con exito!")
+                        .setCancelable(false)
+                        .setNeutralButton("Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        mDbHelper.deletePedido();
+                                        Intent intent = new Intent(PayPalCheckActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
             }
             else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(PayPalCheckActivity.this);

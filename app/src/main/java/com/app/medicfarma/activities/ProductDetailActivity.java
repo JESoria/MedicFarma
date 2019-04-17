@@ -18,6 +18,8 @@ import com.app.medicfarma.models.ProductDetail;
 import com.app.medicfarma.ws_app.ProductDetailBridge;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import static com.app.medicfarma.adapters.AdapterProductsPharmacies.idf;
+import static com.app.medicfarma.adapters.AdapterProductsPharmacies.ids;
 
 public class ProductDetailActivity extends AppCompatActivity implements ProductDetailBridge.AsyncResponse {
 
@@ -37,6 +39,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     ProductDetail productDetail = new ProductDetail();
     final DbHelper mDbHelper = new DbHelper(this);
     private boolean editar;
+    int idF,idS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +77,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         cantidad = datos.getInt("cantidad");
         estadoOrden = mDbHelper.estadoOrden();
 
-
+        idF = idFarmacia;
+        idS = idSucursal;
         if (editar){
             btnAgregar.setText("Actualizar");
             edtCantidad.setText(String.valueOf(cantidad));

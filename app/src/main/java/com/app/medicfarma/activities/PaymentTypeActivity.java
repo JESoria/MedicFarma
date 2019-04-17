@@ -12,6 +12,7 @@ public class PaymentTypeActivity extends AppCompatActivity {
 
     Button btnEfectivo, btnPayPal, btnCancelar;
     double montoCompra = 0.00;
+    int idSucursal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class PaymentTypeActivity extends AppCompatActivity {
 
         if (datos != null){
             montoCompra= datos.getDouble("montoCompra");
+            idSucursal = datos.getInt("idSucursal");
         }
 
         btnEfectivo.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +35,7 @@ public class PaymentTypeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PaymentTypeActivity.this, InfoExtraEnvioActivity.class);
                 intent.putExtra("montoCompra",montoCompra);
+                intent.putExtra("idSucursal",idSucursal);
                 intent.putExtra("tipoPago","efectivo");
                 startActivity(intent);
                 finish();
@@ -44,6 +47,7 @@ public class PaymentTypeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PaymentTypeActivity.this, InfoExtraEnvioActivity.class);
                 intent.putExtra("montoCompra",montoCompra);
+                intent.putExtra("idSucursal",idSucursal);
                 intent.putExtra("tipoPago","paypal");
                 startActivity(intent);
                 finish();

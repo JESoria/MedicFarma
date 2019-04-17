@@ -23,6 +23,7 @@ public class CashCheckActivity extends AppCompatActivity implements OrdenCompraB
 
     String direccion, telefono;
     double montoCompra;
+    int idSucursal;
     final DbHelper mDbHelper = new DbHelper(CashCheckActivity.this);
 
     @Override
@@ -36,6 +37,7 @@ public class CashCheckActivity extends AppCompatActivity implements OrdenCompraB
             direccion = datos.getString("direccion");
             telefono = datos.getString("telefono");
             montoCompra = datos.getDouble("montoCompra");
+            idSucursal = datos.getInt("idSucursal");
         }
 
         UsuarioModel usuarioModel;
@@ -63,7 +65,7 @@ public class CashCheckActivity extends AppCompatActivity implements OrdenCompraB
         DetallePedido detail;
         detail = detallePedido.get(0);
         idFarmacia = detail.getIdFarmacia();
-        idSucursalProducto = ids;
+        idSucursalProducto = idSucursal;
 
         Pedido pedido = new Pedido();
         pedido.setCodigoPedido("OC" + idFarmacia + idSucursalProducto + cod1 + cod2);
