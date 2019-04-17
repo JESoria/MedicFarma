@@ -18,8 +18,6 @@ import com.app.medicfarma.models.ProductDetail;
 import com.app.medicfarma.ws_app.ProductDetailBridge;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import static com.app.medicfarma.adapters.AdapterProductsPharmacies.idf;
-import static com.app.medicfarma.adapters.AdapterProductsPharmacies.ids;
 
 public class ProductDetailActivity extends AppCompatActivity implements ProductDetailBridge.AsyncResponse {
 

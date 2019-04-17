@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterProducts;
 import com.app.medicfarma.helpers.DbHelper;

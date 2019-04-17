@@ -61,7 +61,9 @@
         <activity android:name=".activities.InfoExtraEnvioActivity" />
         <activity android:name=".activities.PayPalActivity" />
         <activity android:name=".activities.PayPalCheckActivity" />
-        <activity android:name=".activities.CashCheckActivity"></activity>
+        <activity android:name=".activities.CashCheckActivity" />
+        <activity android:name=".activities.IncidenciasListActivity" />
+        <activity android:name=".activities.IncidenciaActivity"></activity>
     </application>
 
 </manifest>

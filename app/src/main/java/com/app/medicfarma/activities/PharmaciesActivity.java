@@ -62,30 +62,15 @@ public class PharmaciesActivity extends AppCompatActivity implements FarmaciasBr
     @Override
     public void processFinish(String response, ArrayList farmacias) {
         try{
-            progressBar.setVisibility(View.INVISIBLE);
-            if(!response.equals("") && farmacias != null){
-                adaptador = new AdapterFarmacias(farmacias,this);
-                listaFarmacias.setAdapter(adaptador);
-
-            }
-            else{
-                AlertDialog.Builder builder = new AlertDialog.Builder(PharmaciesActivity.this);
-                builder.setMessage("Lo sentimos el servicio no esta disponible")
-                        .setCancelable(false)
-                        .setNeutralButton("Aceptar",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
+        progressBar.setVisibility(View.INVISIBLE);
+        if(!response.equals("") && farmacias != null){
+            adaptador = new AdapterFarmacias(farmacias,this);
+            listaFarmacias.setAdapter(adaptador);
 
         }
-        catch (NullPointerException e){
+        else{
             AlertDialog.Builder builder = new AlertDialog.Builder(PharmaciesActivity.this);
-            builder.setMessage("Sin servicio")
+            builder.setMessage("Lo sentimos el servicio no esta disponible")
                     .setCancelable(false)
                     .setNeutralButton("Aceptar",
                             new DialogInterface.OnClickListener() {
@@ -96,5 +81,20 @@ public class PharmaciesActivity extends AppCompatActivity implements FarmaciasBr
             AlertDialog alert = builder.create();
             alert.show();
         }
+
     }
+        catch (NullPointerException e){
+        AlertDialog.Builder builder = new AlertDialog.Builder(PharmaciesActivity.this);
+        builder.setMessage("Sin servicio")
+                .setCancelable(false)
+                .setNeutralButton("Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+}
 }

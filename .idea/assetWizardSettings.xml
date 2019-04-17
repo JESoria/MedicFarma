@@ -49,7 +49,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="paddingPercent" value="25" />
+                                                <entry key="paddingPercent" value="15" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -63,8 +63,8 @@
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="cropped" value="true" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\soria\Desktop\MedicFarma\Iconos\cell.png" />
-                                      <entry key="outputName" value="ic_telefono" />
+                                      <entry key="imageAsset" value="C:\Users\soria\Desktop\MedicFarma\Iconos\note.png" />
+                                      <entry key="outputName" value="ic_nota" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -6,9 +6,6 @@ import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-
-import com.airbnb.lottie.LottieAnimationView;
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.DetallePedido;
@@ -16,10 +13,8 @@ import com.app.medicfarma.models.OrdenCompra;
 import com.app.medicfarma.models.Pedido;
 import com.app.medicfarma.models.UsuarioModel;
 import com.app.medicfarma.ws_app.OrdenCompraBridge;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import static com.app.medicfarma.adapters.AdapterProductsPharmacies.ids;
 import java.util.ArrayList;
 
 public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompraBridge.AsyncResponse {

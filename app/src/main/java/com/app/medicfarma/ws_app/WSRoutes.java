@@ -16,4 +16,6 @@ public class WSRoutes {
     public static String makeSearchMore = "v1/SearchMore"; //Sucursal Especifica
     public static String makeProductDetail = "v1/Detail";
     public static String makeOrder = "v1/Order";
+    public static String makePedidos = "v1/Pedidos";
+    public static String makeIncidencia = "v1/Incidencia";
 }

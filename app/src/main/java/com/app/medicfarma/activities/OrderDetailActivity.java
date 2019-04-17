@@ -12,14 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterOrdenCompra;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.DetallePedido;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 

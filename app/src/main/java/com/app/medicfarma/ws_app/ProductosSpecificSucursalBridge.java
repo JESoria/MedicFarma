@@ -3,14 +3,11 @@ package com.app.medicfarma.ws_app;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.ProgressBar;
-
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Product;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

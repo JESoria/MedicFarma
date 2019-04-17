@@ -1,11 +1,9 @@
 package com.app.medicfarma.ws_app;
 
-
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.widget.ProgressBar;
 import com.app.medicfarma.helpers.DbHelper;
-import com.app.medicfarma.models.OrdenCompra;
-import com.google.gson.Gson;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,34 +13,40 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class OrdenCompraBridge extends AsyncTask<OrdenCompra, Void, String> {
+public class IncidenciaBridge extends AsyncTask<String, Void, String> {
 
     private Exception exception;
     DbHelper mDbHelper;
+    ProgressBar progressBar;
 
-    public OrdenCompraBridge.AsyncResponse delegate = null;
+    public AsyncResponse delegate = null;
 
     public interface AsyncResponse {
         void processFinish(String response);
     }
 
-    public OrdenCompraBridge(DbHelper mDbHelper, OrdenCompraBridge.AsyncResponse delegate){
+    public IncidenciaBridge(DbHelper mDbHelper, ProgressBar progressBar, AsyncResponse delegate){
         this.mDbHelper = mDbHelper;
+        this.progressBar = progressBar;
         this.delegate = delegate;
     }
 
     @Override
-    protected String doInBackground(OrdenCompra ...ordenCompra) {
+    protected String doInBackground(String... parametros) {
         try{
-            Gson gson = new Gson();
-            String jsonString = gson.toJson(ordenCompra[0]);
+            String idPedido = parametros[0];
+            String incidencia = parametros[1];
+            String telefono = parametros[2];
+
 
             String requestBody;
             Uri.Builder builder = new Uri.Builder();
-            builder.appendQueryParameter("data",jsonString );
+            builder.appendQueryParameter("idPedido",idPedido);
+            builder.appendQueryParameter("incidencia",incidencia);
+            builder.appendQueryParameter("telefono",telefono);
             requestBody = builder.build().getEncodedQuery();
 
-            URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeOrder);
+            URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeIncidencia);
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);
@@ -77,9 +81,11 @@ public class OrdenCompraBridge extends AsyncTask<OrdenCompra, Void, String> {
             System.err.println(e);
             return "";
         }
+
     }
-    
+
     protected void onPostExecute(String response) {
+
         try {
             delegate.processFinish(response);
 

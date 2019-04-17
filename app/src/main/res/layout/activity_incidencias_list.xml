@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activities.PharmaciesActivity">
+    tools:context=".activities.IncidenciasListActivity"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarListFarmacias"
+        android:id="@+id/toolbarListIncidencias"
         style="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
@@ -36,7 +36,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0.05"
                 android:fontFamily="sans-serif-condensed"
-                android:text="Farmacias"
+                android:text="Pedidos realizados"
                 android:textColor="@color/blanco"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -44,16 +44,6 @@
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
-
-    <ProgressBar
-        android:id="@+id/progressBarFarmacias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="0.49"
-        android:indeterminate="true"
-        android:layout_gravity="center"
-        android:visibility="gone" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -64,8 +54,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ProgressBar
+                android:id="@+id/progressBarIncidenciasList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="0.49"
+                android:indeterminate="true"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvFarmacias"
+                android:id="@+id/rvIncidenciasList"
                 android:layout_width="match_parent"
                 android:layout_height="551dp"
                 tools:layout_editor_absoluteX="8dp"

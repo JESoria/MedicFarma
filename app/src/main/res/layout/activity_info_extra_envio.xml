@@ -22,13 +22,6 @@
             android:orientation="horizontal"
             android:paddingRight="15dp">
 
-            <ImageView
-                android:id="@+id/imgAtras"
-                android:layout_width="64dp"
-                android:layout_height="30dp"
-                android:layout_weight="0.03"
-                app:srcCompat="?android:attr/homeAsUpIndicator" />
-
 
             <TextView
                 android:id="@+id/toolbar_subTitle"
@@ -38,7 +31,6 @@
                 android:layout_weight="0.05"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:paddingRight="50dp"
                 android:text="Información de envió"
                 android:textColor="@color/blanco"
                 android:textSize="16sp"
@@ -77,7 +69,7 @@
                     android:backgroundTint="@android:color/white"
                     android:drawableLeft="@mipmap/ic_direccion"
                     android:ems="10"
-                    android:hint="¿Ingresa la dirección de tu pedido?"
+                    android:hint="Ingresa la dirección de tu pedido"
                     android:inputType="textPersonName"
                     android:maxLength="25"
                     android:paddingLeft="10dp"
@@ -105,7 +97,7 @@
                     android:backgroundTint="@android:color/white"
                     android:drawableLeft="@mipmap/ic_telefono"
                     android:ems="10"
-                    android:hint="¿Ingresa teléfono de contacto?"
+                    android:hint="Ingresa teléfono de contacto"
                     android:inputType="textPersonName|number"
                     android:maxLength="8"
                     android:paddingLeft="10dp"

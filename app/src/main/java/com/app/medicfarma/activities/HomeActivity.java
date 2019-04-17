@@ -19,7 +19,6 @@ import com.app.medicfarma.helpers.DbHelper;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.facebook.login.LoginManager;
-
 import static com.app.medicfarma.adapters.AdapterProductsPharmacies.idf;
 import static com.app.medicfarma.adapters.AdapterProductsPharmacies.ids;
 
