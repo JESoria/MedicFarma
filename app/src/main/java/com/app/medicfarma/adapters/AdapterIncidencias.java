@@ -40,10 +40,10 @@ public class AdapterIncidencias extends RecyclerView.Adapter<AdapterIncidencias.
         final Incidencias incidencia = incidencias.get(position);
 
         incidenciasViewHolder.tvSucursal.setText(incidencia.getSucursal());
-        incidenciasViewHolder.tvCodigoPedido.setText(incidencia.getCodidoPedido());
-        incidenciasViewHolder.tvDireccion.setText(incidencia.getDireccion());
-        incidenciasViewHolder.tvTelefono.setText(incidencia.getTelefono());
-        incidenciasViewHolder.tvMontoCompra.setText("$ "+ String.valueOf(incidencia.getMontoCompra()));
+        incidenciasViewHolder.tvCodigoPedido.setText("Código: "+incidencia.getCodidoPedido());
+        incidenciasViewHolder.tvDireccion.setText("Dirección: "+incidencia.getDireccion());
+        incidenciasViewHolder.tvTelefono.setText("Tel: "+incidencia.getTelefono());
+        incidenciasViewHolder.tvMontoCompra.setText("Total compra: $ "+ String.valueOf(incidencia.getMontoCompra()));
 
         incidenciasViewHolder.cvPedido.setOnClickListener(new View.OnClickListener() {
             @Override

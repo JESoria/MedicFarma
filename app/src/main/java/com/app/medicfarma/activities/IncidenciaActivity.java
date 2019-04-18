@@ -20,7 +20,7 @@ import com.daimajia.androidanimations.library.YoYo;
 
 public class IncidenciaActivity extends AppCompatActivity implements IncidenciaBridge.AsyncResponse {
 
-    EditText incidencia, telefono;
+    EditText incidencia;
     Button procesar,cancelar;
     int idPedido;
     ProgressBar progressBar;
@@ -33,7 +33,6 @@ public class IncidenciaActivity extends AppCompatActivity implements IncidenciaB
         setContentView(R.layout.activity_incidencia);
 
         incidencia = (EditText) findViewById(R.id.edtIncidencia);
-        telefono = (EditText) findViewById(R.id.edtTelefonoIncidencia);
         procesar = (Button) findViewById(R.id.btnProcesarIncidencia);
         cancelar = (Button) findViewById(R.id.btnCancelarIncidencia);
         progressBar = (ProgressBar) findViewById(R.id.progressBar_incidencia);
@@ -103,19 +102,9 @@ public class IncidenciaActivity extends AppCompatActivity implements IncidenciaB
             incidencia.setEnabled(true);
             incidencia.setError("¡Debe ingresar su incoveniente!");
             incidencia.requestFocus();
-        }
-        else if(TextUtils.isEmpty(telefono.getText().toString())){
-            YoYo.with(Techniques.Tada)
-                    .duration(700)
-                    .repeat(1)
-                    .playOn(telefono);
-            telefono.setEnabled(true);
-            telefono.setError("¡Debe ingresar su telefono de contacto!");
-            telefono.requestFocus();
-        }
-        else{
+        }else{
             progressBar.setVisibility(View.VISIBLE);
-            new IncidenciaBridge(mDbHelper,progressBar,this).execute(String.valueOf(idPedido),incidencia.getText().toString(),telefono.getText().toString());
+            new IncidenciaBridge(mDbHelper,progressBar,this).execute(String.valueOf(idPedido),incidencia.getText().toString());
         }
     }
 

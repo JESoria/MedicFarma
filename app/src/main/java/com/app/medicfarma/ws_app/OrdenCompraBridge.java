@@ -1,6 +1,5 @@
 package com.app.medicfarma.ws_app;
 
-
 import android.net.Uri;
 import android.os.AsyncTask;
 import com.app.medicfarma.helpers.DbHelper;

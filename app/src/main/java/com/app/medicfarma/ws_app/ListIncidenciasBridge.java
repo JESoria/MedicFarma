@@ -47,7 +47,7 @@ public class ListIncidenciasBridge extends AsyncTask<String, Void, String> {
 
             String requestBody;
             Uri.Builder builder = new Uri.Builder();
-            builder.appendQueryParameter("idUsuario",idUsuario);
+            builder.appendQueryParameter("ID_USUARIO",idUsuario);
             requestBody = builder.build().getEncodedQuery();
 
             URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makePedidos);
@@ -95,24 +95,19 @@ public class ListIncidenciasBridge extends AsyncTask<String, Void, String> {
         JSONObject object = null;
 
         try {
-
             JSONArray jArray = new JSONArray(response);
 
             for (int i = 0; i < jArray.length(); i++) {
-
                 object = jArray.getJSONObject(i);
-
                 incidencia = new Incidencias();
-
                 incidencia.setIdPedido(Integer.parseInt(object.getString("idPedido")));
-                incidencia.setCodidoPedido(object.getString("codigo"));
+                incidencia.setCodidoPedido(object.getString("codigoPedido"));
                 incidencia.setDireccion(object.getString("direccion"));
                 incidencia.setLatitud(object.getString("latitud"));
                 incidencia.setLongitud(object.getString("longitud"));
                 incidencia.setSucursal(object.getString("sucursal"));
                 incidencia.setTelefono(object.getString("telefono"));
-                incidencia.setMontoCompra(Double.parseDouble(object.getString("monto")));
-
+                incidencia.setMontoCompra(Double.parseDouble(object.getString("montoCompra")));
                 incidencias.add(incidencia);
             }
 

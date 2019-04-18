@@ -71,7 +71,7 @@
                     android:ems="10"
                     android:hint="Ingresa la dirección de tu pedido"
                     android:inputType="textPersonName"
-                    android:maxLength="25"
+                    android:maxLength="250"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:textColor="@android:color/black"

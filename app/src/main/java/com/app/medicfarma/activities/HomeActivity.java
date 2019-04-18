@@ -81,17 +81,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         cvReclamos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                builder = new AlertDialog.Builder(HomeActivity.this);
-                builder.setMessage("¡Todavia no se ha desarrollado esta sección!")
-                        .setCancelable(false)
-                        .setNeutralButton("Aceptar",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-                AlertDialog alert = builder.create();
-                alert.show();
+                Intent intent = new Intent(HomeActivity.this,IncidenciasListActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

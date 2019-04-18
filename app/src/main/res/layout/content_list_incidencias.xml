@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:text="Sucursal"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -43,7 +43,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="codigo pedido"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvDireccion_incidencia"
@@ -52,7 +53,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="direccion"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvTelefono_incidencia"
@@ -61,7 +63,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="telefono"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvMonto_incidencia"
@@ -70,7 +73,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:text="Monto compra"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

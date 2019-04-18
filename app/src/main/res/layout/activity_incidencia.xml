@@ -90,35 +90,7 @@
                     android:ems="10"
                     android:hint="Ingresa tu inconveniente"
                     android:inputType="textPersonName"
-                    android:maxLength="25"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/inpTelefono"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColorHint="@android:color/holo_blue_light">
-
-                <EditText
-                    android:id="@+id/edtTelefonoIncidencia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="5dp"
-                    android:backgroundTint="@android:color/white"
-                    android:drawableLeft="@mipmap/ic_telefono"
-                    android:ems="10"
-                    android:hint="Ingresa teléfono de contacto"
-                    android:inputType="textPersonName|number"
-                    android:maxLength="8"
+                    android:maxLength="250"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:textColor="@android:color/black"
@@ -131,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginRight="50dp"
                 android:background="@drawable/style_button_secundary"
                 android:elevation="4dp"

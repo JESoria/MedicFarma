@@ -36,14 +36,11 @@ public class IncidenciaBridge extends AsyncTask<String, Void, String> {
         try{
             String idPedido = parametros[0];
             String incidencia = parametros[1];
-            String telefono = parametros[2];
-
 
             String requestBody;
             Uri.Builder builder = new Uri.Builder();
             builder.appendQueryParameter("idPedido",idPedido);
             builder.appendQueryParameter("incidencia",incidencia);
-            builder.appendQueryParameter("telefono",telefono);
             requestBody = builder.build().getEncodedQuery();
 
             URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeIncidencia);
