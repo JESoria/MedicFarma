@@ -168,7 +168,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.acerca_de) {
-            // Handle the camera action
+            Intent intent = new Intent(HomeActivity.this, AboutActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.sesion) {
             LoginManager.getInstance().logOut();
             Intent intent = new Intent(HomeActivity.this, StartActivity.class);

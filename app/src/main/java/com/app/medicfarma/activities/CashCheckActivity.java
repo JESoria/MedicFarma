@@ -96,15 +96,15 @@ public class CashCheckActivity extends AppCompatActivity implements OrdenCompraB
                         .setNeutralButton("Aceptar",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
+                                        mDbHelper.deletePedido();
+                                        Intent intent = new Intent(CashCheckActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                         dialog.cancel();
                                     }
                                 });
                 AlertDialog alert = builder.create();
                 alert.show();
-                mDbHelper.deletePedido();
-                Intent intent = new Intent(CashCheckActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
             }
             else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(CashCheckActivity.this);

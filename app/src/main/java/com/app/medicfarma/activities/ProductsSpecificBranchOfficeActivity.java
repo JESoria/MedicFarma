@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import com.app.medicfarma.R;
@@ -144,6 +145,9 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
     @Override
     public void processFinish(String response, ArrayList productos) {
         try{
+            InputMethodManager imm = (InputMethodManager) getSystemService(ProductsSpecificBranchOfficeActivity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput (InputMethodManager.SHOW_FORCED, InputMethodManager.RESULT_HIDDEN);
+
             progressBar.setVisibility(View.INVISIBLE);
             if(productos.size() > 0){
                 adaptador = new AdapterProductsSpecificBranchOffice(productos,this);
