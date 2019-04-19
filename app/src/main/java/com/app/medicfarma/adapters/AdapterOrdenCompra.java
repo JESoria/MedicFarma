@@ -1,5 +1,6 @@
 package com.app.medicfarma.adapters;
 
+import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,18 +15,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.medicfarma.R;
+import com.app.medicfarma.activities.HomeActivity;
 import com.app.medicfarma.activities.OrderDetailActivity;
 import com.app.medicfarma.activities.ProductDetailActivity;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.DetallePedido;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterOrdenCompra extends RecyclerView.Adapter<AdapterOrdenCompra.OrdenCompraViewHolder> {
 
     private Context context;
-    private String name;
     private List<DetallePedido> detallePedido;
 
     public AdapterOrdenCompra(List<DetallePedido> detallePedido, Context context){
@@ -62,9 +64,10 @@ public class AdapterOrdenCompra extends RecyclerView.Adapter<AdapterOrdenCompra.
             }
         });
 
+
         ordenCompraViewHolder.imvEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("¿Estas seguro de eliminar el producto?")
@@ -80,7 +83,10 @@ public class AdapterOrdenCompra extends RecyclerView.Adapter<AdapterOrdenCompra.
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         mDbHelper.deleteDetallePedido(detalle.getIdSucursalProducto());
-                                        detallePedido.remove(position);
+                                        Intent intent = new Intent(context, OrderDetailActivity.class);
+                                        intent.putExtra("eliminar",true);
+                                        context.startActivity(intent);
+
                                     }
                                 });
                 AlertDialog alert = builder.create();
@@ -90,6 +96,7 @@ public class AdapterOrdenCompra extends RecyclerView.Adapter<AdapterOrdenCompra.
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

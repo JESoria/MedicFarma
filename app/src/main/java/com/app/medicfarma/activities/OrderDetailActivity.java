@@ -9,14 +9,19 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterOrdenCompra;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.DetallePedido;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -29,6 +34,8 @@ public class OrderDetailActivity extends AppCompatActivity {
     ImageView agregarProducto;
     int idFarmacia;
     int idSucursal;
+    ArrayList<DetallePedido> detallePedido;
+    LinearLayout pantalla;
 
     private RecyclerView listaProductos;
     ImageView imgAtras;
@@ -39,6 +46,13 @@ public class OrderDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
+
+        pantalla = (LinearLayout) findViewById(R.id.lyOrder);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .repeat(0)
+                .playOn(pantalla);
 
         final DbHelper mDbHelper = new DbHelper(OrderDetailActivity.this);
 
@@ -63,6 +77,13 @@ public class OrderDetailActivity extends AppCompatActivity {
         Bundle datos = getIntent().getExtras();
         idFarmacia = datos.getInt("idFarmacia");
         idSucursal = datos.getInt("idSucursal");
+        boolean eliminar = datos.getBoolean("eliminar");
+
+        if (eliminar){
+            Intent intent = new Intent(OrderDetailActivity.this,OrderDetailActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbarOrder);
         setSupportActionBar(toolbar);
@@ -72,7 +93,15 @@ public class OrderDetailActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaProductos.setLayoutManager(llm);
 
-        cargarListaProductos(mDbHelper);
+        if (mDbHelper.estadoOrden()){
+            cargarListaProductos(mDbHelper);
+        }
+        else {
+            Intent intent = new Intent(OrderDetailActivity.this,HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
 
         agregarProducto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,11 +154,16 @@ public class OrderDetailActivity extends AppCompatActivity {
             }
         });
 
+        listaProductos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cargarListaProductos(mDbHelper);
+            }
+        });
+
     }
 
     public void cargarListaProductos(DbHelper mDbHelper){
-
-        ArrayList<DetallePedido> detallePedido;
 
         Cursor listado = mDbHelper.listadoProductos();
 
@@ -149,18 +183,9 @@ public class OrderDetailActivity extends AppCompatActivity {
             tvTotal.setText("Total compra: $"+monto);
         }
         else{
-            AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetailActivity.this);
-            builder.setMessage("Ups! :V ocurrio un problema")
-                    .setCancelable(false)
-                    .setNeutralButton("Aceptar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    finish();
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
+            Intent intent = new Intent(OrderDetailActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
         }
 
 

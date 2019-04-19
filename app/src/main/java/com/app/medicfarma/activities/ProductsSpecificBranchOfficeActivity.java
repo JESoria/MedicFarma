@@ -61,11 +61,20 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
         verOrden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this, OrderDetailActivity.class);
-                intent.putExtra("idFarmacia",idFarmacia);
-                intent.putExtra("idSucursal",idSucursal);
-                startActivity(intent);
-                finish();
+
+                if (mDbHelper.estadoOrden()){
+                    Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this, OrderDetailActivity.class);
+                    intent.putExtra("idFarmacia",idFarmacia);
+                    intent.putExtra("idSucursal",idSucursal);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         });
 

@@ -20,7 +20,7 @@
             <ImageView
                 android:id="@+id/imgLogoAbout"
                 android:layout_width="300dp"
-                android:layout_height="314dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:src="@drawable/logo_new" />
 
@@ -44,7 +44,7 @@
                 android:gravity="center"
                 android:text="MedicFarma esta basada en el modelo de negocio Marketplace que consiste en la interacción de usuarios y farmacias brindando la oportunidad de llevar a cabo una transacción comercial que en este caso es la venta de medicamentos. "
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <Button
