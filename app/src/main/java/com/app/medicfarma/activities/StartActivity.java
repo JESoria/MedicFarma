@@ -180,7 +180,7 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
             model.setGenero(formatoGenero(object.getString("gender")));
             model.setFechaNacimiento(formatDate(object.getString("birthday")));
             model.setFacebookId(object.getString("id"));
-            model.setEstado(true);
+            model.setEstado("1");
             model.setPassword("123");
 
             progressBar.setVisibility(View.VISIBLE);

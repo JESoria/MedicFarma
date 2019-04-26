@@ -188,14 +188,15 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
                             .setNeutralButton("Aceptar",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
+                                            Intent welcome = new Intent(RegisterActivity.this,StartActivity.class);
+                                            startActivity(welcome);
+                                            finish();
                                             dialog.cancel();
                                         }
                                     });
                     AlertDialog alert = builder.create();
                     alert.show();
-                Intent welcome = new Intent(RegisterActivity.this,StartActivity.class);
-                startActivity(welcome);
-                finish();
+
             }
             else {
 
@@ -263,7 +264,7 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
         model.setApellidos(apellidosregister.getText().toString());
         model.setCorreo(correoregister.getText().toString());
         model.setPassword(passwordregister.getText().toString());
-        model.setEstado(true);
+        model.setEstado("1");
 
         if (TextUtils.isEmpty(model.getNombres())) {
             //btnregistrarregister.setEnabled(true);

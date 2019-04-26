@@ -49,7 +49,7 @@ public class AdapterOrdenCompra extends RecyclerView.Adapter<AdapterOrdenCompra.
         ordenCompraViewHolder.tvCantidad.setText(String.valueOf(detalle.getCantidad()));
         ordenCompraViewHolder.tvProducto.setText(detalle.getProducto());
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
-        String precio = decimalFormat.format(detalle.getPrecio());
+        String precio = decimalFormat.format((detalle.getCantidad() * detalle.getPrecio()));
         ordenCompraViewHolder.tvPrecio.setText("$"+precio);
 
         ordenCompraViewHolder.imvEditar.setOnClickListener(new View.OnClickListener() {

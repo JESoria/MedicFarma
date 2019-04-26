@@ -56,12 +56,11 @@ public class TokenBridge extends AsyncTask<Void, Void, String> {
             modelo.setSender_id("wakanda");
             modelo.setOuth_name("token");
 
-            builder.appendQueryParameter("sender_id", modelo.getSender_id());
+            builder.appendQueryParameter("SENDER_ID", modelo.getSender_id());
 
-            builder.appendQueryParameter("outh_name", modelo.getOuth_name());
+            builder.appendQueryParameter("OUTH_NAME", modelo.getOuth_name());
 
-            builder.appendQueryParameter("grant_type","password");
-
+            builder.appendQueryParameter("GRANT_TYPE","password");
 
             requestBody = builder.build().getEncodedQuery();
 

@@ -161,7 +161,7 @@ public class DbHelper extends SQLiteOpenHelper {
             Birthday = c.getString(c.getColumnIndexOrThrow(InternalControlDB.TablaUsuario.COLUMN_NAME_FECHA_NACIMIENTO));
 
 
-            return new UsuarioModel(idUsuario, "n/a", nombres, apellidos, genero, fechaNacimiento, correo, facebookId, true, "n/a", Birthday);
+            return new UsuarioModel(idUsuario, "n/a", nombres, apellidos, genero, fechaNacimiento, correo, facebookId, "1", "n/a", Birthday);
         }else{
             return null;
         }

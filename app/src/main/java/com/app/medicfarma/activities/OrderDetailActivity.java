@@ -117,11 +117,28 @@ public class OrderDetailActivity extends AppCompatActivity {
         procesarOrden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OrderDetailActivity.this, PaymentTypeActivity.class);
-                intent.putExtra("montoCompra",montoCompra);
-                intent.putExtra("idSucursal",idSucursal);
-                startActivity(intent);
-                finish();
+
+                if (montoCompra > 10.00){
+                    Intent intent = new Intent(OrderDetailActivity.this, PaymentTypeActivity.class);
+                    intent.putExtra("montoCompra",montoCompra);
+                    intent.putExtra("idSucursal",idSucursal);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetailActivity.this);
+                    builder.setMessage("Tu compra debe ser mayor a $10.00")
+                            .setCancelable(false)
+                            .setNeutralButton("Aceptar",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+
+
             }
         });
 
@@ -171,7 +188,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         do{
             detallePedido.add(new DetallePedido(listado.getInt(0), listado.getInt(1), listado.getInt(2), listado.getString(3), listado.getDouble(4)));
-            montoCompra = montoCompra + listado.getDouble(4);
+            montoCompra = montoCompra + ( listado.getDouble(4) * listado.getInt(2));
         } while (listado.moveToNext());
 
 
