@@ -165,12 +165,8 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
                     alert.show();
 
                 }
-
             }
         };
-
-
-
 
 
     }
@@ -180,7 +176,7 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
         try{
             progressBar.setVisibility(View.INVISIBLE);
 
-            if(!response.equals("1")){
+            if(response.equals("1")){
 
                     builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setMessage("¡Registrado con exito!")
@@ -197,6 +193,19 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
                     AlertDialog alert = builder.create();
                     alert.show();
 
+            }
+            else if (response.equals("2")){
+                builder = new AlertDialog.Builder(RegisterActivity.this);
+                builder.setMessage("¡El usuario ya existe, ingrese otro usuario!")
+                        .setCancelable(false)
+                        .setNeutralButton("Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
             else {
 
@@ -228,7 +237,6 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
                             });
             AlertDialog alert = builder.create();
             alert.show();
-
         }
     }
 

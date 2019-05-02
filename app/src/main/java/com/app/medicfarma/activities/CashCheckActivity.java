@@ -27,7 +27,6 @@ public class CashCheckActivity extends AppCompatActivity implements OrdenCompraB
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cash_check);
 
-
         Bundle datos = getIntent().getExtras();
         if (datos != null) {
             direccion = datos.getString("direccion");

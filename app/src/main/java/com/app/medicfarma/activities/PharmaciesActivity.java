@@ -29,7 +29,7 @@ public class PharmaciesActivity extends AppCompatActivity implements FarmaciasBr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pharmacies);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBarFarmacias);
+        progressBar = (ProgressBar) findViewById(R.id.progressBarMalo);
 
         final DbHelper mDbHelper = new DbHelper(PharmaciesActivity.this);
 

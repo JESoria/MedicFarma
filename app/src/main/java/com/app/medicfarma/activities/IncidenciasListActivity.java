@@ -71,7 +71,7 @@ public class IncidenciasListActivity extends AppCompatActivity implements ListIn
             }
             else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(IncidenciasListActivity.this);
-                builder.setMessage("No hay pedido realizados")
+                builder.setMessage("No hay pedido realizados o ya realizo reclamos a sus pedidos")
                         .setCancelable(false)
                         .setNeutralButton("Aceptar",
                                 new DialogInterface.OnClickListener() {

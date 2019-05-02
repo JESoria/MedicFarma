@@ -77,6 +77,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
         idF = idFarmacia;
         idS = idSucursal;
+
         if (editar){
             btnAgregar.setText("Actualizar");
             edtCantidad.setText(String.valueOf(cantidad));
@@ -120,6 +121,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                 if(estadoOrden){
                     //Regresa a pantalla de busqueda por sucursal especifica
                     Intent intent = new Intent(ProductDetailActivity.this,ProductsSpecificBranchOfficeActivity.class);
+                    intent.putExtra("idFarmacia",idF);
+                    intent.putExtra("idSucursal",idS);
                     startActivity(intent);
                     finish();
                 }
