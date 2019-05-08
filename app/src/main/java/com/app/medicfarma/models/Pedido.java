@@ -9,6 +9,9 @@ public class Pedido {
     private String telefono;
     private double montoCompra;
     private String estadoPago;
+    private String correo;
+    private String nombres;
+    private String apellidos;
 
     public Pedido() {
     }
@@ -77,5 +80,29 @@ public class Pedido {
 
     public void setEstadoPago(String estadoPago) {
         this.estadoPago = estadoPago;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 }

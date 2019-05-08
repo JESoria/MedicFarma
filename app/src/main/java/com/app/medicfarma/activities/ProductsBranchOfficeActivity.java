@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterProducts;
+import com.app.medicfarma.config.ConexionInternet;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Product;
 import com.app.medicfarma.ws_app.ProductosSucursalBridge;
@@ -33,11 +34,33 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
     Product product = new Product();
     int idFarmacia;
     ProgressBar progressBar;
+    AlertDialog.Builder builder;
+    boolean connected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_branch_office);
+
+        ConexionInternet conexionInternet = new ConexionInternet();
+        conexionInternet.getStateInternet(ProductsBranchOfficeActivity.this);
+
+        if(!connected){
+            builder = new AlertDialog.Builder(ProductsBranchOfficeActivity.this);
+            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Intent intent = new Intent(ProductsBranchOfficeActivity.this,HomeActivity.class);
+                                    //startActivity(intent);
+                                    //finish();
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarSucursal);
 

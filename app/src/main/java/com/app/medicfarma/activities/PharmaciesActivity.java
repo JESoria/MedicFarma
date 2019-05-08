@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterFarmacias;
+import com.app.medicfarma.config.ConexionInternet;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.ws_app.FarmaciasBridge;
 import java.util.ArrayList;
@@ -23,11 +24,33 @@ public class PharmaciesActivity extends AppCompatActivity implements FarmaciasBr
     ImageView imgAtras;
     private Toolbar toolbar;
     ProgressBar progressBar;
+    AlertDialog.Builder builder;
+    boolean connected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pharmacies);
+
+        ConexionInternet conexionInternet = new ConexionInternet();
+        conexionInternet.getStateInternet(PharmaciesActivity.this);
+
+        if(!connected){
+            builder = new AlertDialog.Builder(PharmaciesActivity.this);
+            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Intent intent = new Intent(PharmaciesActivity.this,HomeActivity.class);
+                                    //startActivity(intent);
+                                    //finish();
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarMalo);
 

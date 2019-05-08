@@ -136,7 +136,7 @@ public class RegisterUserBridge extends AsyncTask<String, Void, String>
             db.close();
             delegate.processFinish(response);
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             delegate.processFinish(response);
         }

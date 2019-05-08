@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterIncidencias;
+import com.app.medicfarma.config.ConexionInternet;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Incidencias;
 import com.app.medicfarma.ws_app.ListIncidenciasBridge;
@@ -25,10 +26,32 @@ public class IncidenciasListActivity extends AppCompatActivity implements ListIn
     private Toolbar toolbar;
     ProgressBar progressBar;
     int idUsuario;
+    AlertDialog.Builder builder;
+    boolean connected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incidencias_list);
+
+        ConexionInternet conexionInternet = new ConexionInternet();
+        conexionInternet.getStateInternet(IncidenciasListActivity.this);
+
+        if(!connected){
+            builder = new AlertDialog.Builder(IncidenciasListActivity.this);
+            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Intent intent = new Intent(IncidenciasListActivity.this,HomeActivity.class);
+                                    //startActivity(intent);
+                                    //finish();
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarIncidenciasList);
 

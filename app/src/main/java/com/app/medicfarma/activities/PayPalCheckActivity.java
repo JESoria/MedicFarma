@@ -79,6 +79,9 @@ public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompr
                 pedido.setIdsucursal(idSucursalProducto);
                 pedido.setDireccion(direccion);
                 pedido.setTelefono(telefono);
+                pedido.setCorreo(usuarioModel.getCorreo());
+                pedido.setNombres(usuarioModel.getNombres());
+                pedido.setApellidos(usuarioModel.getApellidos());
 
                 if(tipopago.equals("efectivo")){
                     pedido.setMontoCompra(montoCompra);

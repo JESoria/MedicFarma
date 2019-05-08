@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterProductsSpecificBranchOffice;
+import com.app.medicfarma.config.ConexionInternet;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Product;
 import com.app.medicfarma.ws_app.ProductosSpecificSucursalBridge;
@@ -33,11 +34,33 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
     int idSucursal;
     ProgressBar progressBar;
     Button verOrden,cancelarOrden;
+    AlertDialog.Builder builder;
+    boolean connected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_specific_branch_office);
+
+        ConexionInternet conexionInternet = new ConexionInternet();
+        conexionInternet.getStateInternet(ProductsSpecificBranchOfficeActivity.this);
+
+        if(!connected){
+            builder = new AlertDialog.Builder(ProductsSpecificBranchOfficeActivity.this);
+            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this,HomeActivity.class);
+                                    //startActivity(intent);
+                                    //finish();
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarFarmaciaEspecifica);
 

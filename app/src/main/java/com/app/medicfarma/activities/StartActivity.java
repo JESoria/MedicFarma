@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.app.medicfarma.R;
 import java.util.Arrays;
+
+import com.app.medicfarma.config.ConexionInternet;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.UsuarioModel;
 import com.app.medicfarma.ws_app.RegisterUserBridge;
@@ -42,8 +44,8 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
     AlertDialog.Builder builder;
     Animation downtoup,uptodown;
     ImageView LogodeLogin;
-    TextView tvStartactivity;
-    boolean userLogeado;
+    TextView tvStartactivity, tvTerm;
+    boolean userLogeado,connected;
 
     //Interfaz callbackManager.
     @Override
@@ -66,16 +68,43 @@ public class StartActivity extends AppCompatActivity implements RegisterUserBrid
         LogodeLogin = (ImageView) findViewById(R.id.logodelogin) ;
         tvStartactivity = (TextView) findViewById(R.id.tvStartactivity);
         botonfacebook = (Button) findViewById(R.id.login_button);
-
+        tvTerm = (TextView) findViewById(R.id.txtTerm);
         LogodeLogin.setAnimation(uptodown);
         tvStartactivity.setAnimation(downtoup);
         iniciarSesion.setAnimation(downtoup);
         crearCuenta.setAnimation(downtoup);
         botonfacebook.setAnimation(uptodown);
+
+        tvTerm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartActivity.this, PoliticasActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         //Get token if it's not
         final DbHelper mDbHelper = new DbHelper(this);
 
         progressBar.setVisibility(View.VISIBLE);
+
+        ConexionInternet conexionInternet = new ConexionInternet();
+        conexionInternet.getStateInternet(StartActivity.this);
+
+        if(!connected){
+            builder = new AlertDialog.Builder(StartActivity.this);
+            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
         //El token se debe pedir en la primera pantalla
         if(mDbHelper.getAuthToken().equals("")){

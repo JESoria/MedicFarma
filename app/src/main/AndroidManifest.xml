@@ -4,6 +4,7 @@
     android:installLocation="preferExternal">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -50,7 +51,9 @@
         <activity
             android:name=".activities.LoginActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activities.RegisterActivity" android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activities.ProductsBranchOfficeActivity" />
         <activity android:name=".activities.ProductsPharmaciesActivity" />
         <activity android:name=".activities.ProductDetailActivity" />
@@ -65,7 +68,8 @@
         <activity android:name=".activities.CashCheckActivity" />
         <activity android:name=".activities.IncidenciasListActivity" />
         <activity android:name=".activities.IncidenciaActivity" />
-        <activity android:name=".activities.AboutActivity"></activity>
+        <activity android:name=".activities.AboutActivity" />
+        <activity android:name=".activities.PoliticasActivity"></activity>
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import com.app.medicfarma.R;
 import com.app.medicfarma.adapters.AdapterProductsPharmacies;
+import com.app.medicfarma.config.ConexionInternet;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.Product;
 import com.app.medicfarma.ws_app.ProductosPharmaciesBridge;
@@ -31,11 +32,33 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
     private RecyclerView listaProductos;
     Product product = new Product();
     ProgressBar progressBar;
+    AlertDialog.Builder builder;
+    boolean connected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_pharmacies);
+
+        ConexionInternet conexionInternet = new ConexionInternet();
+        conexionInternet.getStateInternet(ProductsPharmaciesActivity.this);
+
+        if(!connected){
+            builder = new AlertDialog.Builder(ProductsPharmaciesActivity.this);
+            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Intent intent = new Intent(ProductsPharmaciesActivity.this,HomeActivity.class);
+                                    //startActivity(intent);
+                                    //finish();
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarProductosFarmacias);
         imgAtras = (ImageView) findViewById(R.id.imgAtras);

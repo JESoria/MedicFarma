@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -36,13 +37,15 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
     private static int welcome_timeout = 1000;
 
     TextView tvFecharegister;
-    AlertDialog.Builder builder;
     Button btnregistrarregister, btncancelarregister;
     ProgressBar progressBar;
     EditText nombresregister, apellidosregister, fecha_nacimiento, correoregister,passwordregister;
     RadioGroup rdbgeneroregister;
     UsuarioModel model = new UsuarioModel();
     RadioButton rdbmasculinoregister,rdbfemeninoregister;
+    AlertDialog.Builder builder;
+    boolean connected;
+    CheckBox term;
 
     String date = "sinfecha";
     DatePickerDialog.OnDateSetListener mDataSetListener;
@@ -58,10 +61,28 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
         correoregister =(EditText)findViewById(R.id.edtCorreoRegistro);
         rdbgeneroregister = (RadioGroup) findViewById(R.id.rdbGeneroRegistro);
         rdbmasculinoregister = (RadioButton) findViewById(R.id.rdbMasculinoRegistro);
-        rdbfemeninoregister = (RadioButton) findViewById(R.id.rdbMasculinoRegistro);
+        rdbfemeninoregister = (RadioButton) findViewById(R.id.rdbFemeninoRegisto);
         btnregistrarregister = (Button) findViewById(R.id.btnGuardarRegistro);
         btncancelarregister = (Button) findViewById(R.id.btnCancelarRegistro);
         passwordregister = (EditText) findViewById(R.id.edtPass);
+        term = (CheckBox) findViewById(R.id.chkTerm);
+
+        if(!connected){
+            builder = new AlertDialog.Builder(RegisterActivity.this);
+            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Intent intent = new Intent(RegisterActivity.this,StartActivity.class);
+                                    //startActivity(intent);
+                                    //finish();
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
         progressBar = (ProgressBar)findViewById(R.id.progressBar_registro);
 
@@ -143,9 +164,11 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
                     model.setAge(getAge(date));
 
                     if(month/10 == 0){
-                        fecha = year+"-0"+month+"-"+day;
+                        //fecha = year+"-0"+month+"-"+day;
+                        fecha = day+"/0"+month+"/"+year;
                     }else{
-                        fecha = year+"-"+month+"-"+day;
+                        //fecha = year+"-"+month+"-"+day;
+                        fecha = day+"/"+month+"/"+year;
                     }
                     model.setBirthday(fecha);
                 }
@@ -312,6 +335,20 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
             //btnregistrarregister.setEnabled(true);
             passwordregister.setError(getResources().getString(R.string.msj_pass));
             passwordregister.requestFocus();
+        }
+        else if(!term.isChecked()){
+            builder = new AlertDialog.Builder(RegisterActivity.this);
+            builder.setMessage("¡Debe aceptar los Terminos y Condiciones!")
+                    .setTitle("Terminos y Condiciones")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
         else {
 

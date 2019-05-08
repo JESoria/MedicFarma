@@ -25,10 +25,28 @@ public class LoginActivity extends AppCompatActivity implements LoginBridge.Asyn
     ProgressBar progressBar;
     EditText user, pass;
     LinearLayout linearLayout;
+    boolean connected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if(!connected){
+            builder = new AlertDialog.Builder(LoginActivity.this);
+            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
+                    .setCancelable(false)
+                    .setNeutralButton("Aceptar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //Intent intent = new Intent(LoginActivity.this,StartActivity.class);
+                                    //startActivity(intent);
+                                    //finish();
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
         iniciar = (Button) findViewById(R.id.btnIniciarLogin);
         cancelar = (Button) findViewById(R.id.btnCancelarLogin);

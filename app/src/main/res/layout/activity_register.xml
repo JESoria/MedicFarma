@@ -174,16 +174,16 @@
                     android:id="@+id/edtCorreoRegistro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-3dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="-3dp"
                     android:backgroundTint="@android:color/white"
                     android:drawableLeft="@drawable/ic_mail_register"
                     android:ems="10"
                     android:hint="@string/hint_correo"
                     android:inputType="textPersonName"
-                    android:maxLength="25"
+                    android:maxLength="50"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:textColor="@android:color/black"
@@ -240,6 +240,20 @@
                 android:textColorHint="@android:color/holo_blue_light"
                 android:textSize="14sp" />
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/chkTerm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Acepto los terminos y Condiciones " />
+            </LinearLayout>
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnGuardarRegistro"

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.PoliticasActivity"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarPoliticas"
+        style="@style/Theme.AppCompat.Light.NoActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@drawable/style_button_secundary"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingRight="15dp">
+
+            <ImageView
+                android:id="@+id/imgAtras"
+                android:layout_width="64dp"
+                android:layout_height="30dp"
+                android:layout_weight="0.03"
+                app:srcCompat="?android:attr/homeAsUpIndicator" />
+
+
+            <TextView
+                android:id="@+id/toolbar_subTitle"
+                android:layout_width="266dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.05"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:paddingRight="50dp"
+                android:text="TERMINOS Y CONDICIONES"
+                android:textColor="@color/blanco"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="TERMINOS Y CONDICIONES\n\n USO DE APLICACIÓN MOVIL\n\n MedicFarma, se reserva el derecho a modificar las presentes condiciones de uso, lo cual, se realizará a través de actualizaciones, donde el/la usuario(a) deberá aceptar para continuar utilizando la aplicación móvil. Sin embargo, es responsabilidad de MedicFarma notificar a los/las usuarios(as) sobre los cambios realizados, cambios que estarán disponibles a través de la web y en la(s) aplicación(es) y serán efectivos desde el momento de su publicación. \n\n En consecuencia, de lo anterior, es responsabilidad de el/la usuario(a) mantenerse atento ante posibles cambios, debiendo revisar periódicamente si hay modificaciones en estas condiciones y, si el/la usuario(a) continúa usando el servicio tras la publicación o actualización, ello implicará la aceptación y asunción de los mismos. En el caso que no esté de acuerdo con las actualizaciones de las condiciones de uso o de la política de privacidad, podrá renunciar dejando de usar el servicio. \n\n El acceso y descarga de la aplicación es gratuito, salvo en lo relativo al costo de la conexión a internet a través de la red de telecomunicaciones suministrada por el proveedor de acceso contratado por el/la usuario(a). \n\n El/la usuario(a) reconoce y acepta que el uso de los contenidos y/o servicios ofrecidos por la presente aplicación móvil será bajo su exclusivo riesgo y/o responsabilidad. El/la usuario(a) se compromete a utilizar la presente aplicación móvil y todo su contenido y servicios de conformidad con la ley, la moral, el orden público y las presentes condiciones de uso, que, en su caso, le sean de aplicación\n\n POLITICAS DE MEDICFARMA\n\n La Aplicación Móvil no será responsable de gestionar la logística de entrega del producto al usuario sino sólo notificará los pedidos a cada farmacia.\n\n Para poder realizar los pagos ya sea en efectivo o por medio de PayPal la compra mínima debe ser de $10.00, los tipos de pagos son los siguientes: \n\n PAGO EN EFECTIVO\n\n El usuario podrá gestionar su pago en efectivo, la aplicación enviará su pedido a la farmacia solicitada, el usuario al recibir su pedido realizará su pago al empleado de la farmacia. \n\n PAGO POR MEDIO DEL INTERMEDIARIO PAYPAL\n\n El usuario podrá realizar su pago por medio de PayPal donde ingresando sus datos solicitados por la plataforma se procesará la orden y se enviará el pedido a la farmacia solicitada. Se enviará un comprobante de pago al correo electrónico, especificando el detalle de su orden y un numero de comprobante de pago. \n\n RECLAMOS\n\n RECLAMOS PAYPAL\n\n El usuario debe realizar su reclamo sobre problemas que se le presenten de su pago o cuenta de PayPal ingresando a la dirección web: https://www.paypal.com/pl/smarthelp/contact-us donde se le muestra las opciones de tipos de reclamos que puede gestionar, PayPal será el encargo de administrar dichas incidencias. \n\n RECLAMOS POR NO ENVIÓ DE PEDIDO\n\n El usuario podrá consultar el historial de compras para poder realizar un reclamo por no envió, donde le seleccionará la compra y creará la incidencia, el historial mostrará compras realizadas en el mismo día. \n\n MENORES DE EDAD\n\n Con carácter general, para hacer uso de los servicios de la presente aplicación móvil el acceso quedará restringido única y exclusivamente a mayores de 13 años. "
+                android:textColor="@android:color/black"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
