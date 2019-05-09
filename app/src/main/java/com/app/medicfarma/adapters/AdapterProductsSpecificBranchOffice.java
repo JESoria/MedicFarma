@@ -53,7 +53,7 @@ public class AdapterProductsSpecificBranchOffice extends RecyclerView.Adapter<Ad
 
         productsViewHolder.tvProducto.setText(product.getProducto());
         productsViewHolder.tvSucursal.setText(product.getSucursal());
-        productsViewHolder.tvPrecio.setText(String.valueOf(product.getPrecio()));
+        productsViewHolder.tvPrecio.setText("$"+String.valueOf(product.getPrecio()));
         productsViewHolder.tvDireccion.setText(product.getDireccion());
 
     }

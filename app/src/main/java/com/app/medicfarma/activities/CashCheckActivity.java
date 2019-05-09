@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.DetallePedido;
@@ -20,13 +23,14 @@ public class CashCheckActivity extends AppCompatActivity implements OrdenCompraB
     String direccion, telefono;
     double montoCompra;
     int idSucursal;
+    ProgressBar progressBar;
     final DbHelper mDbHelper = new DbHelper(CashCheckActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cash_check);
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBarPagoCash);
         Bundle datos = getIntent().getExtras();
         if (datos != null) {
             direccion = datos.getString("direccion");
@@ -74,7 +78,7 @@ public class CashCheckActivity extends AppCompatActivity implements OrdenCompraB
         OrdenCompra ordenCompra = new OrdenCompra();
         ordenCompra.setPedidos(pedido);
         ordenCompra.setDetallePedido(detallePedido);
-
+        progressBar.setVisibility(View.VISIBLE);
         procesarPedido(mDbHelper, ordenCompra);
 
     }
@@ -87,7 +91,7 @@ public class CashCheckActivity extends AppCompatActivity implements OrdenCompraB
     @Override
     public void processFinish(String response) {
         try{
-
+            progressBar.setVisibility(View.INVISIBLE);
             if(!response.equals("") ){
                 AlertDialog.Builder builder = new AlertDialog.Builder(CashCheckActivity.this);
                 builder.setMessage("¡Pedido enviado con exito!")

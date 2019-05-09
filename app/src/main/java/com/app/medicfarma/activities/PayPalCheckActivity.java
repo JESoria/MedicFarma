@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import com.app.medicfarma.R;
 import com.app.medicfarma.helpers.DbHelper;
 import com.app.medicfarma.models.DetallePedido;
@@ -23,13 +26,14 @@ public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompr
     String direccion, telefono, tipopago;
     double montoCompra,montoCompraPayPal;
     int idSucursal;
+    ProgressBar progressBar;
     final DbHelper mDbHelper = new DbHelper(PayPalCheckActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pago_ok);
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBarPagoOk);
         Intent intent = getIntent();
 
             Bundle datos = getIntent().getExtras();
@@ -96,7 +100,7 @@ public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompr
                 OrdenCompra ordenCompra = new OrdenCompra();
                 ordenCompra.setPedidos(pedido);
                 ordenCompra.setDetallePedido(detallePedido);
-
+                progressBar.setVisibility(View.VISIBLE);
                 procesarPedido(jsonObject.getJSONObject("response"), mDbHelper, ordenCompra);
 
             } catch (JSONException e) {
@@ -110,6 +114,7 @@ public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompr
             if (response.getString("state").equals("approved")){
                 new OrdenCompraBridge(mDbHelper,PayPalCheckActivity.this).execute(ordenCompra);
             }else{
+                progressBar.setVisibility(View.INVISIBLE);
                 builder = new AlertDialog.Builder(PayPalCheckActivity.this);
                 builder.setMessage("Ups! ocurrio un problema con tu pago, se cancelara la orden, ponte en contacto con PayPal")
                         .setCancelable(false)
@@ -134,7 +139,7 @@ public class PayPalCheckActivity extends AppCompatActivity implements OrdenCompr
     @Override
     public void processFinish(String response) {
         try{
-
+            progressBar.setVisibility(View.INVISIBLE);
             if(!response.equals("") ){
                 AlertDialog.Builder builder = new AlertDialog.Builder(PayPalCheckActivity.this);
                 builder.setMessage("¡Pago efectuado con exito!")

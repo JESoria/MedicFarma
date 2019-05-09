@@ -5,7 +5,7 @@ package com.app.medicfarma.ws_app;
  * En esta clase se almacena todas las rutas que apuntan hacia el web service.
  */
 public class WSRoutes {
-    public static String baseURL = "http://0c75652d.ngrok.io/";
+    public static String baseURL = "http://2291bbd5.ngrok.io/";
     public static String getToken = "WService";
     public static String makeLogin = "v1/Login";
     public static String makeRegister = "v1/Register";

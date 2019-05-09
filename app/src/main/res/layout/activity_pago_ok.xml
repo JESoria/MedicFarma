@@ -4,7 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.PayPalCheckActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBarPagoOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="0.49"
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </LinearLayout>
