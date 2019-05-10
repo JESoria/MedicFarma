@@ -36,7 +36,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
     ProgressBar progressBar;
     AlertDialog.Builder builder;
     boolean connected;
-
+    final DbHelper mDbHelper = new DbHelper(ProductsBranchOfficeActivity.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +74,6 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
                 finish();
             }
         });
-
-        final DbHelper mDbHelper = new DbHelper(ProductsBranchOfficeActivity.this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbarMenuBranchOffice);
         setSupportActionBar(toolbar);
@@ -126,6 +124,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
         if (id == R.id.itemLogin) {
 
             LoginManager.getInstance().logOut();
+            mDbHelper.deleteUsuario();
             Intent intent = new Intent(ProductsBranchOfficeActivity.this, StartActivity.class);
             startActivity(intent);
             finish();

@@ -204,11 +204,15 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             else {
 
                 builder = new AlertDialog.Builder(ProductDetailActivity.this);
-                builder.setMessage("¡Ups ocurrio un problema!")
+                builder.setMessage("¡Ups ocurrio un problema!, se cancelará su orden")
                         .setCancelable(false)
                         .setNeutralButton("Aceptar",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
+                                        Intent intent = new Intent(ProductDetailActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                        mDbHelper.deletePedido();
                                         dialog.cancel();
                                     }
                                 });

@@ -34,6 +34,7 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
     ProgressBar progressBar;
     AlertDialog.Builder builder;
     boolean connected;
+    final DbHelper mDbHelper = new DbHelper(ProductsPharmaciesActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +72,6 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
                 finish();
             }
         });
-
-        final DbHelper mDbHelper = new DbHelper(ProductsPharmaciesActivity.this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbarMenuPharmacies);
         setSupportActionBar(toolbar);
@@ -119,6 +118,7 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
 
         if (id == R.id.itemLogin) {
             LoginManager.getInstance().logOut();
+            mDbHelper.deleteUsuario();
             Intent intent = new Intent(ProductsPharmaciesActivity.this, StartActivity.class);
             startActivity(intent);
             finish();

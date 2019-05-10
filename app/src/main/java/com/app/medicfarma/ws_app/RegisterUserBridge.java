@@ -62,8 +62,6 @@ public class RegisterUserBridge extends AsyncTask<String, Void, String>
             builder.appendQueryParameter("password",password);
             builder.appendQueryParameter("estado",estado);
 
-
-
             requestBody = builder.build().getEncodedQuery();
 
             URL url = new URL(WSRoutes.baseURL +""+ WSRoutes.makeRegister);

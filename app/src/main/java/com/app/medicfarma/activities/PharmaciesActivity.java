@@ -98,6 +98,9 @@ public class PharmaciesActivity extends AppCompatActivity implements FarmaciasBr
                     .setNeutralButton("Aceptar",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
+                                    Intent intent = new Intent(PharmaciesActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                     dialog.cancel();
                                 }
                             });

@@ -36,6 +36,7 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
     Button verOrden,cancelarOrden;
     AlertDialog.Builder builder;
     boolean connected;
+    final DbHelper mDbHelper = new DbHelper(ProductsSpecificBranchOfficeActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +64,6 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
         }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarFarmaciaEspecifica);
-
-        final DbHelper mDbHelper = new DbHelper(ProductsSpecificBranchOfficeActivity.this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbarMenuBranchOffice);
         setSupportActionBar(toolbar);
@@ -166,6 +165,7 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
 
         if (id == R.id.itemLogin) {
             LoginManager.getInstance().logOut();
+            mDbHelper.deleteUsuario();
             Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this, StartActivity.class);
             startActivity(intent);
             finish();

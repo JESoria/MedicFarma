@@ -32,8 +32,8 @@ public class OrderDetailActivity extends AppCompatActivity {
     double montoCompra = 0.00;
     Button procesarOrden,cancelarOrden;
     ImageView agregarProducto;
-    int idFarmacia;
-    int idSucursal;
+    //int idFarmacia;
+    //int idSucursal;
     ArrayList<DetallePedido> detallePedido;
     LinearLayout pantalla;
 
@@ -41,7 +41,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     ImageView imgAtras;
     private Toolbar toolbar;
     public AdapterOrdenCompra adaptador;
-
+    public static int idFarmacia, idSucursal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,12 +75,17 @@ public class OrderDetailActivity extends AppCompatActivity {
         agregarProducto = (ImageView) findViewById(R.id.imvAgregarPOrden);
 
         Bundle datos = getIntent().getExtras();
-        idFarmacia = datos.getInt("idFarmacia");
-        idSucursal = datos.getInt("idSucursal");
         boolean eliminar = datos.getBoolean("eliminar");
+
+        if (!eliminar){
+            idFarmacia = datos.getInt("idFarmacia");
+            idSucursal = datos.getInt("idSucursal");
+        }
 
         if (eliminar){
             Intent intent = new Intent(OrderDetailActivity.this,OrderDetailActivity.class);
+            intent.putExtra("idFarmacia",idFarmacia);
+            intent.putExtra("idSucursal",idSucursal);
             startActivity(intent);
             finish();
         }

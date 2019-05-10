@@ -224,6 +224,9 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
                         .setNeutralButton("Aceptar",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
+                                        Intent intent = new Intent(RegisterActivity.this, StartActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                         dialog.cancel();
                                     }
                                 });
@@ -238,6 +241,9 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
                         .setNeutralButton("Aceptar",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
+                                        Intent intent = new Intent(RegisterActivity.this, StartActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                         dialog.cancel();
                                     }
                                 });
