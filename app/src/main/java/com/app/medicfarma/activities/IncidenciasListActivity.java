@@ -27,7 +27,6 @@ public class IncidenciasListActivity extends AppCompatActivity implements ListIn
     ProgressBar progressBar;
     int idUsuario;
     AlertDialog.Builder builder;
-    boolean connected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,23 +34,6 @@ public class IncidenciasListActivity extends AppCompatActivity implements ListIn
 
         ConexionInternet conexionInternet = new ConexionInternet();
         conexionInternet.getStateInternet(IncidenciasListActivity.this);
-
-        if(!connected){
-            builder = new AlertDialog.Builder(IncidenciasListActivity.this);
-            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
-                    .setCancelable(false)
-                    .setNeutralButton("Aceptar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //Intent intent = new Intent(IncidenciasListActivity.this,HomeActivity.class);
-                                    //startActivity(intent);
-                                    //finish();
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarIncidenciasList);
 

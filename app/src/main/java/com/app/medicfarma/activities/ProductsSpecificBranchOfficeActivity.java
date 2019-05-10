@@ -35,7 +35,7 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
     ProgressBar progressBar;
     Button verOrden,cancelarOrden;
     AlertDialog.Builder builder;
-    boolean connected;
+
     final DbHelper mDbHelper = new DbHelper(ProductsSpecificBranchOfficeActivity.this);
 
     @Override
@@ -45,23 +45,6 @@ public class ProductsSpecificBranchOfficeActivity extends AppCompatActivity impl
 
         ConexionInternet conexionInternet = new ConexionInternet();
         conexionInternet.getStateInternet(ProductsSpecificBranchOfficeActivity.this);
-
-        if(!connected){
-            builder = new AlertDialog.Builder(ProductsSpecificBranchOfficeActivity.this);
-            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
-                    .setCancelable(false)
-                    .setNeutralButton("Aceptar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //Intent intent = new Intent(ProductsSpecificBranchOfficeActivity.this,HomeActivity.class);
-                                    //startActivity(intent);
-                                    //finish();
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarFarmaciaEspecifica);
 

@@ -35,7 +35,7 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
     int idFarmacia;
     ProgressBar progressBar;
     AlertDialog.Builder builder;
-    boolean connected;
+
     final DbHelper mDbHelper = new DbHelper(ProductsBranchOfficeActivity.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,23 +44,6 @@ public class ProductsBranchOfficeActivity extends AppCompatActivity implements P
 
         ConexionInternet conexionInternet = new ConexionInternet();
         conexionInternet.getStateInternet(ProductsBranchOfficeActivity.this);
-
-        if(!connected){
-            builder = new AlertDialog.Builder(ProductsBranchOfficeActivity.this);
-            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
-                    .setCancelable(false)
-                    .setNeutralButton("Aceptar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //Intent intent = new Intent(ProductsBranchOfficeActivity.this,HomeActivity.class);
-                                    //startActivity(intent);
-                                    //finish();
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarSucursal);
 

@@ -39,7 +39,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     final DbHelper mDbHelper = new DbHelper(this);
     private boolean editar;
     int idF,idS;
-    boolean connected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,24 +47,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
         ConexionInternet conexionInternet = new ConexionInternet();
         conexionInternet.getStateInternet(ProductDetailActivity.this);
-
-        if(!connected){
-            builder = new AlertDialog.Builder(ProductDetailActivity.this);
-            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
-                    .setCancelable(false)
-                    .setNeutralButton("Aceptar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //Intent intent = new Intent(ProductDetailActivity.this,HomeActivity.class);
-                                    //startActivity(intent);
-                                    //finish();
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
-
 
 //Componentes------------------------------------------------------------------------
         btnMenos = (Button) findViewById(R.id.btnMenos);

@@ -33,7 +33,7 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
     Product product = new Product();
     ProgressBar progressBar;
     AlertDialog.Builder builder;
-    boolean connected;
+
     final DbHelper mDbHelper = new DbHelper(ProductsPharmaciesActivity.this);
 
     @Override
@@ -43,23 +43,6 @@ public class ProductsPharmaciesActivity extends AppCompatActivity implements Pro
 
         ConexionInternet conexionInternet = new ConexionInternet();
         conexionInternet.getStateInternet(ProductsPharmaciesActivity.this);
-
-        if(!connected){
-            builder = new AlertDialog.Builder(ProductsPharmaciesActivity.this);
-            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
-                    .setCancelable(false)
-                    .setNeutralButton("Aceptar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //Intent intent = new Intent(ProductsPharmaciesActivity.this,HomeActivity.class);
-                                    //startActivity(intent);
-                                    //finish();
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarProductosFarmacias);
         imgAtras = (ImageView) findViewById(R.id.imgAtras);

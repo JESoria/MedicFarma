@@ -44,7 +44,7 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
     UsuarioModel model = new UsuarioModel();
     RadioButton rdbmasculinoregister,rdbfemeninoregister;
     AlertDialog.Builder builder;
-    boolean connected;
+  
     CheckBox term;
 
     String date = "sinfecha";
@@ -66,23 +66,6 @@ public class RegisterActivity  extends AppCompatActivity implements RegisterUser
         btncancelarregister = (Button) findViewById(R.id.btnCancelarRegistro);
         passwordregister = (EditText) findViewById(R.id.edtPass);
         term = (CheckBox) findViewById(R.id.chkTerm);
-
-        if(!connected){
-            builder = new AlertDialog.Builder(RegisterActivity.this);
-            builder.setMessage("¡Ups! debes conectarte a Internet, la aplicación no funcionará correctamente")
-                    .setCancelable(false)
-                    .setNeutralButton("Aceptar",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //Intent intent = new Intent(RegisterActivity.this,StartActivity.class);
-                                    //startActivity(intent);
-                                    //finish();
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
 
         progressBar = (ProgressBar)findViewById(R.id.progressBar_registro);
 
