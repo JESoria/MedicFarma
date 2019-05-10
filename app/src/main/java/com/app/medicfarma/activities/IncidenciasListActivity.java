@@ -99,6 +99,9 @@ public class IncidenciasListActivity extends AppCompatActivity implements ListIn
                         .setNeutralButton("Aceptar",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
+                                        Intent intent = new Intent(IncidenciasListActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                         dialog.cancel();
                                     }
                                 });

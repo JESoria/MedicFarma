@@ -77,8 +77,8 @@ public class LoginActivity extends AppCompatActivity implements LoginBridge.Asyn
         //End Section Animations
 
         //Para efectos de pruebas
-        user.setText("ing_soria@hotmail.com");
-        pass.setText("123");
+        //user.setText("ing_soria@hotmail.com");
+        //pass.setText("123");
 
         final DbHelper mDbHelper = new DbHelper(this);
 
